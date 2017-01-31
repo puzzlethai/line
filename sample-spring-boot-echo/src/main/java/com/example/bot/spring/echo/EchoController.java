@@ -75,6 +75,7 @@ import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
+import javax.print.DocFlavor;
 
 import lombok.NonNull;
 import lombok.Value;
@@ -246,12 +247,12 @@ public class EchoController {
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn("", "GROUP1", "bot1:conservative\nbot2:Clever\nbot3:Witty", Arrays.asList(
+                                new CarouselColumn(imageUrl, "GROUP1", "bot1:conservative\nbot2:Greedy\nbot3:Witty", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
                                 )),
-                                new CarouselColumn("","GROUP2", "bot2:Clever\nbot3:Witty", Arrays.asList(
+                                new CarouselColumn(imageUrl,"GROUP2", "bot2:Clever\nbot3:Witty", Arrays.asList(
                                         new PostbackAction("Join Group2",
                                                            "JoinGroup2")
                                         
