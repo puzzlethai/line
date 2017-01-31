@@ -176,9 +176,26 @@ public class EchoController {
     }
 
     @EventMapping
-    public void handlePostbackEvent(PostbackEvent event) {
+    public void handlePostbackEvent(PostbackEvent event) throws IOException {
         String replyToken = event.getReplyToken();
-        this.replyText(replyToken, "Got postback " + event.getPostbackContent().getData());
+        String groupJoin = event.getPostbackContent().getData();
+        String userId = event.getSource().getUserId();
+        String userName ="";  
+                if (userId != null) {
+                    Response<UserProfileResponse> response = lineMessagingService
+                            .getProfile(userId)
+                            .execute();
+                    if (response.isSuccessful()) {
+                        UserProfileResponse profiles = response.body();
+                        userName = profiles.getDisplayName();
+                        
+                    } else {
+                        this.replyText(replyToken, response.errorBody().string());
+                    }
+                } else {
+                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+                }
+        this.replyText(replyToken, userName+ "You have joined Uno " + groupJoin.substring(4));
     }
 
     @EventMapping
@@ -269,7 +286,7 @@ public class EchoController {
                                 ))
                                         
                         ));
-                TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
+                TemplateMessage templateMessage = new TemplateMessage("Your Line App is not support Please Update", carouselTemplate);
                 this.reply(replyToken, templateMessage);
                 break;
             }
