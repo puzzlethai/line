@@ -246,13 +246,13 @@ public class EchoController {
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn("", "GROUP1", "bot1:conservative/nbot2:Clever/nbot3:Witty", Arrays.asList(
+                                new CarouselColumn("", "GROUP1", "bot1:conservative\nbot2:Clever\nbot3:Witty", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
                                 )),
-                                new CarouselColumn("","GROUP2", "bot2:Clever/nbot3:Witty", Arrays.asList(
-                                        new PostbackAction("Join Group1",
+                                new CarouselColumn("","GROUP2", "bot2:Clever\nbot3:Witty", Arrays.asList(
+                                        new PostbackAction("Join Group2",
                                                            "JoinGroup2")
                                         
                                 ))
