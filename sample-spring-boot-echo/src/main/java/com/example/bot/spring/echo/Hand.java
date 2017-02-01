@@ -38,7 +38,7 @@ public class Hand {
         }
         catch (Exception e) {
             //System.out.println("Problem with " + unoPlayerClassName + ".");
-            this.pushText(userId, "error try");
+            this.pushText(userId, "error try"+e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
