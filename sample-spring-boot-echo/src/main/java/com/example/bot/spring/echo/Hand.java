@@ -30,16 +30,16 @@ public class Hand {
      * pattern whereby the constructor accepts various strategies that
      * implement the UnoPlayer interface.
      */
-    public Hand(String unoPlayerClassName, String playerName, String userId) throws IOException {
+    public Hand(String unoPlayerClassName, String playerName, String userId) throws IOException, InstantiationException, IllegalAccessException {
         this.pushText(userId, "before try");
         try {
             player = (UnoPlayer)
                 Class.forName(unoPlayerClassName).newInstance();
         }
-        catch (Exception e) {
+        catch (ClassNotFoundException e) {
             //System.out.println("Problem with " + unoPlayerClassName + ".");
-            this.pushText(userId, "error try"+e.getMessage());
-            e.printStackTrace();
+            this.pushText(userId, "error try "+e.getMessage());
+            e.printStackTrace(); 
             System.exit(1);
         }
         this.playerName = playerName;
