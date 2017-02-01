@@ -83,6 +83,7 @@ public class Game {
         this.pushText(userId, "after Hand");
         mostRecentColorCalled =
             new UnoPlayer.Color[scoreboard.getNumPlayers()];
+        this.pushText(userId, "before try");
         try {
             for (int i=0; i<scoreboard.getNumPlayers(); i++) {
                 h[i] = new Hand(playerClassList.get(i),
@@ -101,9 +102,11 @@ public class Game {
             this.pushText(userId,"Can't deal initial hands!");
             System.exit(1);
         }
+        this.pushText(userId, "after try");
         direction = Direction.FORWARDS;
         currPlayer =
             new java.util.Random().nextInt(scoreboard.getNumPlayers());
+        this.pushText(userId, "after currPlayer");
         calledColor = UnoPlayer.Color.NONE;
     }
 
