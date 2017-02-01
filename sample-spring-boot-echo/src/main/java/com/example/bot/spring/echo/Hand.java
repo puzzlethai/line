@@ -31,7 +31,7 @@ public class Hand {
      * implement the UnoPlayer interface.
      */
     public Hand(String unoPlayerClassName, String playerName, String userId) throws IOException {
-        this.pushText(userId, "error try");
+        this.pushText(userId, "before try");
         try {
             player = (UnoPlayer)
                 Class.forName(unoPlayerClassName).newInstance();
