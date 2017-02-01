@@ -79,8 +79,10 @@ public class Game {
         this.pushText(userId, "after Scoreboard");
         deck = new Deck();
         this.pushText(userId, "after Deck");
-        h = new Hand[scoreboard.getNumPlayers()];
-        this.pushText(userId, "after Hand");
+        int no_of_play = scoreboard.getNumPlayers();
+        // h = new Hand[scoreboard.getNumPlayers()];
+        h = new Hand[no_of_play];
+        this.pushText(userId, "after Hand "+no_of_play );
         mostRecentColorCalled =
             new UnoPlayer.Color[scoreboard.getNumPlayers()];
         this.pushText(userId, "before try");
