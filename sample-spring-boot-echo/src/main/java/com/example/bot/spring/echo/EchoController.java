@@ -34,6 +34,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.google.common.io.ByteStreams;
 
 import com.linecorp.bot.client.LineMessagingService;
+import com.linecorp.bot.client.LineMessagingServiceBuilder;
+import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.action.MessageAction;
 import com.linecorp.bot.model.action.PostbackAction;
@@ -204,7 +206,23 @@ public class EchoController {
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
         this.replyText(replyToken, userName+ " : You have joined Uno " + groupJoin.substring(4));
-        this.replyText(replyToken, "before Scoreboard");
+        //this.replyText(replyToken, "before Scoreboard");
+        
+                TextMessage textMessage = new TextMessage("hello");
+PushMessage pushMessage = new PushMessage(
+        userId,
+        textMessage
+);
+
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create("EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=")
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+        
+        
         playerNames.add("BOT1");
         playerNames.add("BOT2");
         playerNames.add("BOT3");
