@@ -204,6 +204,7 @@ public class EchoController {
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
         this.replyText(replyToken, userName+ " : You have joined Uno " + groupJoin.substring(4));
+        this.replyText(replyToken, "before Scoreboard");
         playerNames.add("BOT1");
         playerNames.add("BOT2");
         playerNames.add("BOT3");
@@ -212,7 +213,7 @@ public class EchoController {
         playerClasses.add("dummy2_Unoplayer");
         playerClasses.add("dummy3_Unoplayer");
         playerClasses.add("dummy1_Unoplayer");
-        this.replyText(replyToken, "before Scoreboard");
+        
        try {
             
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
