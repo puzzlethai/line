@@ -1,7 +1,14 @@
 
 package com.example.bot.spring.echo;
 
+import com.linecorp.bot.client.LineMessagingServiceBuilder;
+import com.linecorp.bot.model.PushMessage;
+import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.response.BotApiResponse;
+import java.io.IOException;
 import java.util.ArrayList;
+import lombok.NonNull;
+import retrofit2.Response;
 
 /**
  * <p>A Hand of Uno cards, held by a particular player. A Hand object is
@@ -23,13 +30,15 @@ public class Hand {
      * pattern whereby the constructor accepts various strategies that
      * implement the UnoPlayer interface.
      */
-    public Hand(String unoPlayerClassName, String playerName) {
+    public Hand(String unoPlayerClassName, String playerName, String userId) throws IOException {
+        this.pushText(userId, "error try");
         try {
             player = (UnoPlayer)
                 Class.forName(unoPlayerClassName).newInstance();
         }
         catch (Exception e) {
-            System.out.println("Problem with " + unoPlayerClassName + ".");
+            //System.out.println("Problem with " + unoPlayerClassName + ".");
+            this.pushText(userId, "error try");
             e.printStackTrace();
             System.exit(1);
         }
@@ -37,6 +46,21 @@ public class Hand {
         cards = new ArrayList<Card>();
     }
 
+     private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
+       TextMessage textMessage = new TextMessage(messages);
+PushMessage pushMessage = new PushMessage(
+        userId,
+        textMessage
+);
+
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create("EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=")
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    }
     /**
      * Add (draw) a card to the hand.
      */

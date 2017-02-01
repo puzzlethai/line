@@ -89,7 +89,7 @@ public class Game {
         try {
             for (int i=0; i<scoreboard.getNumPlayers(); i++) {
                 h[i] = new Hand(playerClassList.get(i),
-                    scoreboard.getPlayerList()[i]);
+                    scoreboard.getPlayerList()[i],userId);
                 for (int j=0; j<INIT_HAND_SIZE; j++) {
                     h[i].addCard(deck.draw());
                 }
