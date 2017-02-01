@@ -240,6 +240,7 @@ System.out.println(response.code() + " " + response.message());
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
             this.pushText(userId, "after Scoreboard");
                 Game g = new Game(s,playerClasses);
+                this.pushText(userId, "before play");
                 g.play(userId);
             
            
