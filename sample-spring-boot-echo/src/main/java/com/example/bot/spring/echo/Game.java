@@ -94,6 +94,7 @@ public class Game {
                     h[i].addCard(deck.draw());
                 }
             }
+            this.pushText(userId, "before upCard");
             upCard = deck.draw();
             while (upCard.followedByCall()) {
                 deck.discard(upCard);
@@ -101,7 +102,7 @@ public class Game {
             }
         }
         catch (Exception e) {
-            this.pushText(userId,"Can't deal initial hands!");
+            this.pushText(userId,"Can't deal initial hands!"+e.getMessage());
             System.exit(1);
         }
         this.pushText(userId, "after try");
