@@ -208,19 +208,7 @@ public class EchoController {
         this.replyText(replyToken, userName+ " : You have joined Uno " + groupJoin.substring(4));
         //this.replyText(replyToken, "before Scoreboard");
         
-                TextMessage textMessage = new TextMessage("hello");
-PushMessage pushMessage = new PushMessage(
-        userId,
-        textMessage
-);
-
-Response<BotApiResponse> response =
-        LineMessagingServiceBuilder
-                .create("EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=")
-                .build()
-                .pushMessage(pushMessage)
-                .execute();
-System.out.println(response.code() + " " + response.message());
+                
         
         
         playerNames.add("BOT1");
@@ -235,10 +223,8 @@ System.out.println(response.code() + " " + response.message());
        try {
             
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
-            this.replyText(replyToken, "after Scoreboard");
                 Game g = new Game(s,playerClasses);
-                this.replyText(replyToken, "before play");
-                g.play(replyToken);
+                g.play(userId);
             
            
         }

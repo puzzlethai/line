@@ -1,6 +1,8 @@
 package com.example.bot.spring.echo;
 
 import com.linecorp.bot.client.LineMessagingService;
+import com.linecorp.bot.client.LineMessagingServiceBuilder;
+import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
@@ -145,6 +147,9 @@ public class Game {
     }
     @Autowired
     private LineMessagingService lineMessagingService;
+    
+    
+    /*
 private void reply(@NonNull String replyToken, @NonNull Message message) {
         reply(replyToken, Collections.singletonList(message));
     }
@@ -169,24 +174,40 @@ private void reply(@NonNull String replyToken, @NonNull Message message) {
         }
         this.reply(replyToken, new TextMessage(message));
     }
+    */
+    private void pushText(@NonNull String userId, @NonNull TextMessage messages) throws IOException {
+       TextMessage textMessage = messages;
+PushMessage pushMessage = new PushMessage(
+        userId,
+        textMessage
+);
+
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create("EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=")
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    }
     /**
      * Play an entire Game of Uno from start to finish. Hands should have
      * already been dealt before this method is called, and a valid up card
      * turned up. When the method is completed, the Game's scoreboard object
      * will have been updated with new scoring favoring the winner.
-     * @param replyToken
+     * 
      */
-    public void play(String replyToken) {
+    public void play(String userId) throws IOException {
         //println("Initial upcard is " + upCard + ".");
         
-        this.replyText(replyToken, "Initial upcard is " + upCard + ".");
+        this.pushText(userId, new TextMessage("Initial upcard is " + upCard + "."));
         try {
             while (true) {
                 //print("Hand #" + currPlayer + " (" + h[currPlayer] + ")");
                 /*print(h[currPlayer].getPlayerName() +
                     " (" + h[currPlayer] + ")"); */
-                this.replyText(replyToken,h[currPlayer].getPlayerName() +
-                    " (" + h[currPlayer] + ")");
+                this.pushText(userId,new TextMessage(h[currPlayer].getPlayerName() +
+                    " (" + h[currPlayer] + ")"));
                 Card playedCard = h[currPlayer].play(this);
                 if (playedCard == null) {
                     Card drawnCard;
