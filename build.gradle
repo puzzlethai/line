@@ -61,9 +61,7 @@ subprojects {
     apply plugin: 'propdeps-eclipse'
     apply plugin: 'findbugs'
     apply plugin: 'java'
-    
-    
-    findbugs{
+       findbugs{
    ignoreFailures=true
   findbugsTest.enabled=false
 }
