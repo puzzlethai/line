@@ -36,6 +36,7 @@ public class Game {
      * The number of cards each player will be dealt at start of game.
      */
     static final int INIT_HAND_SIZE = 7;
+    
 
     public enum Direction { FORWARDS, BACKWARDS };
 
@@ -49,6 +50,7 @@ public class Game {
 
     /* package-visibility variables to simplify access between Game and
      * GameState classes */
+    String userId;
     Deck deck;
     Hand h[];
     Card upCard;
@@ -70,11 +72,15 @@ public class Game {
      * fully-qualified package/class name of a class that implements the
      * UnoPlayer interface.
      */
-    public Game(Scoreboard scoreboard, ArrayList<String> playerClassList) {
+    public Game(Scoreboard scoreboard, ArrayList<String> playerClassList,String userId) throws IOException {
         
         this.scoreboard = scoreboard;
+        this.userId = userId;
+        this.pushText(userId, "after Scoreboard");
         deck = new Deck();
+        this.pushText(userId, "after Deck");
         h = new Hand[scoreboard.getNumPlayers()];
+        this.pushText(userId, "after Hand");
         mostRecentColorCalled =
             new UnoPlayer.Color[scoreboard.getNumPlayers()];
         try {
@@ -92,7 +98,7 @@ public class Game {
             }
         }
         catch (Exception e) {
-            System.out.println("Can't deal initial hands!");
+            this.pushText(userId,"Can't deal initial hands!");
             System.exit(1);
         }
         direction = Direction.FORWARDS;
@@ -197,7 +203,7 @@ System.out.println(response.code() + " " + response.message());
      * will have been updated with new scoring favoring the winner.
      * 
      */
-    public void play(String userId) throws IOException {
+    public void play() throws IOException  {
         //println("Initial upcard is " + upCard + ".");
         
         this.pushText(userId, "Initial upcard is " + upCard + ".");
