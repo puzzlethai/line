@@ -184,7 +184,22 @@ public class EchoController {
         String replyToken = event.getReplyToken();
         this.replyText(replyToken, "Joined " + event.getSource());
     }
+    private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
+       TextMessage textMessage = new TextMessage(messages);
+PushMessage pushMessage = new PushMessage(
+        userId,
+        textMessage
+);
 
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create("EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=")
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    }
+    
     @EventMapping
     public void handlePostbackEvent(PostbackEvent event) throws IOException {
         String replyToken = event.getReplyToken();
@@ -210,7 +225,7 @@ public class EchoController {
         
                 
         
-        
+        this.pushText(userId, "before Scoreboard");
         playerNames.add("BOT1");
         playerNames.add("BOT2");
         playerNames.add("BOT3");
@@ -223,6 +238,7 @@ public class EchoController {
        try {
             
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
+            this.pushText(userId, "after Scoreboard");
                 Game g = new Game(s,playerClasses);
                 g.play(userId);
             

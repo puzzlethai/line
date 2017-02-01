@@ -175,8 +175,8 @@ private void reply(@NonNull String replyToken, @NonNull Message message) {
         this.reply(replyToken, new TextMessage(message));
     }
     */
-    private void pushText(@NonNull String userId, @NonNull TextMessage messages) throws IOException {
-       TextMessage textMessage = messages;
+    private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
+       TextMessage textMessage = new TextMessage(messages);
 PushMessage pushMessage = new PushMessage(
         userId,
         textMessage
@@ -200,14 +200,14 @@ System.out.println(response.code() + " " + response.message());
     public void play(String userId) throws IOException {
         //println("Initial upcard is " + upCard + ".");
         
-        this.pushText(userId, new TextMessage("Initial upcard is " + upCard + "."));
+        this.pushText(userId, "Initial upcard is " + upCard + ".");
         try {
             while (true) {
                 //print("Hand #" + currPlayer + " (" + h[currPlayer] + ")");
                 /*print(h[currPlayer].getPlayerName() +
                     " (" + h[currPlayer] + ")"); */
-                this.pushText(userId,new TextMessage(h[currPlayer].getPlayerName() +
-                    " (" + h[currPlayer] + ")"));
+                this.pushText(userId,h[currPlayer].getPlayerName() +
+                    " (" + h[currPlayer] + ")");
                 Card playedCard = h[currPlayer].play(this);
                 if (playedCard == null) {
                     Card drawnCard;
