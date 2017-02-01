@@ -1,6 +1,18 @@
 package com.example.bot.spring.echo;
 
+import com.linecorp.bot.client.LineMessagingService;
+import com.linecorp.bot.model.ReplyMessage;
+import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.response.BotApiResponse;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import retrofit2.Response;
 
 /**
  * <p>A Game object represents a single game of Uno in an overall match (of
@@ -57,6 +69,7 @@ public class Game {
      * UnoPlayer interface.
      */
     public Game(Scoreboard scoreboard, ArrayList<String> playerClassList) {
+        
         this.scoreboard = scoreboard;
         deck = new Deck();
         h = new Hand[scoreboard.getNumPlayers()];
@@ -86,12 +99,12 @@ public class Game {
         calledColor = UnoPlayer.Color.NONE;
     }
 
-    private void printState() {
+ /*   private void printState() {
         for (int i=0; i<scoreboard.getNumPlayers(); i++) {
             System.out.println("Hand #" + i + ": " + h[i]);
         }
     }
-
+*/
     /**
      * Return the number of the <i>next</i> player to play, provided the
      * current player doesn't jack that up by playing an action card.
@@ -130,19 +143,48 @@ public class Game {
             direction = Direction.FORWARDS;
         }
     }
+    @Autowired
+    private LineMessagingService lineMessagingService;
+private void reply(@NonNull String replyToken, @NonNull Message message) {
+        reply(replyToken, Collections.singletonList(message));
+    }
 
+    private void reply(@NonNull String replyToken, @NonNull List<Message> messages) {
+        try {
+            Response<BotApiResponse> apiResponse = lineMessagingService
+                    .replyMessage(new ReplyMessage(replyToken, messages))
+                    .execute();
+            
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private void replyText(@NonNull String replyToken, @NonNull String message) {
+        if (replyToken.isEmpty()) {
+            throw new IllegalArgumentException("replyToken must not be empty");
+        }
+        if (message.length() > 1000) {
+            message = message.substring(0, 1000 - 2) + "……";
+        }
+        this.reply(replyToken, new TextMessage(message));
+    }
     /**
      * Play an entire Game of Uno from start to finish. Hands should have
      * already been dealt before this method is called, and a valid up card
      * turned up. When the method is completed, the Game's scoreboard object
      * will have been updated with new scoring favoring the winner.
      */
-    public void play() {
-        println("Initial upcard is " + upCard + ".");
+    public void play(String replyToken) {
+        //println("Initial upcard is " + upCard + ".");
+        
+        this.replyText(replyToken, "Initial upcard is " + upCard + ".");
         try {
             while (true) {
                 //print("Hand #" + currPlayer + " (" + h[currPlayer] + ")");
-                print(h[currPlayer].getPlayerName() +
+                /*print(h[currPlayer].getPlayerName() +
+                    " (" + h[currPlayer] + ")"); */
+                this.replyText(replyToken,h[currPlayer].getPlayerName() +
                     " (" + h[currPlayer] + ")");
                 Card playedCard = h[currPlayer].play(this);
                 if (playedCard == null) {
@@ -151,7 +193,8 @@ public class Game {
                         drawnCard = deck.draw();
                     }
                     catch (Exception e) {
-                        print("...deck exhausted, remixing...");
+                        //print("...deck exhausted, remixing...");
+                        
                         deck.remix();
                         drawnCard = deck.draw();
                     }

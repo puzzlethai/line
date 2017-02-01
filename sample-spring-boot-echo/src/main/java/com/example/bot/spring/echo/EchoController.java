@@ -218,7 +218,7 @@ public class EchoController {
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
             
                 Game g = new Game(s,playerClasses);
-                g.play();
+                g.play(replyToken);
             
            
         }
