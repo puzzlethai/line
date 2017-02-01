@@ -85,7 +85,7 @@ public class Game {
         this.pushText(userId, "after Hand "+no_of_play );
         mostRecentColorCalled =
             new UnoPlayer.Color[scoreboard.getNumPlayers()];
-        this.pushText(userId, "before try");
+        this.pushText(userId, "before try playerClass1 :"+playerClassList.get(1));
         try {
             for (int i=0; i<scoreboard.getNumPlayers(); i++) {
                 h[i] = new Hand(playerClassList.get(i),
