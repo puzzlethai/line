@@ -75,6 +75,7 @@ import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
+import java.util.ArrayList;
 import javax.print.DocFlavor;
 
 import lombok.NonNull;
@@ -83,9 +84,16 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
+
+
 @Slf4j
 @LineMessageHandler
 public class EchoController {
+    
+    static boolean PRINT_VERBOSE = true;
+    private static ArrayList<String> playerNames = new ArrayList<String>();
+    private static ArrayList<String> playerClasses = new ArrayList<String>();
+
     @Autowired
     private LineMessagingService lineMessagingService;
 
@@ -195,7 +203,30 @@ public class EchoController {
                 } else {
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
-        this.replyText(replyToken, userName+ "You have joined Uno " + groupJoin.substring(4));
+        this.replyText(replyToken, userName+ " : You have joined Uno " + groupJoin.substring(4));
+        playerNames.add("BOT1");
+        playerNames.add("BOT2");
+        playerNames.add("BOT3");
+        playerNames.add(userName);
+        playerClasses.add("nds63_Unoplayer");
+        playerClasses.add("dummy2_Unoplayer");
+        playerClasses.add("dummy3_Unoplayer");
+        playerClasses.add("dummy1_Unoplayer");
+        
+       try {
+            
+            Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
+            
+                Game g = new Game(s,playerClasses);
+                g.play();
+            
+           
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+                
     }
 
     @EventMapping
