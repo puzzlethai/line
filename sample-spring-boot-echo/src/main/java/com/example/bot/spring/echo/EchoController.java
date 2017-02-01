@@ -212,12 +212,13 @@ public class EchoController {
         playerClasses.add("dummy2_Unoplayer");
         playerClasses.add("dummy3_Unoplayer");
         playerClasses.add("dummy1_Unoplayer");
-        
+        this.replyText(replyToken, "before Scoreboard");
        try {
             
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
-            
+            this.replyText(replyToken, "after Scoreboard");
                 Game g = new Game(s,playerClasses);
+                this.replyText(replyToken, "before play");
                 g.play(replyToken);
             
            
