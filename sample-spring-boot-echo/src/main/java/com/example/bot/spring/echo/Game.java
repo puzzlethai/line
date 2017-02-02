@@ -229,9 +229,9 @@ System.out.println(response.code() + " " + response.message());
                     }
                     catch (Exception e) {
                         //print("...deck exhausted, remixing...");
-                        
+                        this.pushText(userId,"...deck exhausted, remixing...");
                         deck.remix();
-                        drawnCard = deck.draw();
+                        drawnCard = deck.draw(); // what if cann't draw()
                     }
                     h[currPlayer].addCard(drawnCard);
                     this.pushText(userId," has to draw (" + drawnCard + ").");
