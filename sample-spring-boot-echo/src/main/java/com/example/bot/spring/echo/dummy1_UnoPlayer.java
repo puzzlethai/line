@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +31,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
 	UnoPlayer.Rank wild = UnoPlayer.Rank.WILD;
 	
 	
-        @Override
+        
 	public int play(List<Card> hand, Card upCard, Color calledColor, GameState state, String userId){
 		
 		/* ต้องมี handCanPlay ที่เป็น ArrayList ของ Card เพื่อเก็บ Card ที่สามารถเล่นบน
@@ -106,15 +107,18 @@ System.out.println(response.code() + " " + response.message());
     }
 	public Color callColor(List<Card> hand){
 		
-		Scanner Keyboard = new Scanner(System.in);
-                        System.out.print("Color : ");
-                        int number1 = Keyboard.nextInt();
+		// Scanner Keyboard = new Scanner(System.in);
+                //        System.out.print("Color : ");
+                Random rand;
+                rand = new Random();
+                int number1;
+                        number1 = rand.nextInt(4 - 1 + 1) + 1;
 		
 		switch (number1)		
                 {
                     case 1 : 
                     return blue;
-      
+                    
                     case 2 : 
                      return yellow;
       

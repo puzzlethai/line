@@ -98,6 +98,7 @@ public class Game {
             upCard = deck.draw();
             while (upCard.followedByCall()) {
                 deck.discard(upCard);
+                deck.remix();
                 upCard = deck.draw();
             }
         }
