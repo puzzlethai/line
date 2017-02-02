@@ -243,7 +243,8 @@ System.out.println(response.code() + " " + response.message());
                 Game g = new Game(s,playerClasses,userId);
                 this.pushText(userId, "before play");
                 g.play();
-            
+            playerNames.clear();
+            playerClasses.clear();
            
         }
         catch (Exception e) {
