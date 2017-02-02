@@ -92,7 +92,7 @@ import retrofit2.Response;
 @LineMessageHandler
 public class EchoController {
     
-    static boolean PRINT_VERBOSE = true;
+    static boolean PRINT_VERBOSE = false;
     private static ArrayList<String> playerNames = new ArrayList<String>();
     private static ArrayList<String> playerClasses = new ArrayList<String>();
 

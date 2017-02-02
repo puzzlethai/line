@@ -12,6 +12,8 @@ import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import retrofit2.Response;
@@ -281,13 +283,21 @@ System.out.println(response.code() + " " + response.message());
 
     void print(String s) {
         if (EchoController.PRINT_VERBOSE) {
-            System.out.print(s);
+            try {
+                this.pushText(userId,s);
+            } catch (IOException ex) {
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     void println(String s) {
         if (EchoController.PRINT_VERBOSE) {
-            System.out.println(s);
+            try {
+                this.pushText(userId,s);
+            } catch (IOException ex) {
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
