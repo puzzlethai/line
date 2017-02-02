@@ -230,9 +230,10 @@ System.out.println(response.code() + " " + response.message());
         playerNames.add("BOT2");
         playerNames.add("BOT3");
         playerNames.add(userName);
+        playerClasses.add("com.example.bot.spring.echo.dummy3_UnoPlayer");
         playerClasses.add("com.example.bot.spring.echo.nds63_UnoPlayer"); 
         playerClasses.add("com.example.bot.spring.echo.dummy2_Unoplayer");
-        playerClasses.add("com.example.bot.spring.echo.dummy3_UnoPlayer");
+        
         playerClasses.add("com.example.bot.spring.echo.dummy1_UnoPlayer");
         
        try {
