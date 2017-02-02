@@ -76,13 +76,11 @@ public class Game {
         
         this.scoreboard = scoreboard;
         this.userId = userId;
-        this.pushText(userId, "after Scoreboard");
         deck = new Deck();
-        this.pushText(userId, "after Deck");
         int no_of_play = scoreboard.getNumPlayers();
         // h = new Hand[scoreboard.getNumPlayers()];
         h = new Hand[no_of_play];
-        this.pushText(userId, "after Hand "+no_of_play );
+        this.pushText(userId, "Number of Player : "+no_of_play );
         mostRecentColorCalled =
             new UnoPlayer.Color[scoreboard.getNumPlayers()];
         this.pushText(userId, " playerClass0 :"+playerClassList.get(0));
@@ -97,7 +95,6 @@ public class Game {
                     h[i].addCard(deck.draw());
                 }
             }
-            this.pushText(userId, "before upCard");
             upCard = deck.draw();
             while (upCard.followedByCall()) {
                 deck.discard(upCard);
@@ -107,12 +104,10 @@ public class Game {
         catch (Exception e) {
             this.pushText(userId,"Can't deal initial hands!"+e.getMessage());
             System.exit(1);
-        }
-        this.pushText(userId, "after try");
+        }   
         direction = Direction.FORWARDS;
         currPlayer =
-            new java.util.Random().nextInt(scoreboard.getNumPlayers());
-        this.pushText(userId, "after currPlayer");
+            new java.util.Random().nextInt(scoreboard.getNumPlayers());      
         calledColor = UnoPlayer.Color.NONE;
     }
 
@@ -236,17 +231,17 @@ System.out.println(response.code() + " " + response.message());
                         drawnCard = deck.draw();
                     }
                     h[currPlayer].addCard(drawnCard);
-                    print(" has to draw (" + drawnCard + ").");
+                    this.pushText(userId," has to draw (" + drawnCard + ").");
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {
-                    print(" plays " + playedCard + " on " + upCard + ".");
+                    this.pushText(userId," plays " + playedCard + " on " + upCard + ".");
                     deck.discard(upCard);
                     upCard = playedCard;
                     if (upCard.followedByCall()) {
                         calledColor = h[currPlayer].callColor(this);
                         mostRecentColorCalled[currPlayer] = calledColor;
-                        print(" (and calls " + calledColor +
+                        this.pushText(userId," (and calls " + calledColor +
                             ").");
                     }
                     else {
@@ -258,16 +253,16 @@ System.out.println(response.code() + " " + response.message());
                     for (int j=0; j<scoreboard.getNumPlayers(); j++) {
                         roundPoints += h[j].countCards();
                     }
-                    println("\n" + h[currPlayer].getPlayerName() +
+                    this.pushText(userId,"\n" + h[currPlayer].getPlayerName() +
                         " wins! (and collects " + roundPoints + " points.)");
                     scoreboard.addToScore(currPlayer,roundPoints);
-                    println("---------------\n" + scoreboard);
+                    this.pushText(userId,"---------------\n" + scoreboard);
                     return;
                 }
                 if (h[currPlayer].size() == 1) {
-                    print(" UNO!");
+                    this.pushText(userId," UNO!");
                 }
-                println("");
+                this.pushText(userId,"\n");
                 if (playedCard != null) {
                     playedCard.performCardEffect(this);
                 }
@@ -277,7 +272,7 @@ System.out.println(response.code() + " " + response.message());
             }
         }
         catch (Exception e) {
-            System.out.println("Deck exhausted! This game is a draw.");
+            this.pushText(userId,"Deck exhausted! This game is a draw.");
             e.printStackTrace();
         }
         

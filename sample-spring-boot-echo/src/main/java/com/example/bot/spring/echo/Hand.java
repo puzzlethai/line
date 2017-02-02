@@ -23,6 +23,7 @@ public class Hand {
     private ArrayList<Card> cards;
     private UnoPlayer player;
     private String playerName;
+    public String userId;
 
     /**
      * Instantiate a Hand object to be played by the UnoPlayer class, and
@@ -31,7 +32,7 @@ public class Hand {
      * implement the UnoPlayer interface.
      */
     public Hand(String unoPlayerClassName, String playerName, String userId) throws IOException, InstantiationException, IllegalAccessException {
-        this.pushText(userId, "before try");
+        this.userId = userId;
         try {
             player = (UnoPlayer)
                 Class.forName(unoPlayerClassName).newInstance();
@@ -87,7 +88,7 @@ System.out.println(response.code() + " " + response.message());
     Card play(Game game) {
         int playedCard;
         playedCard = player.play(cards, game.getUpCard(), game.calledColor,
-            game.getGameState());
+            game.getGameState(),userId);
         if (playedCard == -1) {
             return null;
         }

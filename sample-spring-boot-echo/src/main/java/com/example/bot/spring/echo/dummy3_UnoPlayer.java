@@ -18,7 +18,7 @@ public class dummy3_UnoPlayer implements UnoPlayer {
 	UnoPlayer.Rank wild = UnoPlayer.Rank.WILD;
 	
 	
-	public int play(List<Card> hand, Card upCard, Color calledColor, GameState state){
+	public int play(List<Card> hand, Card upCard, Color calledColor, GameState state, String userId){
 		
 		UnoPlayer.Color colorOfUpCard = upCard.getColor();//Used readable variables to refer to the upCard
 		UnoPlayer.Rank rankOfUpCard = upCard.getRank();

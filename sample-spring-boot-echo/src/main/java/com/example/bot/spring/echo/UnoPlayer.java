@@ -49,7 +49,7 @@ public interface UnoPlayer {
      * automatically for you.)</p>
      */
     public int play(List<Card> hand, Card upCard, Color calledColor,
-        GameState state);
+        GameState state,String userId);
 
     /**
      * <p>This method will be called when you have just played a

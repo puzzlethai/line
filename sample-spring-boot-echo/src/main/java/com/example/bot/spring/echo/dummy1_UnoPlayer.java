@@ -1,9 +1,18 @@
 package com.example.bot.spring.echo;
 
+import com.linecorp.bot.client.LineMessagingServiceBuilder;
+import com.linecorp.bot.model.PushMessage;
+import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.response.BotApiResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lombok.NonNull;
+import retrofit2.Response;
 
 
 public class dummy1_UnoPlayer implements UnoPlayer {
@@ -21,7 +30,8 @@ public class dummy1_UnoPlayer implements UnoPlayer {
 	UnoPlayer.Rank wild = UnoPlayer.Rank.WILD;
 	
 	
-	public int play(List<Card> hand, Card upCard, Color calledColor, GameState state){
+        @Override
+	public int play(List<Card> hand, Card upCard, Color calledColor, GameState state, String userId){
 		
 		/* ต้องมี handCanPlay ที่เป็น ArrayList ของ Card เพื่อเก็บ Card ที่สามารถเล่นบน
             UpCard ได้ โดย input จะมาจาก hand  แต่ต้องมี Hashtable เก็บค่า index ของ hand คู่กับ 
@@ -52,15 +62,24 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
-                        System.out.print("("+nameOfCard+")");
+                        
+                        try {
+                            this.pushText(userId,"("+nameOfCard+")");
+                        } catch (IOException ex) {
+                            Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                       
                         
                         
                         
                     }
                     // รับ input จาก User ว่าจะเลือก Card ไหน
-                    Scanner Keyboard = new Scanner(System.in);
-                        System.out.print("Select: ");
-                        int number1 = Keyboard.nextInt();
+                    try {                  
+                        this.pushText(userId,"Select: ");
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        int number1 = 0;
                         //String indexOfhand;
                         // indexOfhand = hashMap.get(Integer.toString(number1));
                         
@@ -70,7 +89,21 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                    	
 		
 	}
-	
+	private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
+       TextMessage textMessage = new TextMessage(messages);
+PushMessage pushMessage = new PushMessage(
+        userId,
+        textMessage
+);
+
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create("EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=")
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    }
 	public Color callColor(List<Card> hand){
 		
 		Scanner Keyboard = new Scanner(System.in);
