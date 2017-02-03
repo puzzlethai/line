@@ -63,13 +63,13 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
-                        
+                        /*
                         try {
                             this.pushText(userId,"("+nameOfCard+")");
                         } catch (IOException ex) {
                             Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                       
+                       */
                         
                         
                         
