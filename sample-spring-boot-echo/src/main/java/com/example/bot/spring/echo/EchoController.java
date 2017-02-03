@@ -93,8 +93,7 @@ import retrofit2.Response;
 public class EchoController {
     
     static boolean PRINT_VERBOSE = false;
-    private static ArrayList<String> playerNames = new ArrayList<String>();
-    private static ArrayList<String> playerClasses = new ArrayList<String>();
+    
 
     @Autowired
     private LineMessagingService lineMessagingService;
@@ -202,6 +201,8 @@ System.out.println(response.code() + " " + response.message());
     
     @EventMapping
     public void handlePostbackEvent(PostbackEvent event) throws IOException {
+         ArrayList<String> playerNames = new ArrayList<String>();
+         ArrayList<String> playerClasses = new ArrayList<String>();
         String replyToken = event.getReplyToken();
         String groupJoin = event.getPostbackContent().getData();
         String userId = event.getSource().getUserId();
