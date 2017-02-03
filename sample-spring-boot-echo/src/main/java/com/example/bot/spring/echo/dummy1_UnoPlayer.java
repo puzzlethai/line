@@ -42,11 +42,13 @@ public class dummy1_UnoPlayer implements UnoPlayer {
             
             */
 		
-		ArrayList<Card> handCanPlay;
+		ArrayList<Card> handCanPlay,handNotPlay;
                 handCanPlay = new ArrayList<Card>();
+                handNotPlay = new ArrayList<Card>();
                 HashMap<Integer,Integer> hashMap=new HashMap<Integer,Integer>();
                 // HashMap hashMap=new HashMap();
                 int k=0;
+                int l=0;
                 for (int i= 0; i< hand.size(); i++){
                     if (hand.get(i).canPlayOn(upCard, calledColor)){
                         
@@ -54,6 +56,9 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         hashMap.put(k,i);
                         //hashMap.put(Integer.toString(k), Integer.toString(i));
                         k=k+1;
+                    }else {
+                        handNotPlay.add(hand.get(i));
+                        l=l+1;
                     }
                 }
                 if (handCanPlay.isEmpty()) {
@@ -74,6 +79,12 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         
                         
                     }
+                       for (int m=0; m< handNotPlay.size();m++){
+                        String nameOfCard;
+                        nameOfCard = handNotPlay.get(m).toString();
+                        System.out.print("["+nameOfCard+"]");
+                    
+                }
                     // รับ input จาก User ว่าจะเลือก Card ไหน
                     /*
                     try {                  
