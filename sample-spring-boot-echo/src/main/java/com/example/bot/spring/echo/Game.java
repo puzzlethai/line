@@ -219,8 +219,9 @@ System.out.println(response.code() + " " + response.message());
                 //print("Hand #" + currPlayer + " (" + h[currPlayer] + ")");
                 /*print(h[currPlayer].getPlayerName() +
                     " (" + h[currPlayer] + ")"); */
-                this.pushText(userId,h[currPlayer].getPlayerName() +
+                /*this.pushText(userId,h[currPlayer].getPlayerName() +
                     " (" + h[currPlayer] + ")");
+                */
                 Card playedCard = h[currPlayer].play(this);
                 if (playedCard == null) {
                     Card drawnCard;
@@ -234,18 +235,19 @@ System.out.println(response.code() + " " + response.message());
                         drawnCard = deck.draw(); // what if cann't draw()
                     }
                     h[currPlayer].addCard(drawnCard);
-                    this.pushText(userId," has to draw (" + drawnCard + ").");
+                    //this.pushText(userId," has to draw (" + drawnCard + ").");
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {
-                    this.pushText(userId," plays " + playedCard + " on " + upCard + ".");
+                    //this.pushText(userId," plays " + playedCard + " on " + upCard + ".");
                     deck.discard(upCard);
                     upCard = playedCard;
                     if (upCard.followedByCall()) {
                         calledColor = h[currPlayer].callColor(this);
                         mostRecentColorCalled[currPlayer] = calledColor;
-                        this.pushText(userId," (and calls " + calledColor +
-                            ").");
+                       /* this.pushText(userId," (and calls " + calledColor +
+                            ")."); 
+                        */
                     }
                     else {
                         calledColor = UnoPlayer.Color.NONE;
@@ -263,7 +265,7 @@ System.out.println(response.code() + " " + response.message());
                     return;
                 }
                 if (h[currPlayer].size() == 1) {
-                    this.pushText(userId," UNO!");
+                    //this.pushText(userId," UNO!");
                 }
                 this.pushText(userId,"\n");
                 if (playedCard != null) {

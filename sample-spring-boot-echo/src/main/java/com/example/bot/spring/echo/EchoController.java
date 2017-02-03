@@ -202,7 +202,7 @@ System.out.println(response.code() + " " + response.message());
     @EventMapping
     public void handlePostbackEvent(PostbackEvent event) throws IOException {
          ArrayList<String> playerNames = new ArrayList<String>();
-         ArrayList<String> playerClasses = new ArrayList<String>();
+     ArrayList<String> playerClasses = new ArrayList<String>();
         String replyToken = event.getReplyToken();
         String groupJoin = event.getPostbackContent().getData();
         String userId = event.getSource().getUserId();
