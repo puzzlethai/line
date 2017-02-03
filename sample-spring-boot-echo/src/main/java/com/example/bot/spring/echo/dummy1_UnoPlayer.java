@@ -75,11 +75,13 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         
                     }
                     // รับ input จาก User ว่าจะเลือก Card ไหน
+                    /*
                     try {                  
                         this.pushText(userId,"Select: ");
                     } catch (IOException ex) {
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    */
                         int number1 = 0;
                         //String indexOfhand;
                         // indexOfhand = hashMap.get(Integer.toString(number1));
