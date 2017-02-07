@@ -418,7 +418,7 @@ System.out.println(response.code() + " " + response.message());
                 break;
             }
             case "carousel": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
+                String imageUrl = createUri("1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
                                 new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
