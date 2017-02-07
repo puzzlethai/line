@@ -397,7 +397,7 @@ System.out.println(response.code() + " " + response.message());
             }
             
             case "buttons": {
-                String imageUrl = createUri("/1040.jpg");
+                String imageUrl = createUri("/main/static/buttons/1040.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         "My button sample",
@@ -418,7 +418,7 @@ System.out.println(response.code() + " " + response.message());
                 break;
             }
             case "carousel": {
-                String imageUrl = createUri("1040.jpg");
+                String imageUrl = createUri("/resources/main/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
                                 new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
