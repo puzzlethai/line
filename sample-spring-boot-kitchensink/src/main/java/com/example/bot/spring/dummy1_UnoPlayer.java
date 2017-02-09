@@ -79,6 +79,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         
                         
                     }
+                    
                        for (int m=0; m< handNotPlay.size();m++){
                         String nameOfCard;
                         nameOfCard = handNotPlay.get(m).toString();
