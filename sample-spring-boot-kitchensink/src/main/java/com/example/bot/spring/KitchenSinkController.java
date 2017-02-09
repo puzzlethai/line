@@ -34,6 +34,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.google.common.io.ByteStreams;
 
 import com.linecorp.bot.client.LineMessagingService;
+import com.linecorp.bot.client.LineMessagingServiceBuilder;
+import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.action.MessageAction;
 import com.linecorp.bot.model.action.PostbackAction;
@@ -75,6 +77,8 @@ import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
+import java.util.ArrayList;
+import javax.print.DocFlavor;
 
 import lombok.NonNull;
 import lombok.Value;
@@ -82,9 +86,15 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
+
+
 @Slf4j
 @LineMessageHandler
 public class KitchenSinkController {
+    
+    static boolean PRINT_VERBOSE = false;
+    
+
     @Autowired
     private LineMessagingService lineMessagingService;
 
@@ -109,7 +119,7 @@ public class KitchenSinkController {
                 locationMessage.getLongitude()
         ));
     }
-
+    
     @EventMapping
     public void handleImageMessageEvent(MessageEvent<ImageMessageContent> event) throws IOException {
         // You need to install ImageMagick
@@ -173,11 +183,76 @@ public class KitchenSinkController {
         String replyToken = event.getReplyToken();
         this.replyText(replyToken, "Joined " + event.getSource());
     }
+    private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
+       TextMessage textMessage = new TextMessage(messages);
+PushMessage pushMessage = new PushMessage(
+        userId,
+        textMessage
+);
 
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create("EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=")
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    }
+    
     @EventMapping
-    public void handlePostbackEvent(PostbackEvent event) {
+    public void handlePostbackEvent(PostbackEvent event) throws IOException {
+         ArrayList<String> playerNames = new ArrayList<String>();
+     ArrayList<String> playerClasses = new ArrayList<String>();
         String replyToken = event.getReplyToken();
-        this.replyText(replyToken, "Got postback " + event.getPostbackContent().getData());
+        String groupJoin = event.getPostbackContent().getData();
+        String userId = event.getSource().getUserId();
+        String userName ="";  
+                if (userId != null) {
+                    Response<UserProfileResponse> response = lineMessagingService
+                            .getProfile(userId)
+                            .execute();
+                    if (response.isSuccessful()) {
+                        UserProfileResponse profiles = response.body();
+                        userName = profiles.getDisplayName();
+                        
+                    } else {
+                        this.replyText(replyToken, response.errorBody().string());
+                    }
+                } else {
+                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+                }
+        this.replyText(replyToken, userName+ " : You have joined Uno " + groupJoin.substring(4));
+        //this.replyText(replyToken, "before Scoreboard");
+        
+                
+        
+        this.pushText(userId, "before Scoreboard");
+        playerNames.add("BOT1");
+        playerNames.add("BOT2");
+        playerNames.add("BOT3");
+        playerNames.add(userName);
+        playerClasses.add("com.example.bot.spring.echo.dummy3_UnoPlayer");
+        playerClasses.add("com.example.bot.spring.echo.nds63_UnoPlayer"); 
+        playerClasses.add("com.example.bot.spring.echo.dummy2_UnoPlayer");
+        
+        playerClasses.add("com.example.bot.spring.echo.dummy1_UnoPlayer");
+        
+       try {
+            
+            Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
+            this.pushText(userId, "after Scoreboard");
+                Game g = new Game(s,playerClasses,userId);
+                this.pushText(userId, "before play");
+                g.play();
+            playerNames.clear();
+            playerClasses.clear();
+           
+        }
+        catch (Exception e) {
+            this.pushText(userId,e.getMessage());
+        }
+        
+                
     }
 
     @EventMapping
@@ -242,6 +317,36 @@ public class KitchenSinkController {
 
         log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
+            case "play uno": {
+                String imageUrl = createUri("/static/buttons/1040.jpg");
+                CarouselTemplate carouselTemplate = new CarouselTemplate(
+                        Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT1 : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
+                                        
+                                        new PostbackAction("Join Group1",
+                                                           "JoinGroup1")
+                                )),
+                                new CarouselColumn(null,"GROUP2", "BOT2 : Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
+                                        new PostbackAction("Join Group2",
+                                                           "JoinGroup2")
+                                        
+                                )),
+                                new CarouselColumn(null,"GROUP3", "BOT3 : Witty\nBOT4 : Carefully\nBOT1 : Conservative", Arrays.asList(
+                                        new PostbackAction("Join Group3",
+                                                           "JoinGroup3")
+                                        
+                                )),
+                                new CarouselColumn(null, "GROUP1", "BOT4 : Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
+                                        
+                                        new PostbackAction("Join Group4",
+                                                           "JoinGroup4")
+                                ))
+                                        
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Your Line App is not support Please Update", carouselTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+            }
             case "profile": {
                 String userId = event.getSource().getUserId();
                 if (userId != null) {
@@ -290,12 +395,13 @@ public class KitchenSinkController {
                 this.reply(replyToken, templateMessage);
                 break;
             }
+            
             case "buttons": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
+                String imageUrl = createUri("/1040.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
-                        "UNO",
-                        "UNO, my button",
+                        "My button sample",
+                        "Hello, my button",
                         Arrays.asList(
                                 new URIAction("Go to line.me",
                                               "https://line.me"),
@@ -423,3 +529,4 @@ public class KitchenSinkController {
         String uri;
     }
 }
+
