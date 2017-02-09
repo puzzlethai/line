@@ -276,7 +276,7 @@ System.out.println(response.code() + " " + response.message());
                 }
             }
         }
-        catch (Exception e) {
+        catch (EmptyDeckException e) {
             this.pushText(userId,"Deck exhausted! This game is a draw.");
             e.printStackTrace();
         }

@@ -188,7 +188,7 @@ public class Card {
      * when a player must draw as a result of this card's effect, yet the
      * draw cannot occur because of un-shufflable deck exhaustion.
      */
-    void performCardEffect(Game game) throws Exception {
+    void performCardEffect(Game game) throws EmptyDeckException {
         switch (rank) {
             case SKIP:
                 game.advanceToNextPlayer();
@@ -218,13 +218,13 @@ public class Card {
         }
     }
 
-    private void nextPlayerDraw(Game game) throws Exception {
+    private void nextPlayerDraw(Game game) throws EmptyDeckException {
         int nextPlayer = game.getNextPlayer();
         Card drawnCard;
         try {
             drawnCard = game.deck.draw();
         }
-        catch (Exception e) {
+        catch (EmptyDeckException e) {
             game.print("...deck exhausted, remixing...");
             game.deck.remix();
             drawnCard = game.deck.draw();

@@ -127,9 +127,9 @@ public class Deck {
      * @throws EmptyDeckException When called on an empty deck.
      * @see isEmpty
      */
-    public Card draw() throws Exception {
+    public Card draw() throws EmptyDeckException {
         if (cards.size() == 0) {
-            throw new Exception();
+            throw new EmptyDeckException();
         }
         return cards.remove(0);
     }
