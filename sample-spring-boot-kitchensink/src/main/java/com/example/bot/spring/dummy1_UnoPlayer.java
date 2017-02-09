@@ -2,10 +2,17 @@ package com.example.bot.spring;
 
 import com.linecorp.bot.client.LineMessagingServiceBuilder;
 import com.linecorp.bot.model.PushMessage;
+import com.linecorp.bot.model.action.MessageAction;
+import com.linecorp.bot.model.action.PostbackAction;
+import com.linecorp.bot.model.action.URIAction;
+import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.TemplateMessage;
 import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.message.template.ButtonsTemplate;
 import com.linecorp.bot.model.response.BotApiResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -13,6 +20,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.NonNull;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import retrofit2.Response;
 
 
@@ -79,13 +87,35 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         
                         
                     }
-                    
+                    String imageUrl = createUri("/1040.jpg");
+                ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
+                        imageUrl,
+                        "UNO",
+                        "Card NO",
+                        Arrays.asList(
+                                new URIAction("Go to line.me",
+                                              "https://line.me"),
+                                new PostbackAction("Say hello1",
+                                                   "hello こんにちは"),
+                                new PostbackAction("言 hello2",
+                                                   "hello こんにちは",
+                                                   "hello こんにちは"),
+                                new MessageAction("Say message",
+                                                  "Rice=米")
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+                    try {
+                        this.pushButton(userId,templateMessage);
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                        for (int m=0; m< handNotPlay.size();m++){
                         String nameOfCard;
                         nameOfCard = handNotPlay.get(m).toString();
-                        System.out.print("["+nameOfCard+"]");
+                        //System.out.print("["+nameOfCard+"]");
                     
                 }
+                       
                     // รับ input จาก User ว่าจะเลือก Card ไหน
                     /*
                     try {                  
@@ -118,6 +148,27 @@ Response<BotApiResponse> response =
                 .pushMessage(pushMessage)
                 .execute();
 System.out.println(response.code() + " " + response.message());
+    }
+       private void pushButton(@NonNull String userId, TemplateMessage templateMessage) throws IOException {
+       
+PushMessage pushMessage = new PushMessage(
+        userId,
+        templateMessage
+);
+
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create("xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=")
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    } 
+        
+        private static String createUri(String path) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath()
+                                          .path(path).build()
+                                          .toUriString();
     }
 	public Color callColor(List<Card> hand){
 		
