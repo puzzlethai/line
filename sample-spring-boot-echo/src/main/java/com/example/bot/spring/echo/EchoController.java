@@ -397,7 +397,7 @@ System.out.println(response.code() + " " + response.message());
             }
             
             case "buttons": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
+                String imageUrl = createUri("1040.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         "My button sample",
