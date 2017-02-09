@@ -19,3 +19,5 @@ apply plugin: 'org.springframework.boot'
 dependencies {
     compile project(':line-bot-spring-boot')
 }
+sourceSets.main.resources.srcDirs = [ "src/" ]
+sourceSets.main.resources.includes = [ "**/*.jpg" ]
