@@ -87,7 +87,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         
                         
                     }
-                    String imageUrl = createUri("/1040.jpg");
+                    String imageUrl = createUri("/static/buttons/1040.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         "UNO",
