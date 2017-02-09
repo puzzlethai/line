@@ -249,7 +249,7 @@ System.out.println(response.code() + " " + response.message());
            
         }
         catch (Exception e) {
-            e.printStackTrace();
+            this.pushText(userId,e.getMessage());
         }
         
                 
