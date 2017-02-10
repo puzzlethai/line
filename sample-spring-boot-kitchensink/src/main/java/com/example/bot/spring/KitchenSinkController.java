@@ -17,21 +17,18 @@
 package com.example.bot.spring;
 
 import java.io.IOException;
-import java.io.OutputStream;
+
 import java.io.UncheckedIOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDateTime;
+
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
-import java.util.function.Consumer;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.google.common.io.ByteStreams;
 
 import com.linecorp.bot.client.LineMessagingService;
 import com.linecorp.bot.client.LineMessagingServiceBuilder;
@@ -47,12 +44,11 @@ import com.linecorp.bot.model.event.JoinEvent;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.PostbackEvent;
 import com.linecorp.bot.model.event.UnfollowEvent;
-import com.linecorp.bot.model.event.message.AudioMessageContent;
-import com.linecorp.bot.model.event.message.ImageMessageContent;
-import com.linecorp.bot.model.event.message.LocationMessageContent;
+
+
 import com.linecorp.bot.model.event.message.StickerMessageContent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
-import com.linecorp.bot.model.event.message.VideoMessageContent;
+
 import com.linecorp.bot.model.event.source.GroupSource;
 import com.linecorp.bot.model.event.source.RoomSource;
 import com.linecorp.bot.model.event.source.Source;
@@ -64,7 +60,7 @@ import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.StickerMessage;
 import com.linecorp.bot.model.message.TemplateMessage;
 import com.linecorp.bot.model.message.TextMessage;
-import com.linecorp.bot.model.message.VideoMessage;
+
 import com.linecorp.bot.model.message.imagemap.ImagemapArea;
 import com.linecorp.bot.model.message.imagemap.ImagemapBaseSize;
 import com.linecorp.bot.model.message.imagemap.MessageImagemapAction;
@@ -93,7 +89,7 @@ import retrofit2.Response;
 public class KitchenSinkController {
     
     static boolean PRINT_VERBOSE = false;
-    
+    final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 
     @Autowired
     private LineMessagingService lineMessagingService;
@@ -107,64 +103,6 @@ public class KitchenSinkController {
     @EventMapping
     public void handleStickerMessageEvent(MessageEvent<StickerMessageContent> event) {
         handleSticker(event.getReplyToken(), event.getMessage());
-    }
-
-    @EventMapping
-    public void handleLocationMessageEvent(MessageEvent<LocationMessageContent> event) {
-        LocationMessageContent locationMessage = event.getMessage();
-        reply(event.getReplyToken(), new LocationMessage(
-                locationMessage.getTitle(),
-                locationMessage.getAddress(),
-                locationMessage.getLatitude(),
-                locationMessage.getLongitude()
-        ));
-    }
-    
-    @EventMapping
-    public void handleImageMessageEvent(MessageEvent<ImageMessageContent> event) throws IOException {
-        // You need to install ImageMagick
-        handleHeavyContent(
-                event.getReplyToken(),
-                event.getMessage().getId(),
-                responseBody -> {
-                    DownloadedContent jpg = saveContent("jpg", responseBody);
-                    DownloadedContent previewImg = createTempFile("jpg");
-                    system(
-                            "convert",
-                            "-resize", "240x",
-                            jpg.path.toString(),
-                            previewImg.path.toString());
-                    reply(((MessageEvent) event).getReplyToken(),
-                          new ImageMessage(jpg.getUri(), jpg.getUri()));
-                });
-    }
-
-    @EventMapping
-    public void handleAudioMessageEvent(MessageEvent<AudioMessageContent> event) throws IOException {
-        handleHeavyContent(
-                event.getReplyToken(),
-                event.getMessage().getId(),
-                responseBody -> {
-                    DownloadedContent mp4 = saveContent("mp4", responseBody);
-                    reply(event.getReplyToken(), new AudioMessage(mp4.getUri(), 100));
-                });
-    }
-
-    @EventMapping
-    public void handleVideoMessageEvent(MessageEvent<VideoMessageContent> event) throws IOException {
-        // You need to install ffmpeg and ImageMagick.
-        handleHeavyContent(
-                event.getReplyToken(),
-                event.getMessage().getId(),
-                responseBody -> {
-                    DownloadedContent mp4 = saveContent("mp4", responseBody);
-                    DownloadedContent previewImg = createTempFile("jpg");
-                    system("convert",
-                           mp4.path + "[0]",
-                           previewImg.path.toString());
-                    reply(((MessageEvent) event).getReplyToken(),
-                          new VideoMessage(mp4.getUri(), previewImg.uri));
-                });
     }
 
     @EventMapping
@@ -192,7 +130,24 @@ PushMessage pushMessage = new PushMessage(
 
 Response<BotApiResponse> response =
         LineMessagingServiceBuilder
-                .create("xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=")
+                .create(channalKey)
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    }
+    
+    private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
+      // TextMessage textMessage = new TextMessage(messages);
+      ImageMessage imageMessage = new ImageMessage(imageUrl, imageUrl);
+PushMessage pushMessage = new PushMessage(
+        userId,
+        imageMessage
+);
+
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create(channalKey)
                 .build()
                 .pushMessage(pushMessage)
                 .execute();
@@ -289,20 +244,6 @@ System.out.println(response.code() + " " + response.message());
             message = message.substring(0, 1000 - 2) + "……";
         }
         this.reply(replyToken, new TextMessage(message));
-    }
-
-    private void handleHeavyContent(String replyToken, String messageId,
-                                    Consumer<ResponseBody> messageConsumer) throws IOException {
-        Response<ResponseBody> response = lineMessagingService.getMessageContent(messageId)
-                                                              .execute();
-        if (response.isSuccessful()) {
-            try (ResponseBody body = response.body()) {
-                messageConsumer.accept(body);
-            }
-        } else {
-            reply(replyToken, new TextMessage("Cannot get image: " + response.message()));
-        }
-
     }
 
     private void handleSticker(String replyToken, StickerMessageContent content) {
@@ -488,45 +429,6 @@ System.out.println(response.code() + " " + response.message());
                                           .toUriString();
     }
 
-    private void system(String... args) {
-        ProcessBuilder processBuilder = new ProcessBuilder(args);
-        try {
-            Process start = processBuilder.start();
-            int i = start.waitFor();
-            log.info("result: {} =>  {}", Arrays.toString(args), i);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        } catch (InterruptedException e) {
-            log.info("Interrupted", e);
-            Thread.currentThread().interrupt();
-        }
-    }
-
-    private static DownloadedContent saveContent(String ext, ResponseBody responseBody) {
-        log.info("Got content-type: {}", responseBody.contentType());
-        DownloadedContent tempFile = createTempFile(ext);
-        try (OutputStream outputStream = Files.newOutputStream(tempFile.path)) {
-            ByteStreams.copy(responseBody.byteStream(), outputStream);
-            log.info("Saved {}: {}", ext, tempFile);
-            return tempFile;
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    private static DownloadedContent createTempFile(String ext) {
-        String fileName = LocalDateTime.now().toString() + '-' + UUID.randomUUID().toString() + '.' + ext;
-        Path tempFile = KitchenSinkApplication.downloadedContentDir.resolve(fileName);
-        tempFile.toFile().deleteOnExit();
-        return new DownloadedContent(
-                tempFile,
-                createUri("/downloaded/" + tempFile.getFileName()));
-    }
-
-    @Value
-    public static class DownloadedContent {
-        Path path;
-        String uri;
-    }
+   
 }
 

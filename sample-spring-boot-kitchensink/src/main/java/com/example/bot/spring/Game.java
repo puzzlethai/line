@@ -1,9 +1,11 @@
 package com.example.bot.spring;
 
+
 import com.linecorp.bot.client.LineMessagingService;
 import com.linecorp.bot.client.LineMessagingServiceBuilder;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
+import com.linecorp.bot.model.message.ImageMessage;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.response.BotApiResponse;
@@ -16,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import retrofit2.Response;
 
 /**
@@ -38,6 +41,8 @@ public class Game {
      * The number of cards each player will be dealt at start of game.
      */
     static final int INIT_HAND_SIZE = 7;
+final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
+
     
 
     public enum Direction { FORWARDS, BACKWARDS };
@@ -197,7 +202,23 @@ PushMessage pushMessage = new PushMessage(
 
 Response<BotApiResponse> response =
         LineMessagingServiceBuilder
-                .create("xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=")
+                .create(channalKey)
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    }
+    private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
+      // TextMessage textMessage = new TextMessage(messages);
+      ImageMessage imageMessage = new ImageMessage(imageUrl, imageUrl);
+PushMessage pushMessage = new PushMessage(
+        userId,
+        imageMessage
+);
+
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create(channalKey)
                 .build()
                 .pushMessage(pushMessage)
                 .execute();
@@ -213,7 +234,9 @@ System.out.println(response.code() + " " + response.message());
     public void play() throws IOException  {
         //println("Initial upcard is " + upCard + ".");
         
-        this.pushText(userId, "Initial upcard is " + upCard + ".");
+        // this.pushText(userId, "Initial upcard is " + upCard + ".");
+        String imageUrl = createUri("/static/buttons/1040.jpg");
+        pushImage(userId,imageUrl); 
         try {
             while (true) {
                 //print("Hand #" + currPlayer + " (" + h[currPlayer] + ")");
@@ -317,5 +340,10 @@ System.out.println(response.code() + " " + response.message());
      */
     public Card getUpCard() {
         return upCard;
+    }
+      private static String createUri(String path) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath()
+                                          .path(path).build()
+                                          .toUriString();
     }
 }
