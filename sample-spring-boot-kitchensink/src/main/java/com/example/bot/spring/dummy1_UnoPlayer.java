@@ -52,7 +52,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
             
             */
                 
-                String imageUrl = createUri("/static/buttons/1040.jpg");
+                String imageUrl = createUri("/static/buttons/B0L.jpg");
 		
 		ArrayList<Card> handCanPlay,handNotPlay;
                 handCanPlay = new ArrayList<Card>();
