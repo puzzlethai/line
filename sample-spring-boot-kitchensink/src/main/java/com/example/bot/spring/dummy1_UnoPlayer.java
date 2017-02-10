@@ -9,6 +9,8 @@ import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TemplateMessage;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.message.template.ButtonsTemplate;
+import com.linecorp.bot.model.message.template.CarouselColumn;
+import com.linecorp.bot.model.message.template.CarouselTemplate;
 import com.linecorp.bot.model.response.BotApiResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,6 +51,8 @@ public class dummy1_UnoPlayer implements UnoPlayer {
             return ค่ากลับ เป็น int 
             
             */
+                
+                String imageUrl = createUri("/static/buttons/1040.jpg");
 		
 		ArrayList<Card> handCanPlay,handNotPlay;
                 handCanPlay = new ArrayList<Card>();
@@ -73,9 +77,23 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     return -1;
                     
                 }else { // แสดง Card ที่สามารถเล่นได้ให้ ผู้เล่นดู 
+                    CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
+                        
+                        column [j] = new CarouselColumn(imageUrl,nameOfCard,"4",Arrays.asList(
+                            new PostbackAction("Select",nameOfCard))
+                    );
+                        CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
+                        TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
+                        
+                        try {
+                        this.pushButton(userId,templateMessage);
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                         /*
                         try {
                             this.pushText(userId,"("+nameOfCard+")");
@@ -87,7 +105,9 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         
                         
                     }
-                    String imageUrl = createUri("/static/buttons/1040.jpg");
+                    
+                    /*
+                    
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         "UNO",
@@ -109,12 +129,14 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     } catch (IOException ex) {
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    */
                        for (int m=0; m< handNotPlay.size();m++){
                         String nameOfCard;
                         nameOfCard = handNotPlay.get(m).toString();
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
+                       
                        
                     // รับ input จาก User ว่าจะเลือก Card ไหน
                     /*
@@ -165,6 +187,7 @@ Response<BotApiResponse> response =
 System.out.println(response.code() + " " + response.message());
     } 
         
+
         private static String createUri(String path) {
         return ServletUriComponentsBuilder.fromCurrentContextPath()
                                           .path(path).build()
