@@ -234,8 +234,8 @@ System.out.println(response.code() + " " + response.message());
     public void play() throws IOException  {
         //println("Initial upcard is " + upCard + ".");
         
-        // this.pushText(userId, "Initial upcard is " + upCard + ".");
-        String imageUrl = createUri("/static/buttons/1040.jpg");
+        this.pushText(userId, "Initial upcard is " + upCard + ".");
+        String imageUrl = createUri("/static/buttons/B0.jpg");
         pushImage(userId,imageUrl); 
         try {
             while (true) {
