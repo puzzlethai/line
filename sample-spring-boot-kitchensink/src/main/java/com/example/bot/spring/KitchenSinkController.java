@@ -91,6 +91,7 @@ public class KitchenSinkController {
     static boolean PRINT_VERBOSE = false;
     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 static String status = "begin";
+static boolean eventPressed = false;
 
     @Autowired
     private LineMessagingService lineMessagingService;
@@ -178,7 +179,8 @@ System.out.println(response.code() + " " + response.message());
                 }
         
         //this.replyText(replyToken, "before Scoreboard");
-        if (KitchenSinkController.status.startsWith("JoinGroup")) {
+        if ((KitchenSinkController.status.startsWith("JoinGroup"))&&(!eventPressed)) {
+            eventPressed = true;
             this.replyText(replyToken, userName+ " : You have joined Uno " + KitchenSinkController.status.substring(4));
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
@@ -209,8 +211,9 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId,e.getMessage());
         }
         }  else{
-            if (KitchenSinkController.status.startsWith("Card")){
-                //this.pushText(userId,status);
+            if ((KitchenSinkController.status.startsWith("Card"))&&(!eventPressed)){
+                eventPressed = true;
+    //this.pushText(userId,status);
             }
         }
                 
