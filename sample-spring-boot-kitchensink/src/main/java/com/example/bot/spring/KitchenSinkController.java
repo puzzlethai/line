@@ -90,6 +90,7 @@ public class KitchenSinkController {
     
     static boolean PRINT_VERBOSE = false;
     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
+static String status = "begin";
 
     @Autowired
     private LineMessagingService lineMessagingService;
@@ -156,10 +157,9 @@ System.out.println(response.code() + " " + response.message());
     
     @EventMapping
     public void handlePostbackEvent(PostbackEvent event) throws IOException {
-         ArrayList<String> playerNames = new ArrayList<String>();
-     ArrayList<String> playerClasses = new ArrayList<String>();
+         
         String replyToken = event.getReplyToken();
-        String groupJoin = event.getPostbackContent().getData();
+        KitchenSinkController.status = event.getPostbackContent().getData(); // JoinGroup,Card,Color
         String userId = event.getSource().getUserId();
         String userName ="";  
                 if (userId != null) {
@@ -176,12 +176,13 @@ System.out.println(response.code() + " " + response.message());
                 } else {
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
-        this.replyText(replyToken, userName+ " : You have joined Uno " + groupJoin.substring(4));
+        
         //this.replyText(replyToken, "before Scoreboard");
-        
-                
-        
-        this.pushText(userId, "before Scoreboard");
+        if (KitchenSinkController.status.startsWith("JoinGroup")) {
+            this.replyText(replyToken, userName+ " : You have joined Uno " + KitchenSinkController.status.substring(4));
+        ArrayList<String> playerNames = new ArrayList<String>();
+     ArrayList<String> playerClasses = new ArrayList<String>();
+        //this.pushText(userId, "before Scoreboard");
         playerNames.add("BOT1");
         playerNames.add("BOT2");
         playerNames.add("BOT3");
@@ -191,13 +192,14 @@ System.out.println(response.code() + " " + response.message());
         playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer");
         
         playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer");
-        
+      
        try {
             
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
             this.pushText(userId, "after Scoreboard");
                 Game g = new Game(s,playerClasses,userId);
                 this.pushText(userId, "before play");
+                KitchenSinkController.status = "Playing";
                 g.play();
             playerNames.clear();
             playerClasses.clear();
@@ -206,9 +208,67 @@ System.out.println(response.code() + " " + response.message());
         catch (Exception e) {
             this.pushText(userId,e.getMessage());
         }
-        
+        }  else{
+            if (KitchenSinkController.status.startsWith("Card")){
+                //this.pushText(userId,status);
+            }
+        }
                 
     }
+//    public void handlePostbackEvent(PostbackEvent event) throws IOException {
+//         ArrayList<String> playerNames = new ArrayList<String>();
+//     ArrayList<String> playerClasses = new ArrayList<String>();
+//        String replyToken = event.getReplyToken();
+//        String groupJoin = event.getPostbackContent().getData();
+//        String userId = event.getSource().getUserId();
+//        String userName ="";  
+//                if (userId != null) {
+//                    Response<UserProfileResponse> response = lineMessagingService
+//                            .getProfile(userId)
+//                            .execute();
+//                    if (response.isSuccessful()) {
+//                        UserProfileResponse profiles = response.body();
+//                        userName = profiles.getDisplayName();
+//                        
+//                    } else {
+//                        this.replyText(replyToken, response.errorBody().string());
+//                    }
+//                } else {
+//                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+//                }
+//        this.replyText(replyToken, userName+ " : You have joined Uno " + groupJoin.substring(4));
+//        //this.replyText(replyToken, "before Scoreboard");
+//        
+//                
+//        
+//        this.pushText(userId, "before Scoreboard");
+//        playerNames.add("BOT1");
+//        playerNames.add("BOT2");
+//        playerNames.add("BOT3");
+//        playerNames.add(userName);
+//        playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer");
+//        playerClasses.add("com.example.bot.spring.nds63_UnoPlayer"); 
+//        playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer");
+//        
+//        playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer");
+//        
+//       try {
+//            
+//            Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
+//            this.pushText(userId, "after Scoreboard");
+//                Game g = new Game(s,playerClasses,userId);
+//                this.pushText(userId, "before play");
+//                g.play();
+//            playerNames.clear();
+//            playerClasses.clear();
+//           
+//        }
+//        catch (Exception e) {
+//            this.pushText(userId,e.getMessage());
+//        }
+//        
+//                
+//    }
 
     @EventMapping
     public void handleBeaconEvent(BeaconEvent event) {

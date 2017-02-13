@@ -136,7 +136,21 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
-                       
+                      long startTime = System.currentTimeMillis(); //fetch starting time
+
+while ((System.currentTimeMillis()-startTime)<30000)
+
+{
+                        try {
+                            // do something
+                            Thread.sleep(1000);} catch (InterruptedException ex) {
+                            Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+    if (KitchenSinkController.status.startsWith("Card")){
+        
+        break;
+    }
+}  
                        
                     // รับ input จาก User ว่าจะเลือก Card ไหน
                     /*
