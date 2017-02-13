@@ -91,7 +91,7 @@ public class KitchenSinkController {
     static boolean PRINT_VERBOSE = false;
     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 static String status = "begin";
-static boolean eventPressed = false;
+static String  gameStatus = "notPlayYet";
 
     @Autowired
     private LineMessagingService lineMessagingService;
@@ -179,8 +179,8 @@ System.out.println(response.code() + " " + response.message());
                 }
         
         //this.replyText(replyToken, "before Scoreboard");
-        if ((KitchenSinkController.status.startsWith("JoinGroup"))&&(!KitchenSinkController.eventPressed)) {
-            KitchenSinkController.eventPressed = true;
+        if ((KitchenSinkController.status.startsWith("JoinGroup"))&&(KitchenSinkController.gameStatus.equals("begin"))) {
+            KitchenSinkController.gameStatus = "joingroup";
             this.replyText(replyToken, userName+ " : You have joined Uno " + KitchenSinkController.status.substring(4));
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
@@ -211,8 +211,8 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId,e.getMessage());
         }
         }  else{
-            if ((KitchenSinkController.status.startsWith("Card"))&&(!KitchenSinkController.eventPressed)){
-                KitchenSinkController.eventPressed = true;
+            if ((KitchenSinkController.status.startsWith("Card"))&&(KitchenSinkController.gameStatus.equals("waitCard"))){
+                KitchenSinkController.gameStatus = "cardSelected";
     //this.pushText(userId,status);
             }
         }
@@ -321,8 +321,8 @@ System.out.println(response.code() + " " + response.message());
 
         log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
-            case "play uno": {
-                KitchenSinkController.eventPressed = false;
+            case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
+                KitchenSinkController.gameStatus = "begin";
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(

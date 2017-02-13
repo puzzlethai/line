@@ -136,7 +136,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
-                      KitchenSinkController.eventPressed = false;
+                      KitchenSinkController.gameStatus = "waitCard";
                       long startTime = System.currentTimeMillis(); //fetch starting time
 
 while ((System.currentTimeMillis()-startTime)<30000)
