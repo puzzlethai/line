@@ -160,6 +160,32 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     */
+                    if (KitchenSinkController.status.startsWith("Card")){
+                        try {                  
+                        this.pushText(userId,"You Select: "+KitchenSinkController.status);
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                            
+                            }
+                    KitchenSinkController.status = "Just Selected";
+                    } else {
+                        try {                  
+                        this.pushText(userId,"We Select :"+KitchenSinkController.status);
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                            
+                            }
+                    }
+                    
+                      try {                  
+                        this.pushText(userId,KitchenSinkController.status);
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                            
+                            }
                         int number1 = 0;
                         //String indexOfhand;
                         // indexOfhand = hashMap.get(Integer.toString(number1));
