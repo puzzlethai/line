@@ -83,7 +83,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         nameOfCard = handCanPlay.get(j).toString();
                         
                         column [j] = new CarouselColumn(imageUrl,nameOfCard,"4",Arrays.asList(
-                            new PostbackAction("Select",nameOfCard))
+                            new PostbackAction("Select","Card"+j))
                     );
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
                         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
