@@ -179,8 +179,8 @@ System.out.println(response.code() + " " + response.message());
                 }
         
         //this.replyText(replyToken, "before Scoreboard");
-        if ((KitchenSinkController.status.startsWith("JoinGroup"))&&(!eventPressed)) {
-            eventPressed = true;
+        if ((KitchenSinkController.status.startsWith("JoinGroup"))&&(!KitchenSinkController.eventPressed)) {
+            KitchenSinkController.eventPressed = true;
             this.replyText(replyToken, userName+ " : You have joined Uno " + KitchenSinkController.status.substring(4));
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
@@ -211,8 +211,8 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId,e.getMessage());
         }
         }  else{
-            if ((KitchenSinkController.status.startsWith("Card"))&&(!eventPressed)){
-                eventPressed = true;
+            if ((KitchenSinkController.status.startsWith("Card"))&&(!KitchenSinkController.eventPressed)){
+                KitchenSinkController.eventPressed = true;
     //this.pushText(userId,status);
             }
         }
@@ -322,6 +322,7 @@ System.out.println(response.code() + " " + response.message());
         log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
             case "play uno": {
+                KitchenSinkController.eventPressed = false;
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
