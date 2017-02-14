@@ -86,9 +86,12 @@ public class KitchenSinkController {
     
     static boolean PRINT_VERBOSE = false;
     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
-static String status = "begin";
-static String  gameStatus = "notPlayYet";
 
+static String  gameStatus = "notPlayYet";
+static boolean eventPressed = false;
+boolean joined = false;
+boolean playing = false;
+int round = 0;
     @Autowired
     private LineMessagingService lineMessagingService;
 
@@ -156,7 +159,7 @@ System.out.println(response.code() + " " + response.message());
     public void handlePostbackEvent(PostbackEvent event) throws IOException {
          
         String replyToken = event.getReplyToken();
-        KitchenSinkController.status = event.getPostbackContent().getData(); // JoinGroup,Card,Color
+        KitchenSinkController.gameStatus = event.getPostbackContent().getData(); // JoinGroup,Card,Color
         String userId = event.getSource().getUserId();
         String userName ="";  
                 if (userId != null) {
@@ -175,9 +178,9 @@ System.out.println(response.code() + " " + response.message());
                 }
         
         //this.replyText(replyToken, "before Scoreboard");
-        if ((KitchenSinkController.status.startsWith("JoinGroup"))&&(KitchenSinkController.gameStatus.equals("begin"))) {
-            KitchenSinkController.gameStatus = "joingroup";
-            this.replyText(replyToken, userName+ " : You have joined Uno " + KitchenSinkController.status.substring(4));
+        if ((KitchenSinkController.gameStatus.startsWith("JoinGroup"))&&(!joined)) {
+            joined = true;
+            this.replyText(replyToken, userName+ " : You have joined Uno " + KitchenSinkController.gameStatus.substring(4));
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
         //this.pushText(userId, "before Scoreboard");
@@ -197,18 +200,24 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId, "after Scoreboard");
                 Game g = new Game(s,playerClasses,userId);
                 this.pushText(userId, "before play");
-                KitchenSinkController.status = "Playing";
+              //  KitchenSinkController.gameStatus = "Playing";
+              playing = true;
                 g.play();
             playerNames.clear();
             playerClasses.clear();
-            KitchenSinkController.gameStatus = "notPlayYet";
+            round = 0;
+            joined = false;
+            playing = false;
+            //KitchenSinkController.gameStatus = "notPlayYet";
         }
         catch (Exception e) {
             this.pushText(userId,e.getMessage());
         }
         }  else{
-            if ((KitchenSinkController.status.startsWith("Card"))&&(KitchenSinkController.gameStatus.equals("waitCard"))){
-                KitchenSinkController.gameStatus = "cardSelected";
+            round = round +1;
+            int temp = Integer.parseInt(KitchenSinkController.gameStatus.substring(6));
+            if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
+                KitchenSinkController.eventPressed = true;
     //this.pushText(userId,status);
             }
         }
@@ -318,7 +327,8 @@ System.out.println(response.code() + " " + response.message());
         log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
             case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
-                KitchenSinkController.gameStatus = "begin";
+                if (!playing){
+                joined = false;
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
@@ -346,6 +356,8 @@ System.out.println(response.code() + " " + response.message());
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Your Line App is not support Please Update", carouselTemplate);
                 this.reply(replyToken, templateMessage);
+                break;
+            } 
                 break;
             }
             case "profile": {
