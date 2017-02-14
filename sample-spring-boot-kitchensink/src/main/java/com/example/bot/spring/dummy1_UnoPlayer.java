@@ -181,7 +181,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     KitchenSinkController.eventPressed.replace(userId, false);
                     } else {
                         try {                  
-                        this.pushText(userId,"We Select :"+KitchenSinkController.gameStatus);
+                        this.pushText(userId,"We Select :"+KitchenSinkController.gameStatus+"No: "+KitchenSinkController.eventPressed.size());
                     } catch (IOException ex) {
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
