@@ -52,20 +52,16 @@ import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.event.source.GroupSource;
 import com.linecorp.bot.model.event.source.RoomSource;
 import com.linecorp.bot.model.event.source.Source;
-import com.linecorp.bot.model.message.AudioMessage;
+
 import com.linecorp.bot.model.message.ImageMessage;
-import com.linecorp.bot.model.message.ImagemapMessage;
-import com.linecorp.bot.model.message.LocationMessage;
+
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.StickerMessage;
 import com.linecorp.bot.model.message.TemplateMessage;
 import com.linecorp.bot.model.message.TextMessage;
-
-import com.linecorp.bot.model.message.imagemap.ImagemapArea;
-import com.linecorp.bot.model.message.imagemap.ImagemapBaseSize;
-import com.linecorp.bot.model.message.imagemap.MessageImagemapAction;
-import com.linecorp.bot.model.message.imagemap.URIImagemapAction;
 import com.linecorp.bot.model.message.template.ButtonsTemplate;
+
+
 import com.linecorp.bot.model.message.template.CarouselColumn;
 import com.linecorp.bot.model.message.template.CarouselTemplate;
 import com.linecorp.bot.model.message.template.ConfirmTemplate;
@@ -205,7 +201,7 @@ System.out.println(response.code() + " " + response.message());
                 g.play();
             playerNames.clear();
             playerClasses.clear();
-           
+            KitchenSinkController.gameStatus = "notPlayYet";
         }
         catch (Exception e) {
             this.pushText(userId,e.getMessage());
@@ -444,39 +440,6 @@ System.out.println(response.code() + " " + response.message());
                 this.reply(replyToken, templateMessage);
                 break;
             }
-            case "imagemap":
-                this.reply(replyToken, new ImagemapMessage(
-                        createUri("/static/rich"),
-                        "This is alt text",
-                        new ImagemapBaseSize(1040, 1040),
-                        Arrays.asList(
-                                new URIImagemapAction(
-                                        "https://store.line.me/family/manga/en",
-                                        new ImagemapArea(
-                                                0, 0, 520, 520
-                                        )
-                                ),
-                                new URIImagemapAction(
-                                        "https://store.line.me/family/music/en",
-                                        new ImagemapArea(
-                                                520, 0, 520, 520
-                                        )
-                                ),
-                                new URIImagemapAction(
-                                        "https://store.line.me/family/play/en",
-                                        new ImagemapArea(
-                                                0, 520, 520, 520
-                                        )
-                                ),
-                                new MessageImagemapAction(
-                                        "URANAI!",
-                                        new ImagemapArea(
-                                                520, 520, 520, 520
-                                        )
-                                )
-                        )
-                ));
-                break;
             default:
                 log.info("Returns echo message {}: {}", replyToken, text);
                 this.replyText(
