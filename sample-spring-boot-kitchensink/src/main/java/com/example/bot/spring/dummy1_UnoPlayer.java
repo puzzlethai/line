@@ -67,6 +67,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         
                         handCanPlay.add(hand.get(i));
                         hashMap.put(k,i);
+                       
                         //hashMap.put(Integer.toString(k), Integer.toString(i));
                         k=k+1;
                     }else {
@@ -144,7 +145,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
-                       KitchenSinkController.eventPressed = false; // รอรับ input 
+                       KitchenSinkController.eventPressed.replace(userId, false); // รอรับ input 
                       long startTime = System.currentTimeMillis(); //fetch starting time
 
 while ((System.currentTimeMillis()-startTime)<30000)
@@ -155,7 +156,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                             Thread.sleep(1000);} catch (InterruptedException ex) {
                             Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
-    if (KitchenSinkController.eventPressed){
+    if (KitchenSinkController.eventPressed.get(userId)){
         
         break;
     }
@@ -169,7 +170,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     */
-                    if (KitchenSinkController.eventPressed){
+                    if (KitchenSinkController.eventPressed.get(userId)){
                         try {                  
                         this.pushText(userId,"You Select: "+KitchenSinkController.gameStatus);
                     } catch (IOException ex) {
@@ -177,7 +178,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     
                             
                             }
-                    KitchenSinkController.eventPressed = false;
+                    KitchenSinkController.eventPressed.replace(userId, false);
                     } else {
                         try {                  
                         this.pushText(userId,"We Select :"+KitchenSinkController.gameStatus);
