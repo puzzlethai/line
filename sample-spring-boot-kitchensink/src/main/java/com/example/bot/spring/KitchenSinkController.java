@@ -157,9 +157,10 @@ System.out.println(response.code() + " " + response.message());
     
     @EventMapping
     public void handlePostbackEvent(PostbackEvent event) throws IOException {
-         
+        
         String replyToken = event.getReplyToken();
         KitchenSinkController.gameStatus = event.getPostbackContent().getData(); // JoinGroup,Card,Color
+        
         String userId = event.getSource().getUserId();
         String userName ="";  
                 if (userId != null) {
@@ -214,14 +215,17 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId,e.getMessage());
         }
         }  else{
+            if (KitchenSinkController.gameStatus.substring(2,6).equals("Card")){
             round = round +1;
             int temp = Integer.parseInt(KitchenSinkController.gameStatus.substring(6));
-            if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
+            if (temp ==round){
+                // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
                 KitchenSinkController.eventPressed = true;
     //this.pushText(userId,status);
             }
         }
-                
+        }
+    
     }
 //    public void handlePostbackEvent(PostbackEvent event) throws IOException {
 //         ArrayList<String> playerNames = new ArrayList<String>();
