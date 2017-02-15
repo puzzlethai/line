@@ -224,11 +224,11 @@ System.out.println(response.code() + " " + response.message());
                 // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
                 KitchenSinkController.eventPressed.replace(userId,true);
     //this.pushText(userId,status);
-            } 
-            
-        } else {
+            } else {
                 round = round -1;
             }
+            
+        } 
         }
     
     }
