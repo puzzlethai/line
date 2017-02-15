@@ -87,15 +87,15 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
-//                        String cardNo;
-//                        if (j<10){
-//                            cardNo = "0"+Integer.toString(j);
-//                        } else {
-//                            cardNo = Integer.toString(j);
-//                        }
+                        String cardNo;
+                        if (j<10){
+                            cardNo = "0"+Integer.toString(j);
+                        } else {
+                            cardNo = Integer.toString(j);
+                       }
                         
                         column [j] = new CarouselColumn(imageUrl,nameOfCard,"4",Arrays.asList(
-                            new PostbackAction("Select","Card"+j))
+                            new PostbackAction("Select",cardNo+"Card"+round))
                     );
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
                         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
@@ -197,7 +197,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     
                     int number1 = 0;
                     String str;
-                    str = KitchenSinkController.gameStatus.substring(4);
+                    str = KitchenSinkController.gameStatus.substring(6);
                     number1 = Integer.valueOf(str);
                     try {
                         this.pushText(userId,"CardNO = "+String.valueOf(number1));
