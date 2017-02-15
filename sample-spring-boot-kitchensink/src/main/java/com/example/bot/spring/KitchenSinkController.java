@@ -226,7 +226,9 @@ System.out.println(response.code() + " " + response.message());
     //this.pushText(userId,status);
             } 
             
-        }
+        } else {
+                round = round -1;
+            }
         }
     
     }
