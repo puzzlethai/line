@@ -219,12 +219,17 @@ System.out.println(response.code() + " " + response.message());
         }  else{
             if (KitchenSinkController.gameStatus.startsWith("Card")){
             round = round +1;
+            
             int temp = Integer.parseInt(KitchenSinkController.gameStatus.substring(4));
+            this.pushText(userId,"round ="+round+" temp ="+temp);
             if (temp ==round){
                 // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
                 KitchenSinkController.eventPressed.replace(userId,true);
     //this.pushText(userId,status);
-            } else round = round -1;
+            } else {
+                round = round -1;
+            
+            }
             
             
         } else {
