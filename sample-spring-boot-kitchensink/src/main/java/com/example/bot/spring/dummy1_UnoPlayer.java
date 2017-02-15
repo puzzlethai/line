@@ -197,7 +197,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     
                     int number1 = 0;
                     String str;
-                    str = KitchenSinkController.gameStatus.substring(0,2);
+                    str = KitchenSinkController.gameStatus.substring(4);
                     number1 = Integer.valueOf(str);
                     try {
                         this.pushText(userId,"CardNO = "+String.valueOf(number1));
