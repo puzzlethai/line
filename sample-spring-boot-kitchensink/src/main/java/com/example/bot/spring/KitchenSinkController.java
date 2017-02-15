@@ -71,8 +71,6 @@ import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.print.DocFlavor;
 
 import lombok.NonNull;
@@ -94,7 +92,7 @@ static String  gameStatus = "notPlayYet";
 static HashMap<String,Boolean> eventPressed=new HashMap<String,Boolean>();
 boolean joined = false;
 boolean playing = false;
-
+int round = 0;
     @Autowired
     private LineMessagingService lineMessagingService;
 
@@ -159,7 +157,7 @@ System.out.println(response.code() + " " + response.message());
     }
     
     @EventMapping
-    public void handlePostbackEvent(PostbackEvent event) throws IOException, InstantiationException, IllegalAccessException {
+    public void handlePostbackEvent(PostbackEvent event) throws IOException {
         
         String replyToken = event.getReplyToken();
         KitchenSinkController.gameStatus = event.getPostbackContent().getData(); // JoinGroup,Card,Color
@@ -180,13 +178,13 @@ System.out.println(response.code() + " " + response.message());
                 } else {
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
-     ArrayList<String> playerNames = new ArrayList<String>();
-     ArrayList<String> playerClasses = new ArrayList<String>();        
+        
         //this.replyText(replyToken, "before Scoreboard");
         if ((KitchenSinkController.gameStatus.startsWith("JoinGroup"))&&(!joined)) {
             joined = true;
             this.replyText(replyToken, userName+ " : You have joined Uno " + KitchenSinkController.gameStatus.substring(4));
-   
+        ArrayList<String> playerNames = new ArrayList<String>();
+     ArrayList<String> playerClasses = new ArrayList<String>();
         //this.pushText(userId, "before Scoreboard");
         KitchenSinkController.eventPressed.put(userId,false);
         playerNames.add("BOT1");
@@ -198,7 +196,7 @@ System.out.println(response.code() + " " + response.message());
         playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer");
         
         playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer");
-     
+      
        try {
             
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
@@ -210,7 +208,7 @@ System.out.println(response.code() + " " + response.message());
                 g.play();
             playerNames.clear();
             playerClasses.clear();
-            
+            round = 0;
             joined = false;
             playing = false;
             //KitchenSinkController.gameStatus = "notPlayYet";
@@ -219,36 +217,19 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId,e.getMessage());
         }
         }  else{
-                      
+            if (KitchenSinkController.gameStatus.substring(2,6).equals("Card")){
+            round = round +1;
             int temp = Integer.parseInt(KitchenSinkController.gameStatus.substring(6));
-            this.pushText(userId,KitchenSinkController.gameStatus.substring(6));
-//            UnoPlayer dummy;
-//            try {
-//            dummy =  (UnoPlayer) Class.forName("dummy1_UnoPlayer",true,this);
-//               
-//        }
-//        catch (ClassNotFoundException e) {
-//            //System.out.println("Problem with " + unoPlayerClassName + ".");
-//            this.pushText(userId, "error try "+e.getMessage());
-//            e.printStackTrace(); 
-//            System.exit(1);
-//        }
-//            UnoPlayer dummy;
-//            
-//           dummy = (UnoPlayer) Class.forName("com.example.bot.spring.dummy1_UnoPlayer").;
-
-Hand dummy;
-            
-                dummy = new Hand(playerClasses.get(3), playerNames.get(3),userId);
-           
-        this.pushText(userId,"VauleOfRound"+String.valueOf(dummy.getUnoPlayer().getRound()));
-
-           if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==dummy.getUnoPlayer().getRound())){
+            if (temp ==round){
+                // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
                 KitchenSinkController.eventPressed.replace(userId,true);
     //this.pushText(userId,status);
-           } 
+            } else {
+                round = round -1;
+            }
+            
         }
-        
+        }
     
     }
 //    public void handlePostbackEvent(PostbackEvent event) throws IOException {

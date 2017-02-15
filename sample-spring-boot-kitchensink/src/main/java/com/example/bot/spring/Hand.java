@@ -46,9 +46,6 @@ public class Hand {
         this.playerName = playerName;
         cards = new ArrayList<Card>();
     }
-public UnoPlayer getUnoPlayer() {
-        return player;
-    }
 
      private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
        TextMessage textMessage = new TextMessage(messages);

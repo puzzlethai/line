@@ -16,20 +16,6 @@ public class dummy2_UnoPlayer implements UnoPlayer {
 	UnoPlayer.Rank drawTwo = UnoPlayer.Rank.DRAW_TWO;
 	UnoPlayer.Rank wildDrawFour = UnoPlayer.Rank.WILD_D4;
 	UnoPlayer.Rank wild = UnoPlayer.Rank.WILD;
-        
-              int round = 0;
-	
-        dummy2_UnoPlayer(){
-            
-        }
-
-    public int getRound() {
-        return round;
-    }
-
-    public void setRound(int round) {
-        this.round = round;
-    }
 	
 	
 	public int play(List<Card> hand, Card upCard, Color calledColor, GameState state,String userId){
