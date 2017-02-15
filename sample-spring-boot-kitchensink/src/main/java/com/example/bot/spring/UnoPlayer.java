@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface UnoPlayer {
 
+    public int getRound();
+
     public enum Color { RED, YELLOW, GREEN, BLUE, NONE }
     public enum Rank { NUMBER, SKIP, REVERSE, DRAW_TWO, WILD, WILD_D4 }
 

@@ -42,6 +42,17 @@ public class dummy1_UnoPlayer implements UnoPlayer {
 	
         int round = 0;
 	
+        dummy1_UnoPlayer(){
+            
+        }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
         
 	public int play(List<Card> hand, Card upCard, Color calledColor, GameState state, String userId){
 		
