@@ -87,15 +87,15 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
-                        String cardNo;
-                        if (j<10){
-                            cardNo = "0"+Integer.toString(j);
-                        } else {
-                            cardNo = Integer.toString(j);
-                        }
+//                        String cardNo;
+//                        if (j<10){
+//                            cardNo = "0"+Integer.toString(j);
+//                        } else {
+//                            cardNo = Integer.toString(j);
+//                        }
                         
                         column [j] = new CarouselColumn(imageUrl,nameOfCard,"4",Arrays.asList(
-                            new PostbackAction("Select",cardNo+"Card"+String.valueOf(round)))
+                            new PostbackAction("Select","Card"+j))
                     );
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
                         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
