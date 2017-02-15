@@ -241,7 +241,7 @@ Hand dummy;
             
                 dummy = new Hand(playerClasses.get(3), playerNames.get(3),userId);
            
-        this.pushText(userId,String.valueOf(dummy.getUnoPlayer().getRound()));
+        this.pushText(userId,"VauleOfRound"+String.valueOf(dummy.getUnoPlayer().getRound()));
 
            if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==dummy.getUnoPlayer().getRound())){
                 KitchenSinkController.eventPressed.replace(userId,true);

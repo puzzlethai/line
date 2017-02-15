@@ -91,7 +91,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     
                 }else { // แสดง Card ที่สามารถเล่นได้ให้ ผู้เล่นดู 
                     CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
-                    round = round +1;
+                    this.round = this.getRound() +1;
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
@@ -103,7 +103,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         }
                         
                         column [j] = new CarouselColumn(imageUrl,nameOfCard,"4",Arrays.asList(
-                            new PostbackAction("Select",cardNo+"Card"+String.valueOf(round)))
+                            new PostbackAction("Select",cardNo+"Card"+String.valueOf(this.round)))
                     );
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
                         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
