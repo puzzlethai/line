@@ -41,6 +41,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
 	UnoPlayer.Rank wild = UnoPlayer.Rank.WILD;
 	
         int round = 0;
+        boolean wait = true;
 	
         
 	public int play(List<Card> hand, Card upCard, Color calledColor, GameState state, String userId){
@@ -52,6 +53,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
             return ค่ากลับ เป็น int 
             
             */
+                
                 
                 String imageUrl = createUri("/static/buttons/B0L.jpg");
 		
@@ -79,6 +81,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     return -1;
                     
                 }else { // แสดง Card ที่สามารถเล่นได้ให้ ผู้เล่นดู 
+                    if (wait) {
                     CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
                     round = round +1;
                     for (int j=0; j< handCanPlay.size();j++){
@@ -161,6 +164,8 @@ while ((System.currentTimeMillis()-startTime)<30000)
         break;
     }
 }  
+
+                }
                        
                     // รับ input จาก User ว่าจะเลือก Card ไหน
                     /*
@@ -180,9 +185,9 @@ while ((System.currentTimeMillis()-startTime)<30000)
                             }
                     KitchenSinkController.eventPressed.replace(userId, false);
                     } else {
-                        round = round -1;
+                        wait = false;
                         try {                  
-                        this.pushText(userId,"We Select :"+KitchenSinkController.gameStatus+"No: "+KitchenSinkController.eventPressed.size());
+                        this.pushText(userId,"!!TIME OUT!! You didn't select the card. Our System play for You");
                     } catch (IOException ex) {
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
@@ -205,10 +210,14 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         // indexOfhand = hashMap.get(Integer.toString(number1));
                         
                     //return  Integer.parseInt(indexOfhand);
-                    return  hashMap.get(number1);
+                    if (number1 < hashMap.size()) {
+                    return  hashMap.get(number1);    
+                    } else {
+                        return 0;
+                    }
+                    
                 }
-                   	
-		
+                   		
 	}
 	private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
        TextMessage textMessage = new TextMessage(messages);
