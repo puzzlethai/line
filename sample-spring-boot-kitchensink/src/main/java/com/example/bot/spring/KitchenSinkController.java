@@ -203,7 +203,7 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId, "after Scoreboard");
                 Game g = new Game(s,playerClasses,userId);
                 this.pushText(userId, "before play");
-              KitchenSinkController.gameStatus = "Card0"; // Start Valueof PostBackEvent Select Card
+             // KitchenSinkController.gameStatus = "Card0"; // Start Valueof PostBackEvent Select Card
               playing = true;
                 g.play();
             playerNames.clear();
@@ -224,11 +224,13 @@ System.out.println(response.code() + " " + response.message());
                 // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
                 KitchenSinkController.eventPressed.replace(userId,true);
     //this.pushText(userId,status);
-            } else {
-                round = round -1;
+            } else round = round -1;
+            
+            
+        } else {
+                this.pushText(userId, "Not Starts with Card");
             }
             
-        } 
         }
     
     }
