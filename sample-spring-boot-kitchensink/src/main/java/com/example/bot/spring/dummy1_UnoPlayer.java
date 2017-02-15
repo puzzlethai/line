@@ -180,6 +180,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                             }
                     KitchenSinkController.eventPressed.replace(userId, false);
                     } else {
+                        round = round -1;
                         try {                  
                         this.pushText(userId,"We Select :"+KitchenSinkController.gameStatus+"No: "+KitchenSinkController.eventPressed.size());
                     } catch (IOException ex) {
