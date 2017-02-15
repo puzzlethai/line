@@ -221,6 +221,7 @@ System.out.println(response.code() + " " + response.message());
         }  else{
                       
             int temp = Integer.parseInt(KitchenSinkController.gameStatus.substring(6));
+            this.pushText(userId,KitchenSinkController.gameStatus.substring(6));
 //            UnoPlayer dummy;
 //            try {
 //            dummy =  (UnoPlayer) Class.forName("dummy1_UnoPlayer",true,this);
