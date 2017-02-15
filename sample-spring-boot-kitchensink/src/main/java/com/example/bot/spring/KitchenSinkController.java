@@ -203,7 +203,7 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId, "after Scoreboard");
                 Game g = new Game(s,playerClasses,userId);
                 this.pushText(userId, "before play");
-              //  KitchenSinkController.gameStatus = "Playing";
+              KitchenSinkController.gameStatus = "00Card0"; // Start Valueof PostBackEvent Select Card
               playing = true;
                 g.play();
             playerNames.clear();
