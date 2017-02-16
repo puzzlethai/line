@@ -88,7 +88,7 @@ public class KitchenSinkController {
     static boolean PRINT_VERBOSE = false;
     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 
-static String  gameStatus = "notPlayYet";
+static HashMap<String,String> gameStatus = new HashMap<String,String>();
 static HashMap<String,Boolean> eventPressed=new HashMap<String,Boolean>();
 boolean joined = false;
 boolean playing = false;
@@ -160,9 +160,17 @@ System.out.println(response.code() + " " + response.message());
     public void handlePostbackEvent(PostbackEvent event) throws IOException {
         
         String replyToken = event.getReplyToken();
-        KitchenSinkController.gameStatus = event.getPostbackContent().getData(); // JoinGroup,Card,Color
+        String eventData = event.getPostbackContent().getData();  // New
+        // KitchenSinkController.gameStatus = event.getPostbackContent().getData(); // JoinGroup,Card,Color
         
-        String userId = event.getSource().getUserId();
+        String userId = event.getSource().getUserId();               // New
+        if (KitchenSinkController.gameStatus.containsKey(userId)) {
+            KitchenSinkController.gameStatus.replace(userId, eventData);
+        } else {
+            KitchenSinkController.gameStatus.put(userId, eventData);
+        }  // New
+            
+
         String userName ="";  
                 if (userId != null) {
                     Response<UserProfileResponse> response = lineMessagingService
@@ -180,9 +188,10 @@ System.out.println(response.code() + " " + response.message());
                 }
         
         //this.replyText(replyToken, "before Scoreboard");
-        if ((KitchenSinkController.gameStatus.startsWith("JoinGroup"))&&(!joined)) {
+        // if ((KitchenSinkController.gameStatus.get(userId).startsWith("JoinGroup"))&&(!joined))
+        if ((eventData.startsWith("JoinGroup"))&&(!joined)) {
             joined = true;
-            this.replyText(replyToken, userName+ " : You have joined Uno " + KitchenSinkController.gameStatus.substring(4));
+            this.replyText(replyToken, userName+ " : You have joined Uno " + eventData.substring(4));
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
         //this.pushText(userId, "before Scoreboard");
@@ -203,7 +212,7 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId, "after Scoreboard");
                 Game g = new Game(s,playerClasses,userId);
                 this.pushText(userId, "before play");
-             KitchenSinkController.gameStatus = "00Card0"; // Start Valueof PostBackEvent Select Card
+            eventData = "00Card0"; // Start Valueof PostBackEvent Select Card
               playing = true;
                 g.play();
             playerNames.clear();
@@ -217,10 +226,10 @@ System.out.println(response.code() + " " + response.message());
             this.pushText(userId,e.getMessage());
         }
         }  else{
-            if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))){
+            if ((eventData.substring(2,6).equals("Card"))){
             round = round +1;
             
-            int temp = Integer.parseInt(KitchenSinkController.gameStatus.substring(6));
+            int temp = Integer.parseInt(eventData.substring(6));
             this.pushText(userId,"round ="+round+" temp ="+temp);
             if (temp ==round){
                 // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){

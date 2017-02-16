@@ -177,7 +177,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     */
                     if (KitchenSinkController.eventPressed.get(userId)){
                         try {                  
-                        this.pushText(userId,"You Select: "+KitchenSinkController.gameStatus);
+                        this.pushText(userId,"You Select: "+KitchenSinkController.gameStatus.get(userId));
                     } catch (IOException ex) {
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
@@ -197,7 +197,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     
                     int number1 = 0;
                     String str;
-                    str = KitchenSinkController.gameStatus.substring(6);
+                    str = KitchenSinkController.gameStatus.get(userId).substring(0,2); // first 2 digit is CardNO.
                     number1 = Integer.valueOf(str);
                     try {
                         this.pushText(userId,"CardNO = "+String.valueOf(number1));
