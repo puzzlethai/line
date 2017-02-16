@@ -171,7 +171,7 @@ System.out.println(response.code() + " " + response.message());
             KitchenSinkController.gameStatus.put(userId, eventData);
         }  // New
             
-
+this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
         String userName ="";  
                 if (userId != null) {
                     Response<UserProfileResponse> response = lineMessagingService
@@ -244,7 +244,7 @@ System.out.println(response.code() + " " + response.message());
             
             
         } else {
-                if (eventData.equals("red")||eventData.equals("green")||eventData.equals("blue")||eventData.equals("yellow")) {
+                if (eventData.equals("ColorRed")||eventData.equals("ColorGreen")||eventData.equals("ColorBlue")||eventData.equals("ColorYellow")) {
                     KitchenSinkController.colorPressed.replace(userId, true);
                 } else {
                 this.pushText(userId, "Not Starts with Card or Color");

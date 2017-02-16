@@ -262,17 +262,17 @@ System.out.println(response.code() + " " + response.message());
                 //        System.out.print("Color : ");
                                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         null,
-                        "UNO",
-                        "Card NO",
+                        null,
+                        "Please select COLOR",
                         Arrays.asList(
                                 new PostbackAction("RED",
-                                                   "red"),
+                                                   "ColorRed"),
                                 new PostbackAction("GREEN",
-                                                   "green"),
+                                                   "ColorGreen"),
                                 new PostbackAction("BLUE",
-                                                   "blue"),
+                                                   "ColorBlue"),
                                 new PostbackAction("YELLOW",
-                                                   "yellow")
+                                                   "ColorYellow")
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
                     try {
@@ -280,6 +280,7 @@ System.out.println(response.code() + " " + response.message());
                     } catch (IOException ex) {
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                         KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
                       long startTime = System.currentTimeMillis(); //fetch starting time
 
@@ -308,10 +309,10 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     KitchenSinkController.colorPressed.replace(userId, false);
                     switch (KitchenSinkController.gameStatus.get(userId))
                     {
-                        case "red": return red;
-                        case "green": return green;
-                        case "blue": return blue;
-                        case "yellow": return yellow;
+                        case "ColorRed": return red;
+                        case "ColorGreen": return green;
+                        case "ColorBlue": return blue;
+                        case "ColorYellow": return yellow;
                         default: return green;
                     }
                     } else {
