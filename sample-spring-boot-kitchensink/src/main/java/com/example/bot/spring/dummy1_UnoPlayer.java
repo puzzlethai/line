@@ -260,7 +260,27 @@ System.out.println(response.code() + " " + response.message());
 		
 		// Scanner Keyboard = new Scanner(System.in);
                 //        System.out.print("Color : ");
-                
+                                ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
+                        null,
+                        "UNO",
+                        "Card NO",
+                        Arrays.asList(
+                                new PostbackAction("RED",
+                                                   "red"),
+                                new PostbackAction("GREEN",
+                                                   "green"),
+                                new PostbackAction("BLUE",
+                                                   "blue"),
+                                new PostbackAction("YELLOW",
+                                                   "yellow")
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+                    try {
+                        this.pushButton(userId,templateMessage);
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                 Random rand;
                 rand = new Random();
                 int number1;
