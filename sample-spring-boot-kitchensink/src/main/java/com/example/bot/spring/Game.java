@@ -90,10 +90,10 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
         this.pushText(userId, "Number of Player : "+no_of_play );
         mostRecentColorCalled =
             new UnoPlayer.Color[scoreboard.getNumPlayers()];
-        this.pushText(userId, " playerClass0 :"+playerClassList.get(0));
-        this.pushText(userId, " playerClass1 :"+playerClassList.get(1));
-        this.pushText(userId, " playerClass2 :"+playerClassList.get(2));
-        this.pushText(userId, " playerClass3 :"+playerClassList.get(3));
+//        this.pushText(userId, " playerClass0 :"+playerClassList.get(0));
+//        this.pushText(userId, " playerClass1 :"+playerClassList.get(1));
+//        this.pushText(userId, " playerClass2 :"+playerClassList.get(2));
+//        this.pushText(userId, " playerClass3 :"+playerClassList.get(3));
         try {
             for (int i=0; i<scoreboard.getNumPlayers(); i++) {
                 h[i] = new Hand(playerClassList.get(i),
@@ -262,7 +262,7 @@ System.out.println(response.code() + " " + response.message());
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {
-                    //this.pushText(userId," plays " + playedCard + " on " + upCard + ".");
+                    this.pushText(userId,h[currPlayer].getPlayerName()+" plays " + playedCard + " on " + upCard + ".");
                     deck.discard(upCard);
                     upCard = playedCard;
                     if (upCard.followedByCall()) {

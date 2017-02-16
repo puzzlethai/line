@@ -211,9 +211,9 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
        try {
             
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
-            this.pushText(userId, "after Scoreboard");
+           // this.pushText(userId, "after Scoreboard");
                 Game g = new Game(s,playerClasses,userId);
-                this.pushText(userId, "before play");
+              //  this.pushText(userId, "before play");
             eventData = "00Card0"; // Start Valueof PostBackEvent Select Card
               playing = true;
                 g.play();
@@ -235,7 +235,7 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
             round = round +1;
             
             int temp = Integer.parseInt(eventData.substring(6));
-            this.pushText(userId,"round ="+round+" temp ="+temp);
+          //  this.pushText(userId,"round ="+round+" temp ="+temp);
             if (temp ==round){
                 // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
                 KitchenSinkController.eventPressed.replace(userId,true);
