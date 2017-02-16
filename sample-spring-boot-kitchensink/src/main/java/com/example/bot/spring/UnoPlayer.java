@@ -59,6 +59,6 @@ public interface UnoPlayer {
      * <p>You must return a valid Color value from this method. You must
      * not return the value Color.NONE under any circumstances.</p>
      */
-    public Color callColor(List<Card> hand);
+    public Color callColor(List<Card> hand,String userId);
  
 }

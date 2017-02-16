@@ -108,7 +108,7 @@ System.out.println(response.code() + " " + response.message());
      * @return A Color value, <i>not</i> Color.NONE.
      */
     UnoPlayer.Color callColor(Game game) {
-        return player.callColor(cards);
+        return player.callColor(cards,userId);
     }
 
     /**

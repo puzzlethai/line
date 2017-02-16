@@ -266,7 +266,7 @@ public class nds63_UnoPlayer implements UnoPlayer {
 		
 	}
 	
-	public Color callColor(List<Card> hand){
+	public Color callColor(List<Card> hand,String userId){
 		
 		
 		int numBlue = 0;

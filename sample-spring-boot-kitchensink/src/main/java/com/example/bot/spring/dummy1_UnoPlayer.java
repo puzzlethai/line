@@ -256,10 +256,11 @@ System.out.println(response.code() + " " + response.message());
                                           .path(path).build()
                                           .toUriString();
     }
-	public Color callColor(List<Card> hand){
+	public Color callColor(List<Card> hand,String userId){
 		
 		// Scanner Keyboard = new Scanner(System.in);
                 //        System.out.print("Color : ");
+                
                 Random rand;
                 rand = new Random();
                 int number1;
