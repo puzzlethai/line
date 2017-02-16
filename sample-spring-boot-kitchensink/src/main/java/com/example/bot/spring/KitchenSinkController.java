@@ -222,6 +222,9 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
             round = 0;
             joined = false;
             playing = false;
+            KitchenSinkController.colorPressed.clear();   // Newest ดูให้ดีว่าถ้าเป็น multiuser แล้วส่งผลไหม
+            KitchenSinkController.eventPressed.clear();
+            KitchenSinkController.gameStatus.clear();
             //KitchenSinkController.gameStatus = "notPlayYet";
         }
         catch (Exception e) {
