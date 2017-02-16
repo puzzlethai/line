@@ -280,8 +280,49 @@ System.out.println(response.code() + " " + response.message());
                     } catch (IOException ex) {
                         Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                        KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
+                      long startTime = System.currentTimeMillis(); //fetch starting time
+
+while ((System.currentTimeMillis()-startTime)<30000)
+
+{
+                        try {
+                            // do something
+                            Thread.sleep(1000);} catch (InterruptedException ex) {
+                            Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+    if (KitchenSinkController.colorPressed.get(userId)){
+        
+        break;
+    }
+}
+
+       if (KitchenSinkController.colorPressed.get(userId)){
+                        try {                  
+                        this.pushText(userId,"You Select: "+KitchenSinkController.gameStatus.get(userId));
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
-                Random rand;
+                            
+                            }
+                    KitchenSinkController.colorPressed.replace(userId, false);
+                    switch (KitchenSinkController.gameStatus.get(userId))
+                    {
+                        case "red": return red;
+                        case "green": return green;
+                        case "blue": return blue;
+                        case "yellow": return yellow;
+                        default: return green;
+                    }
+                    } else {
+                        try {                  
+                        this.pushText(userId,"!!TIME OUT!! You didn't choose the color we choose for YOU");
+                    } catch (IOException ex) {
+                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                            
+                            }
+                       Random rand;
                 rand = new Random();
                 int number1;
                         number1 = rand.nextInt(4 - 1 + 1) + 1;
@@ -299,7 +340,10 @@ System.out.println(response.code() + " " + response.message());
                     default:
                         return green;     
                      			
-	}
+	} 
+                    }                
+                    
+                
 
         }	
 }

@@ -89,7 +89,8 @@ public class KitchenSinkController {
     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 
 static HashMap<String,String> gameStatus = new HashMap<String,String>();
-static HashMap<String,Boolean> eventPressed=new HashMap<String,Boolean>();
+static HashMap<String,Boolean> eventPressed = new HashMap<String,Boolean>();
+static HashMap<String,Boolean> colorPressed = new HashMap<String,Boolean>();
 boolean joined = false;
 boolean playing = false;
 int round = 0;
@@ -196,6 +197,7 @@ System.out.println(response.code() + " " + response.message());
      ArrayList<String> playerClasses = new ArrayList<String>();
         //this.pushText(userId, "before Scoreboard");
         KitchenSinkController.eventPressed.put(userId,false);
+        KitchenSinkController.colorPressed.put(userId,false);
         playerNames.add("BOT1");
         playerNames.add("BOT2");
         playerNames.add("BOT3");
@@ -225,7 +227,7 @@ System.out.println(response.code() + " " + response.message());
         catch (Exception e) {
             this.pushText(userId,e.getMessage());
         }
-        }  else{
+        }  else{   // not JoinGroup
             if ((eventData.substring(2,6).equals("Card"))){
             round = round +1;
             
@@ -242,7 +244,11 @@ System.out.println(response.code() + " " + response.message());
             
             
         } else {
-                this.pushText(userId, "Not Starts with Card");
+                if (eventData.equals("red")||eventData.equals("green")||eventData.equals("blue")||eventData.equals("yellow")) {
+                    KitchenSinkController.colorPressed.replace(userId, true);
+                } else {
+                this.pushText(userId, "Not Starts with Card or Color");
+                }
             }
             
         }
