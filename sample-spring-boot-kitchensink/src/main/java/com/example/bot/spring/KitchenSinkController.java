@@ -110,7 +110,7 @@ int round = 0;
 
     @EventMapping
     public void handleUnfollowEvent(UnfollowEvent event) {
-        log.info("unfollowed this bot: {}", event);
+        //log.info("unfollowed this bot: {}", event);
     }
 
     @EventMapping
@@ -320,7 +320,7 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
 
     @EventMapping
     public void handleOtherEvent(Event event) {
-        log.info("Received message(Ignored): {}", event);
+        // log.info("Received message(Ignored): {}", event);
     }
 
     private void reply(@NonNull String replyToken, @NonNull Message message) {
@@ -332,7 +332,7 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
             Response<BotApiResponse> apiResponse = lineMessagingService
                     .replyMessage(new ReplyMessage(replyToken, messages))
                     .execute();
-            log.info("Sent messages: {}", apiResponse);
+           // log.info("Sent messages: {}", apiResponse);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
@@ -358,7 +358,7 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
             throws IOException {
         String text = content.getText();
 
-        log.info("Got text message from {}: {}", replyToken, text);
+        //log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
             case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
                 if (!playing){
@@ -487,7 +487,7 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
                 break;
             }
             default:
-                log.info("Returns echo message {}: {}", replyToken, text);
+                //log.info("Returns echo message {}: {}", replyToken, text);
                 this.replyText(
                         replyToken,
                         text

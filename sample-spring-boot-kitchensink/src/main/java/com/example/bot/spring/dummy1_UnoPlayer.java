@@ -103,7 +103,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         try {
                         this.pushButton(userId,templateMessage);
                     } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                         /*
@@ -157,7 +157,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         try {
                             // do something
                             Thread.sleep(1000);} catch (InterruptedException ex) {
-                            Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                            //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
     if (KitchenSinkController.eventPressed.get(userId)){
         
@@ -179,7 +179,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         try {                  
                         this.pushText(userId,"You Select: "+KitchenSinkController.gameStatus.get(userId));
                     } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
                             
                             }
@@ -189,7 +189,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         try {                  
                         this.pushText(userId,"!!TIME OUT!! You didn't select the card. Our System play for You");
                     } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
                             
                             }
@@ -202,7 +202,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     try {
                         this.pushText(userId,"CardNO = "+String.valueOf(number1));
                     } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     
@@ -278,7 +278,7 @@ System.out.println(response.code() + " " + response.message());
                     try {
                         this.pushButton(userId,templateMessage);
                     } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                         KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
@@ -290,7 +290,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         try {
                             // do something
                             Thread.sleep(1000);} catch (InterruptedException ex) {
-                            Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                            //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
     if (KitchenSinkController.colorPressed.get(userId)){
         
@@ -302,7 +302,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         try {                  
                         this.pushText(userId,"You Select: "+KitchenSinkController.gameStatus.get(userId));
                     } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
                             
                             }
@@ -319,7 +319,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                         try {                  
                         this.pushText(userId,"!!TIME OUT!! You didn't choose the color we choose for YOU");
                     } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
                             
                             }

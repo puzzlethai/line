@@ -311,7 +311,7 @@ System.out.println(response.code() + " " + response.message());
             try {
                 this.pushText(userId,s);
             } catch (IOException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -321,7 +321,7 @@ System.out.println(response.code() + " " + response.message());
             try {
                 this.pushText(userId,s);
             } catch (IOException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
