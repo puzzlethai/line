@@ -118,8 +118,11 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
             System.exit(1);
         }   
         direction = Direction.FORWARDS;
+        /*
         currPlayer =
             new java.util.Random().nextInt(scoreboard.getNumPlayers());      
+        */
+        currPlayer = scoreboard.getNumPlayers() -1;
         calledColor = UnoPlayer.Color.NONE;
     }
 
@@ -279,7 +282,7 @@ System.out.println(response.code() + " " + response.message());
                     }
                     h[currPlayer].addCard(drawnCard);
                     //this.pushText(userId,playerName+" has to draw (" + drawnCard + ").");
-                     this.pushText(userId,playerName+" has to draw.");
+                     this.pushText(userId,playerName+" draw.");
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {  
@@ -293,7 +296,7 @@ System.out.println(response.code() + " " + response.message());
                         "plays "+ playedCard + ".",
                         Arrays.asList(
                                 new PostbackAction("NEXT",
-                                                   "nextPlay")
+                                                   "00nextPlay")
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
                     pushButton(userId, templateMessage);

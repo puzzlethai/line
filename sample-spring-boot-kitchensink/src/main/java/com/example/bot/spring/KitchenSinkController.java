@@ -247,7 +247,7 @@ System.out.println(response.code() + " " + response.message());
             
             
         } else {
-                if (eventData.equals("nextPlay")||eventData.equals("ColorRed")||eventData.equals("ColorGreen")||eventData.equals("ColorBlue")||eventData.equals("ColorYellow")) {
+                if (eventData.equals("00nextPlay")||eventData.equals("ColorRed")||eventData.equals("ColorGreen")||eventData.equals("ColorBlue")||eventData.equals("ColorYellow")) {
                     KitchenSinkController.colorPressed.replace(userId, true);
                 } else {
                     

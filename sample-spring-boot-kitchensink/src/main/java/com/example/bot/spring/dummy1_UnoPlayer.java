@@ -115,10 +115,25 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         }
                        */
                         
-                        
-                        
                     }
                     
+                    for (int m=0; m< handNotPlay.size();m++){
+                        String nameOfCard;
+                        nameOfCard = handCanPlay.get(m).toString();
+                        String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");                 
+                        column [m] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
+                            new PostbackAction("Can not select this card","Can_not_Select_this"))
+                    );
+                        CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
+                        TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
+                        
+                        try {
+                        this.pushButton(userId,templateMessage);
+                    } catch (IOException ex) {
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                                            
+                    }
                     /*
                     
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
@@ -169,6 +184,8 @@ while ((System.currentTimeMillis()-startTime)<30000)
                 }
                        
                     // รับ input จาก User ว่าจะเลือก Card ไหน
+                    int number1 = 0;
+                    String str;
                     
                     if (KitchenSinkController.eventPressed.get(userId)){
                         /*
@@ -180,9 +197,13 @@ while ((System.currentTimeMillis()-startTime)<30000)
                             
                             }
                         */
+                      
                     KitchenSinkController.eventPressed.replace(userId, false);
+                      str = KitchenSinkController.gameStatus.get(userId).substring(0,2); // first 2 digit is CardNO.
+                    number1 = Integer.valueOf(str);
                     } else {
                         wait = false;
+                        number1 =0;
                         try {                  
                         this.pushText(userId,"!!TIME OUT!! You didn't select the card. Our System play for You");
                     } catch (IOException ex) {
@@ -192,10 +213,8 @@ while ((System.currentTimeMillis()-startTime)<30000)
                             }
                     }
                     
-                    int number1 = 0;
-                    String str;
-                    str = KitchenSinkController.gameStatus.get(userId).substring(0,2); // first 2 digit is CardNO.
-                    number1 = Integer.valueOf(str);
+                    
+                    
                     /*
                     try {
                         this.pushText(userId,"CardNO = "+String.valueOf(number1));
