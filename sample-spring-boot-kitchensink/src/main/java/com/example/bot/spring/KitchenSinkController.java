@@ -198,9 +198,9 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
         //this.pushText(userId, "before Scoreboard");
         KitchenSinkController.eventPressed.put(userId,false);
         KitchenSinkController.colorPressed.put(userId,false);
-        playerNames.add("\u0084");
-        playerNames.add("\u008A");
-        playerNames.add("\u0078");
+        playerNames.add("\u100084");
+        playerNames.add("\u10008A");
+        playerNames.add("\u100078");
         playerNames.add(userName);
         playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer");
         playerClasses.add("com.example.bot.spring.nds63_UnoPlayer"); 
@@ -366,22 +366,22 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "BOT1 : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT1 \u10007A : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
                                 )),
-                                new CarouselColumn(null,"GROUP2", "BOT2 : Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
+                                new CarouselColumn(null,"GROUP2", "BOT2 \\u100084 : Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
                                         new PostbackAction("Join Group2",
                                                            "JoinGroup2")
                                         
                                 )),
-                                new CarouselColumn(null,"GROUP3", "BOT3 : Witty\nBOT4 : Carefully\nBOT1 : Conservative", Arrays.asList(
+                                new CarouselColumn(null,"GROUP3", "BOT3 0x100084 : Witty\nBOT4 : Carefully\nBOT1 : Conservative", Arrays.asList(
                                         new PostbackAction("Join Group3",
                                                            "JoinGroup3")
                                         
                                 )),
-                                new CarouselColumn(null, "GROUP1", "BOT4 : Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT4 \u100078 : Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
                                         
                                         new PostbackAction("Join Group4",
                                                            "JoinGroup4")
