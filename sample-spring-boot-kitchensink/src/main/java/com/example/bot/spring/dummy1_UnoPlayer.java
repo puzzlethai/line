@@ -81,7 +81,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     
                 }else { // แสดง Card ที่สามารถเล่นได้ให้ ผู้เล่นดู 
                     if (wait) {
-                    CarouselColumn[] columnNotPlay = new CarouselColumn[hand.size()];
+                    CarouselColumn[] columnNotPlay = new CarouselColumn[handNotPlay.size()];
                     round = round +1;
                     
                     for (int n=0; n< handNotPlay.size();n++){
@@ -99,7 +99,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    CarouselColumn[] column = new CarouselColumn[hand.size()];
+                    CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
