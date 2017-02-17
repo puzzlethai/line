@@ -81,8 +81,25 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     
                 }else { // แสดง Card ที่สามารถเล่นได้ให้ ผู้เล่นดู 
                     if (wait) {
-                    CarouselColumn[] column = new CarouselColumn[hand.size()];
+                    CarouselColumn[] columnNotPlay = new CarouselColumn[hand.size()];
                     round = round +1;
+                    
+                    for (int n=0; n< handNotPlay.size();n++){
+                        String nameOfCard;
+                        nameOfCard = handNotPlay.get(n).toString();
+                        String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");                 
+                        columnNotPlay [n] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
+                            new PostbackAction("Can not select this card","00Can_not_Select")));
+                    }
+                    CarouselTemplate carouselTemplateNP = new CarouselTemplate(Arrays.asList(columnNotPlay));
+                        TemplateMessage templateMessageNP = new TemplateMessage("Carousel alt text", carouselTemplateNP);
+                        
+                        try {
+                        this.pushButton(userId,templateMessageNP);
+                    } catch (IOException ex) {
+                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    CarouselColumn[] column = new CarouselColumn[hand.size()];
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
@@ -98,14 +115,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             new PostbackAction("Select",cardNo+"Card"+round)));
                             
                     }
-                    
-                    for (int n=0; n< handNotPlay.size();n++){
-                        String nameOfCard;
-                        nameOfCard = handNotPlay.get(n).toString();
-                        String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");                 
-                        column [n+handCanPlay.size()+1] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
-                            new PostbackAction("Can not select this card","00Can_not_Select")));
-                    }
+                                        
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
                         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
                         
@@ -114,13 +124,14 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+/*
                        for (int m=0; m< handNotPlay.size();m++){
                         String nameOfCard;
                         nameOfCard = handNotPlay.get(m).toString();
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
+                       */
                        KitchenSinkController.eventPressed.replace(userId, false); // รอรับ input 
                       long startTime = System.currentTimeMillis(); //fetch starting time
 
