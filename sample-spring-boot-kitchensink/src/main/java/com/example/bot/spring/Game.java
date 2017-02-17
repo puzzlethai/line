@@ -246,6 +246,7 @@ System.out.println(response.code() + " " + response.message());
                     " (" + h[currPlayer] + ")");
                 */
                 Card playedCard = h[currPlayer].play(this);
+                String playerName = h[currPlayer].getPlayerName()+"("+h[currPlayer].size()+" Card left)";
                 if (playedCard == null) {
                     Card drawnCard;
                     try {
@@ -258,11 +259,15 @@ System.out.println(response.code() + " " + response.message());
                         drawnCard = deck.draw(); // what if cann't draw()
                     }
                     h[currPlayer].addCard(drawnCard);
-                    this.pushText(userId," has to draw (" + drawnCard + ").");
+                    //this.pushText(userId,playerName+" has to draw (" + drawnCard + ").");
+                     this.pushText(userId,playerName+" has to draw.");
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {
-                    this.pushText(userId,h[currPlayer].getPlayerName()+" plays " + playedCard + " on " + upCard + ".");
+                    // this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
+                    this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
+                    imageUrl = createUri("/static/buttons/"+playedCard+".jpg");
+                    pushImage(userId,imageUrl);
                     deck.discard(upCard);
                     upCard = playedCard;
                     if (upCard.followedByCall()) {
@@ -288,7 +293,7 @@ System.out.println(response.code() + " " + response.message());
                     return;
                 }
                 if (h[currPlayer].size() == 1) {
-                    //this.pushText(userId," UNO!");
+                    this.pushText(userId,playerName+ " UNO!");
                 }
                 this.pushText(userId,"\n");
                 if (playedCard != null) {

@@ -169,14 +169,9 @@ while ((System.currentTimeMillis()-startTime)<30000)
                 }
                        
                     // รับ input จาก User ว่าจะเลือก Card ไหน
-                    /*
-                    try {                  
-                        this.pushText(userId,"Select: ");
-                    } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    */
+                    
                     if (KitchenSinkController.eventPressed.get(userId)){
+                        /*
                         try {                  
                         this.pushText(userId,"You Select: "+KitchenSinkController.gameStatus.get(userId));
                     } catch (IOException ex) {
@@ -184,6 +179,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     
                             
                             }
+                        */
                     KitchenSinkController.eventPressed.replace(userId, false);
                     } else {
                         wait = false;
@@ -200,12 +196,13 @@ while ((System.currentTimeMillis()-startTime)<30000)
                     String str;
                     str = KitchenSinkController.gameStatus.get(userId).substring(0,2); // first 2 digit is CardNO.
                     number1 = Integer.valueOf(str);
+                    /*
                     try {
                         this.pushText(userId,"CardNO = "+String.valueOf(number1));
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+                    */
                     
                         //String indexOfhand;
                         // indexOfhand = hashMap.get(Integer.toString(number1));

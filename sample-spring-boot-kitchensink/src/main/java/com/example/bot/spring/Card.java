@@ -113,7 +113,7 @@ public class Card {
                 retval += "W";
                 break;
             case DRAW_TWO:
-                retval += "+2";
+                retval += "plus2";
                 break;
             case WILD_D4:
                 retval += "W4";
