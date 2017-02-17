@@ -265,9 +265,14 @@ System.out.println(response.code() + " " + response.message());
                 }
                 if (playedCard != null) {
                     // this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
-                    this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
+                    this.pushText(userId,playerName+" plays " + playedCard + ".");
                     imageUrl = createUri("/static/buttons/"+playedCard+".jpg");
                     pushImage(userId,imageUrl);
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException ex) {
+                        //Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     deck.discard(upCard);
                     upCard = playedCard;
                     if (upCard.followedByCall()) {

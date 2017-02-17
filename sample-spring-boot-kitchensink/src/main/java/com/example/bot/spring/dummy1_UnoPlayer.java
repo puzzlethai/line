@@ -157,7 +157,7 @@ while ((System.currentTimeMillis()-startTime)<30000)
 {
                         try {
                             // do something
-                            Thread.sleep(1000);} catch (InterruptedException ex) {
+                            Thread.sleep(2000);} catch (InterruptedException ex) {
                             //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
     if (KitchenSinkController.eventPressed.get(userId)){
