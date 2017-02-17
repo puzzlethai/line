@@ -119,7 +119,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     
                     for (int m=0; m< handNotPlay.size();m++){
                         String nameOfCard;
-                        nameOfCard = handCanPlay.get(m).toString();
+                        nameOfCard = handNotPlay.get(m).toString();
                         String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");                 
                         column [m] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
                             new PostbackAction("Can not select this card","00Can_not_Select"))
