@@ -83,14 +83,20 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     if (wait) {
                     
                     round = round +1;
-                    String cardName = "You hand have [ " ;
-                    for (int m=0; m< handNotPlay.size();m++){
+                    String cardName = "Your hand [ " ;
+                    for (int m=0; m< hand.size();m++){
                         
-                        cardName = cardName+handNotPlay.get(m).toString()+" ";
+                        cardName = cardName+hand.get(m).toString()+" ";
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
                     cardName = cardName+"]";
+                        try {
+                            this.pushText(userId, cardName);
+                        } catch (IOException ex) {
+                           // Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                       /*  Show  hand can't play  but It will not show hand can play 
                     CarouselColumn[] columnNotPlay = new CarouselColumn[handNotPlay.size()];
                     for (int n=0; n< handNotPlay.size();n++){
                         String nameOfCard;
@@ -108,11 +114,12 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         
                         try {
-                            this.pushText(userId, cardName);
+                            this.pushText(userId, "More than 5 column");
                         } catch (IOException ey) {
                            // Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
+                        */
                       
                     
                     
