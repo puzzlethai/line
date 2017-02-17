@@ -372,7 +372,7 @@ System.out.println(response.code() + " " + response.message());
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
                                 )),
-                                new CarouselColumn(null,"GROUP2", "BOT2 \u1F47D: Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
+                                new CarouselColumn(null,"GROUP2", "BOT2 \u2695: Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
                                         new PostbackAction("Join Group2",
                                                            "JoinGroup2")
                                         
@@ -382,7 +382,7 @@ System.out.println(response.code() + " " + response.message());
                                                            "JoinGroup3")
                                         
                                 )),
-                                new CarouselColumn(null, "GROUP1", "BOT4 \u200D: Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT4 \u2639: Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
                                         
                                         new PostbackAction("Join Group4",
                                                            "JoinGroup4")

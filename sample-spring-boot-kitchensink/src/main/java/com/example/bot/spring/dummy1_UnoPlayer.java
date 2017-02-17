@@ -82,7 +82,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     
                 }else { // แสดง Card ที่สามารถเล่นได้ให้ ผู้เล่นดู 
                     if (wait) {
-                    CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
+                    CarouselColumn[] column = new CarouselColumn[hand.size()];
                     round = round +1;
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
@@ -115,35 +115,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                                            
-                    
-                    
-                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    
-                    /*
-                    
-                ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
-                        imageUrl,
-                        "UNO",
-                        "Card NO",
-                        Arrays.asList(
-                                new URIAction("Go to line.me",
-                                              "https://line.me"),
-                                new PostbackAction("Say hello1",
-                                                   "hello こんにちは"),
-                                new PostbackAction("言 hello2",
-                                                   "hello こんにちは",
-                                                   "hello こんにちは"),
-                                new MessageAction("Say message",
-                                                  "Rice=米")
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
-                    try {
-                        this.pushButton(userId,templateMessage);
-                    } catch (IOException ex) {
-                        Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    */
+
                        for (int m=0; m< handNotPlay.size();m++){
                         String nameOfCard;
                         nameOfCard = handNotPlay.get(m).toString();
