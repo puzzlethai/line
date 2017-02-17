@@ -55,7 +55,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
             */
                 
                 
-                String imageUrl = createUri("/static/buttons/B0L.jpg");
+                
 		
 		ArrayList<Card> handCanPlay,handNotPlay;
                 handCanPlay = new ArrayList<Card>();
@@ -87,6 +87,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
                         nameOfCard = handCanPlay.get(j).toString();
+                        String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");
                         String cardNo;
                         if (j<10){
                             cardNo = "0"+Integer.toString(j);
@@ -94,7 +95,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             cardNo = Integer.toString(j);
                        }
                         
-                        column [j] = new CarouselColumn(imageUrl,nameOfCard,"4",Arrays.asList(
+                        column [j] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
                             new PostbackAction("Select",cardNo+"Card"+round))
                     );
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));

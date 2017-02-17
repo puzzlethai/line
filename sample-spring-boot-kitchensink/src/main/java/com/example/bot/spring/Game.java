@@ -235,7 +235,7 @@ System.out.println(response.code() + " " + response.message());
         //println("Initial upcard is " + upCard + ".");
         
         this.pushText(userId, "Initial upcard is " + upCard + ".");
-        String imageUrl = createUri("/static/buttons/B0.jpg");
+        String imageUrl = createUri("/static/buttons/"+upCard+".jpg");
         pushImage(userId,imageUrl); 
         try {
             while (true) {
@@ -258,7 +258,7 @@ System.out.println(response.code() + " " + response.message());
                         drawnCard = deck.draw(); // what if cann't draw()
                     }
                     h[currPlayer].addCard(drawnCard);
-                    //this.pushText(userId," has to draw (" + drawnCard + ").");
+                    this.pushText(userId," has to draw (" + drawnCard + ").");
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {
