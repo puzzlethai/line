@@ -70,7 +70,6 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         handCanPlay.add(hand.get(i));
                         hashMap.put(k,i);
                        
-                        //hashMap.put(Integer.toString(k), Integer.toString(i));
                         k=k+1;
                     }else {
                         handNotPlay.add(hand.get(i));
@@ -104,7 +103,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         String nameOfCard;
                         nameOfCard = handNotPlay.get(n).toString();
                         String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");                 
-                        column [n+handCanPlay.size()] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
+                        column [n+handCanPlay.size()+1] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
                             new PostbackAction("Can not select this card","00Can_not_Select")));
                     }
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));

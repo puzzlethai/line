@@ -367,12 +367,12 @@ System.out.println(response.code() + " " + response.message());
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "BOT1 \u2620 : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT1 \u2641 : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
                                 )),
-                                new CarouselColumn(null,"GROUP2", "BOT2 \u2695: Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
+                                new CarouselColumn(null,"GROUP2", "BOT2 \u2640: Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
                                         new PostbackAction("Join Group2",
                                                            "JoinGroup2")
                                         
