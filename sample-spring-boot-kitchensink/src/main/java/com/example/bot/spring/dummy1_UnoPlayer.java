@@ -83,7 +83,14 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     if (wait) {
                     
                     round = round +1;
+                    String cardName = "You hand have [ " ;
+                    for (int m=0; m< handNotPlay.size();m++){
+                        
+                        cardName = cardName+handNotPlay.get(m).toString()+" ";
+                        //System.out.print("["+nameOfCard+"]");
                     
+                }
+                    cardName = cardName+"]";
                     CarouselColumn[] columnNotPlay = new CarouselColumn[handNotPlay.size()];
                     for (int n=0; n< handNotPlay.size();n++){
                         String nameOfCard;
@@ -99,21 +106,15 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         this.pushButton(userId,templateMessageNP);
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                         
-                    String cardName = "You hand have [" ;
-                    for (int m=0; m< handNotPlay.size();m++){
-                        
-                        cardName = cardName+handNotPlay.get(m).toString()+",";
-                        //System.out.print("["+nameOfCard+"]");
-                    
-                }
-                    cardName = cardName+"]";
                         try {
                             this.pushText(userId, cardName);
-                        } catch (IOException ex) {
-                            Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ey) {
+                           // Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                    }
+                      
+                    
                     
                     CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
                     for (int j=0; j< handCanPlay.size();j++){
@@ -127,7 +128,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             cardNo = Integer.toString(j);
                        }
                         
-                        column [j] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
+                        column [j] = new CarouselColumn(imageUrl,null,cardName,Arrays.asList(
                             new PostbackAction("Select",cardNo+"Card"+round)));
                             
                     }
