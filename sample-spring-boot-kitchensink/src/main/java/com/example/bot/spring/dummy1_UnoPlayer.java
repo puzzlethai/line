@@ -96,34 +96,17 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                        }
                         
                         column [j] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
-                            new PostbackAction("Select",cardNo+"Card"+round))
-                    );
-                        CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
-                        TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
-                        
-                        try {
-                        this.pushButton(userId,templateMessage);
-                    } catch (IOException ex) {
-                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                            new PostbackAction("Select",cardNo+"Card"+round)));
+                            
                     }
                     
-                        /*
-                        try {
-                            this.pushText(userId,"("+nameOfCard+")");
-                        } catch (IOException ex) {
-                            Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                       */
-                        
-                    }
-                    
-                    for (int m=0; m< handNotPlay.size();m++){
+                    for (int n=0; n< handNotPlay.size();n++){
                         String nameOfCard;
-                        nameOfCard = handNotPlay.get(m).toString();
+                        nameOfCard = handNotPlay.get(n).toString();
                         String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");                 
-                        column [m] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
-                            new PostbackAction("Can not select this card","00Can_not_Select"))
-                    );
+                        column [n+handCanPlay.size()] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
+                            new PostbackAction("Can not select this card","00Can_not_Select")));
+                    }
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
                         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
                         
@@ -133,7 +116,10 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
                                             
-                    }
+                    
+                    
+                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                    
                     /*
                     
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
