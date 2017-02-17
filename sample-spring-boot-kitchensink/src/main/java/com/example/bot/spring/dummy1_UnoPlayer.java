@@ -81,15 +81,16 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     
                 }else { // แสดง Card ที่สามารถเล่นได้ให้ ผู้เล่นดู 
                     if (wait) {
-                    CarouselColumn[] columnNotPlay = new CarouselColumn[handNotPlay.size()];
+                    
                     round = round +1;
                     
+                    CarouselColumn[] columnNotPlay = new CarouselColumn[handNotPlay.size()];
                     for (int n=0; n< handNotPlay.size();n++){
                         String nameOfCard;
                         nameOfCard = handNotPlay.get(n).toString();
                         String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");                 
                         columnNotPlay [n] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
-                            new PostbackAction("Can not select this card","00Can_not_Select")));
+                            new PostbackAction("Can_not_select","00Can_not_Select")));
                     }
                     CarouselTemplate carouselTemplateNP = new CarouselTemplate(Arrays.asList(columnNotPlay));
                         TemplateMessage templateMessageNP = new TemplateMessage("Carousel alt text", carouselTemplateNP);
@@ -99,6 +100,21 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                        
+                    String cardName = "You hand have [" ;
+                    for (int m=0; m< handNotPlay.size();m++){
+                        
+                        cardName = cardName+handNotPlay.get(m).toString()+",";
+                        //System.out.print("["+nameOfCard+"]");
+                    
+                }
+                    cardName = cardName+"]";
+                        try {
+                            this.pushText(userId, cardName);
+                        } catch (IOException ex) {
+                            Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    
                     CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
