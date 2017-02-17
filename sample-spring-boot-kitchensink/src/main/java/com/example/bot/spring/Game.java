@@ -265,7 +265,7 @@ System.out.println(response.code() + " " + response.message());
                     " (" + h[currPlayer] + ")");
                 */
                 Card playedCard = h[currPlayer].play(this);
-                String playerName = h[currPlayer].getPlayerName()+"("+h[currPlayer].size()+" Card left)";
+                String playerName = h[currPlayer].getPlayerName()+" ("+h[currPlayer].size()+" Card left)";
                 if (playedCard == null) {
                     Card drawnCard;
                     try {
@@ -282,9 +282,10 @@ System.out.println(response.code() + " " + response.message());
                      this.pushText(userId,playerName+" has to draw.");
                     playedCard = h[currPlayer].play(this);
                 }
-                if (playedCard != null) {  // ต้องข้าม Human Player ทำเฉพาะ BOT 
+                if (playedCard != null) {  
                     // this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
                     // this.pushText(userId,playerName+" plays " + playedCard + ".");
+                    if (playerName.startsWith("BOT")){ // ต้องข้าม Human Player ทำเฉพาะ BOT 
                     imageUrl = createUri("/static/buttons/"+playedCard+".jpg");
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
@@ -313,6 +314,8 @@ System.out.println(response.code() + " " + response.message());
         break;
     }
 }
+                    }
+                    
                     
                    
                     deck.discard(upCard);
