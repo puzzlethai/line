@@ -5,13 +5,17 @@ import com.linecorp.bot.client.LineMessagingService;
 import com.linecorp.bot.client.LineMessagingServiceBuilder;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
+import com.linecorp.bot.model.action.PostbackAction;
 import com.linecorp.bot.model.message.ImageMessage;
 import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.TemplateMessage;
 import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.message.template.ButtonsTemplate;
 import com.linecorp.bot.model.response.BotApiResponse;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -224,6 +228,21 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
+    private void pushButton(@NonNull String userId, TemplateMessage templateMessage) throws IOException {
+       
+PushMessage pushMessage = new PushMessage(
+        userId,
+        templateMessage
+);
+
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create(channalKey)
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+    } 
     /**
      * Play an entire Game of Uno from start to finish. Hands should have
      * already been dealt before this method is called, and a valid up card
@@ -265,14 +284,37 @@ System.out.println(response.code() + " " + response.message());
                 }
                 if (playedCard != null) {
                     // this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
-                    this.pushText(userId,playerName+" plays " + playedCard + ".");
+                    // this.pushText(userId,playerName+" plays " + playedCard + ".");
                     imageUrl = createUri("/static/buttons/"+playedCard+".jpg");
-                    pushImage(userId,imageUrl);
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException ex) {
-                        //Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                     ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
+                        imageUrl,
+                        playerName,
+                        "plays "+ playedCard + ".",
+                        Arrays.asList(
+                                new PostbackAction("NEXT",
+                                                   "nextPlay")
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+                    pushButton(userId, templateMessage);
+                    
+                    KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
+                    long startTime = System.currentTimeMillis(); //fetch starting time
+
+                    while ((System.currentTimeMillis()-startTime)<30000)
+
+{
+                        try {
+                            // do something
+                            Thread.sleep(1000);} catch (InterruptedException ex) {
+                            //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+    if (KitchenSinkController.colorPressed.get(userId)){
+        
+        break;
+    }
+}
+                    
+                   
                     deck.discard(upCard);
                     upCard = playedCard;
                     if (upCard.followedByCall()) {
