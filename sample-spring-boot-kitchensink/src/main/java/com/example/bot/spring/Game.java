@@ -282,7 +282,7 @@ System.out.println(response.code() + " " + response.message());
                      this.pushText(userId,playerName+" has to draw.");
                     playedCard = h[currPlayer].play(this);
                 }
-                if (playedCard != null) {
+                if (playedCard != null) {  // ต้องข้าม Human Player ทำเฉพาะ BOT 
                     // this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
                     // this.pushText(userId,playerName+" plays " + playedCard + ".");
                     imageUrl = createUri("/static/buttons/"+playedCard+".jpg");

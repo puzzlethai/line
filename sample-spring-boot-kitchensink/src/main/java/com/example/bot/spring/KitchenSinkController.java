@@ -171,7 +171,7 @@ System.out.println(response.code() + " " + response.message());
             KitchenSinkController.gameStatus.put(userId, eventData);
         }  // New
             
-this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
+// this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
         String userName ="";  
                 if (userId != null) {
                     Response<UserProfileResponse> response = lineMessagingService
@@ -247,9 +247,10 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
             
             
         } else {
-                if (eventData.equals("ColorRed")||eventData.equals("ColorGreen")||eventData.equals("ColorBlue")||eventData.equals("ColorYellow")) {
+                if (eventData.equals("nextPlay")||eventData.equals("ColorRed")||eventData.equals("ColorGreen")||eventData.equals("ColorBlue")||eventData.equals("ColorYellow")) {
                     KitchenSinkController.colorPressed.replace(userId, true);
                 } else {
+                    
                 this.pushText(userId, "Not Starts with Card or Color");
                 }
             }
@@ -366,7 +367,7 @@ this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "BOT1 \u1F63E : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT1 \uF09F98BE : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
