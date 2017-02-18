@@ -363,11 +363,11 @@ System.out.println(response.code() + " " + response.message());
         switch (text) {
             case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
                 if (!playing){
-                joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 //
-                String imageUrl = createUri("/static/buttons/1040.jpg");
+                joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
+                String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "BOT1 \u26F9  : Conservative\nBOT2 \u2603 : Greedy\nBOT3 \u26C4: Witty", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT1 \u2642  : Conservative\nBOT2 \u2696 : Greedy\nBOT3 \u26C4: Witty", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
