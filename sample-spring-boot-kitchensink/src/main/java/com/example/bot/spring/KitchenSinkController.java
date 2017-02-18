@@ -363,26 +363,26 @@ System.out.println(response.code() + " " + response.message());
         switch (text) {
             case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
                 if (!playing){
-                joined = false;
+                joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 //
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "BOT \u0031 \u0041 : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT1 \u26F9  : Conservative\nBOT2 \u2603 : Greedy\nBOT3 \u26C4: Witty", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
                                 )),
-                                new CarouselColumn(null,"GROUP2", "BOT2 \u267F: Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
+                                new CarouselColumn(null,"GROUP2", "BOT2 \u26D1: Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
                                         new PostbackAction("Join Group2",
                                                            "JoinGroup2")
                                         
                                 )),
-                                new CarouselColumn(null,"GROUP3", "BOT3 \u263A: Witty\nBOT4 : Carefully\nBOT1 : Conservative", Arrays.asList(
+                                new CarouselColumn(null,"GROUP3", "BOT3 \u2600: Witty\nBOT4 : Carefully\nBOT1 : Conservative", Arrays.asList(
                                         new PostbackAction("Join Group3",
                                                            "JoinGroup3")
                                         
                                 )),
-                                new CarouselColumn(null, "GROUP1", "BOT4 \u2614: Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT4 \u2B50: Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
                                         
                                         new PostbackAction("Join Group4",
                                                            "JoinGroup4")
