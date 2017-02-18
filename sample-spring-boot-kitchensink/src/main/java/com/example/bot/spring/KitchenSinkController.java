@@ -199,7 +199,7 @@ System.out.println(response.code() + " " + response.message());
         KitchenSinkController.eventPressed.put(userId,false);
         KitchenSinkController.colorPressed.put(userId,false);
         playerNames.add("BOT1\u26C4");
-        playerNames.add("BOT2\u2639");
+        playerNames.add("BOT2\u267F");
         playerNames.add("BOT3\u263A");
         playerNames.add(userName);
         playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer");
@@ -372,7 +372,7 @@ System.out.println(response.code() + " " + response.message());
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
                                 )),
-                                new CarouselColumn(null,"GROUP2", "BOT2 \u2639: Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
+                                new CarouselColumn(null,"GROUP2", "BOT2 \u267F: Greedy\nBOT3: Witty\nBOT4 : Carefully", Arrays.asList(
                                         new PostbackAction("Join Group2",
                                                            "JoinGroup2")
                                         
@@ -382,7 +382,7 @@ System.out.println(response.code() + " " + response.message());
                                                            "JoinGroup3")
                                         
                                 )),
-                                new CarouselColumn(null, "GROUP1", "BOT4 \u2640: Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT4 \u2614: Carefully\nBOT1 : Conservative\nBOT2 : Greedy", Arrays.asList(
                                         
                                         new PostbackAction("Join Group4",
                                                            "JoinGroup4")

@@ -87,10 +87,10 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     if (wait) {
                     
                     round = round +1;
-                    String cardName = "Your hand [ " ;
-                    for (int m=0; m< hand.size();m++){
+                    String cardName = "Unplayable Card[ " ;
+                    for (int m=0; m< handNotPlay.size();m++){
                         
-                        cardName = cardName+hand.get(m).toString()+" ";
+                        cardName = cardName+handNotPlay.get(m).toString()+" ";
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
@@ -100,7 +100,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         } catch (IOException ex) {
                            // Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                       //  Show  hand can't play  but It will not show hand can play 
+                       
                     CarouselColumn[] columnNotPlay = new CarouselColumn[handNotPlay.size()];
                     for (int n=0; n< handNotPlay.size();n++){
                         String nameOfCard;
@@ -126,7 +126,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                        }
                         
                         column [j] = new CarouselColumn(imageUrl,null,cardName,Arrays.asList(
-                            new PostbackAction("Select",cardNo+"Card"+round)));
+                            new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
                             
                     }
                                         
