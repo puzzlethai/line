@@ -286,9 +286,10 @@ System.out.println(response.code() + " " + response.message());
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {  
+                    
                     // this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
                     // this.pushText(userId,playerName+" plays " + playedCard + ".");
-                    if (playerName.startsWith("BOT")){ // ต้องข้าม Human Player ทำเฉพาะ BOT 
+                    if (playerName.contains("BOT")){ // ต้องข้าม Human Player ทำเฉพาะ BOT 
                     imageUrl = createUri("/static/buttons/"+playedCard+".jpg");
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,

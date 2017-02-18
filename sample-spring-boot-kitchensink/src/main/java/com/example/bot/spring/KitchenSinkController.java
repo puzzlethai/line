@@ -367,7 +367,7 @@ System.out.println(response.code() + " " + response.message());
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "BOT1 \u26C4 : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "BOT \u0031 \u0041 : Conservative\nBOT2 : Greedy\nBOT3 : Witty", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
