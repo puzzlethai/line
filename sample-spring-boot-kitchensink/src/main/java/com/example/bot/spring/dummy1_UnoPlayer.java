@@ -2,6 +2,7 @@ package com.example.bot.spring;
 
 import com.linecorp.bot.client.LineMessagingServiceBuilder;
 import com.linecorp.bot.model.PushMessage;
+import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.action.MessageAction;
 import com.linecorp.bot.model.action.PostbackAction;
 import com.linecorp.bot.model.action.URIAction;
@@ -13,8 +14,10 @@ import com.linecorp.bot.model.message.template.CarouselColumn;
 import com.linecorp.bot.model.message.template.CarouselTemplate;
 import com.linecorp.bot.model.response.BotApiResponse;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -28,6 +31,7 @@ import retrofit2.Response;
 
 public class dummy1_UnoPlayer implements UnoPlayer {
 	
+    final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 	UnoPlayer.Color blue = UnoPlayer.Color.BLUE;
 	UnoPlayer.Color red = UnoPlayer.Color.RED;
 	UnoPlayer.Color yellow = UnoPlayer.Color.YELLOW;
@@ -143,11 +147,9 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
                         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
                         
-                        try {
+                       
                         this.pushButton(userId,templateMessage);
-                    } catch (IOException ex) {
-                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    
 /*
                        for (int m=0; m< handNotPlay.size();m++){
                         String nameOfCard;
@@ -237,26 +239,33 @@ PushMessage pushMessage = new PushMessage(
 
 Response<BotApiResponse> response =
         LineMessagingServiceBuilder
-                .create("xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=")
+                .create(channalKey)
                 .build()
                 .pushMessage(pushMessage)
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
-       private void pushButton(@NonNull String userId, TemplateMessage templateMessage) throws IOException {
+        private void pushButton(@NonNull String replyToken, @NonNull Message message) {
+        pushButton(replyToken, Collections.singletonList(message));
+    }
+     
+       private void pushButton(@NonNull String userId, @NonNull List<Message> templateMessage)  {
        
 PushMessage pushMessage = new PushMessage(
         userId,
         templateMessage
 );
-
+ try {
 Response<BotApiResponse> response =
         LineMessagingServiceBuilder
-                .create("xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=")
+                .create(channalKey)
                 .build()
                 .pushMessage(pushMessage)
                 .execute();
 System.out.println(response.code() + " " + response.message());
+} catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     } 
         
 
@@ -284,11 +293,9 @@ System.out.println(response.code() + " " + response.message());
                                                    "ColorYellow")
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
-                    try {
+                    
                         this.pushButton(userId,templateMessage);
-                    } catch (IOException ex) {
-                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                   
                     
                         KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
                       long startTime = System.currentTimeMillis(); //fetch starting time
