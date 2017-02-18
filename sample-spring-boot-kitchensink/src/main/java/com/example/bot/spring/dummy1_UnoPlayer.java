@@ -100,33 +100,19 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         } catch (IOException ex) {
                            // Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                       /*  Show  hand can't play  but It will not show hand can play 
+                       //  Show  hand can't play  but It will not show hand can play 
                     CarouselColumn[] columnNotPlay = new CarouselColumn[handNotPlay.size()];
                     for (int n=0; n< handNotPlay.size();n++){
                         String nameOfCard;
                         nameOfCard = handNotPlay.get(n).toString();
                         String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");                 
                         columnNotPlay [n] = new CarouselColumn(imageUrl,null,nameOfCard,Arrays.asList(
-                            new PostbackAction("Can_not_select","00Can_not_Select")));
+                            new PostbackAction("   ","00Can_not_Select")));
                     }
                     CarouselTemplate carouselTemplateNP = new CarouselTemplate(Arrays.asList(columnNotPlay));
                         TemplateMessage templateMessageNP = new TemplateMessage("Carousel alt text", carouselTemplateNP);
                         
-                        try {
-                        this.pushButton(userId,templateMessageNP);
-                    } catch (IOException ex) {
-                        //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        
-                        try {
-                            this.pushText(userId, "More than 5 column");
-                        } catch (IOException ey) {
-                           // Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                        */
-                      
-                    
-                    
+
                     CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
                     for (int j=0; j< handCanPlay.size();j++){
                         String nameOfCard;
@@ -147,8 +133,9 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
                         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
                         
+                       List<Message> listTmessage = Arrays.asList(templateMessageNP,templateMessage);
                        
-                        this.pushButton(userId,templateMessage);
+                        this.pushButton(userId,listTmessage);
                     
 /*
                        for (int m=0; m< handNotPlay.size();m++){
