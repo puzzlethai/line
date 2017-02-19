@@ -21,7 +21,7 @@ public class Card {
      * work on Ubuntu Linux, and known not to work in DOS terminal and
      * NetBeans.
      */
-    public static final boolean PRINT_IN_COLOR = true;
+    public static final boolean PRINT_IN_COLOR = false;
 
     private UnoPlayer.Color color;
     private UnoPlayer.Rank rank;
