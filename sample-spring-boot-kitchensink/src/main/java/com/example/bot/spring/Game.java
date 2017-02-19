@@ -294,8 +294,8 @@ System.out.println(response.code() + " " + response.message());
                     imageUrl = createUri("/static/buttons/"+playedCard+".jpg");
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
-                        playerName+" plays "+ playedCard + ".",
-                        "("+cardLeft+" Card Left) ",
+                        null,
+                        playerName+" plays "+ playedCard + "."+"("+cardLeft+" Card Left)",
                         Arrays.asList(
                                 new PostbackAction("NEXT",
                                                    "00nextPlay")
