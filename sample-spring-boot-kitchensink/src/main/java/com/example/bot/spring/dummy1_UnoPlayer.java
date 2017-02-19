@@ -100,7 +100,72 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                         } catch (IOException ex) {
                            // Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                    if (handCanPlay.size()<6){
+                        CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
+                    for (int j=0; j< handCanPlay.size();j++){
+                        String nameOfCard;
+                        nameOfCard = handCanPlay.get(j).toString();
+                        String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");
+                        String cardNo;
+                        if (j<10){
+                            cardNo = "0"+Integer.toString(j);
+                        } else {
+                            cardNo = Integer.toString(j);
+                       }
+                        
+                        column [j] = new CarouselColumn(imageUrl,cardName,"Upcard is "+upCard+" Please Select",Arrays.asList(
+                            new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
+                        
                        
+                    }  //  end for
+                    CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
+                        TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate); 
+                        this.pushButton(userId,templateMessage);
+                    } else {  // more than 5 column
+                        int leftColumn = handCanPlay.size() - 5;
+                        CarouselColumn[] column = new CarouselColumn[5];
+                        for (int j=0; j< 5;j++){
+                        String nameOfCard;
+                        nameOfCard = handCanPlay.get(j).toString();
+                        String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");
+                        String cardNo;
+                        if (j<10){
+                            cardNo = "0"+Integer.toString(j);
+                        } else {
+                            cardNo = Integer.toString(j);
+                       }
+                        
+                        column [j] = new CarouselColumn(imageUrl,cardName,"Upcard is "+upCard+" Please Select",Arrays.asList(
+                            new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
+                        
+                           
+                    }
+                     CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(column));
+                        TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate); 
+                        
+                        CarouselColumn[] column2 = new CarouselColumn[leftColumn];
+                        for (int j=0; j< leftColumn;j++){
+                        String nameOfCard;
+                        nameOfCard = handCanPlay.get(j).toString();
+                        String imageUrl = createUri("/static/buttons/"+nameOfCard+".jpg");
+                        String cardNo;
+                        if (j<10){
+                            cardNo = "0"+Integer.toString(j);
+                        } else {
+                            cardNo = Integer.toString(j);
+                       }
+                        
+                        column2 [j] = new CarouselColumn(imageUrl,cardName,"Upcard is "+upCard+" Please Select",Arrays.asList(
+                            new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
+                        
+                        
+                    }  
+                      CarouselTemplate carouselTemplate2 = new CarouselTemplate(Arrays.asList(column2));
+                        TemplateMessage templateMessage2 = new TemplateMessage("Carousel alt text", carouselTemplate2);   
+                        List<Message> listTmessage = Arrays.asList(templateMessage,templateMessage2);
+                        this.pushButton(userId,listTmessage);
+                    }
+                    /*  แสดงทั้ง unplayable card และ playable
                     CarouselColumn[] columnNotPlay = new CarouselColumn[handNotPlay.size()];
                     for (int n=0; n< handNotPlay.size();n++){
                         String nameOfCard;
@@ -136,6 +201,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                        List<Message> listTmessage = Arrays.asList(templateMessageNP,templateMessage);
                        
                         this.pushButton(userId,listTmessage);
+                        */
                     
 /*
                        for (int m=0; m< handNotPlay.size();m++){
@@ -148,12 +214,12 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                        KitchenSinkController.eventPressed.replace(userId, false); // รอรับ input 
                       long startTime = System.currentTimeMillis(); //fetch starting time
 
-while ((System.currentTimeMillis()-startTime)<30000)
+while ((System.currentTimeMillis()-startTime)<60000)
 
 {
                         try {
                             // do something
-                            Thread.sleep(2000);} catch (InterruptedException ex) {
+                            Thread.sleep(1000);} catch (InterruptedException ex) {
                             //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                         }
     if (KitchenSinkController.eventPressed.get(userId)){
@@ -287,7 +353,7 @@ System.out.println(response.code() + " " + response.message());
                         KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
                       long startTime = System.currentTimeMillis(); //fetch starting time
 
-while ((System.currentTimeMillis()-startTime)<30000)
+while ((System.currentTimeMillis()-startTime)<60000)
 
 {
                         try {

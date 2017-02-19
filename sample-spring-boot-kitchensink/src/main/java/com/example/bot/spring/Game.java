@@ -283,7 +283,7 @@ System.out.println(response.code() + " " + response.message());
                     }
                     h[currPlayer].addCard(drawnCard);
                     //this.pushText(userId,playerName+" has to draw (" + drawnCard + ").");
-                     this.pushText(userId,playerName+" draw.");
+                     this.pushText(userId,playerName+" draw card.");
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {  
@@ -295,7 +295,7 @@ System.out.println(response.code() + " " + response.message());
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         playerName+"plays "+ playedCard + ".",
-                        cardLeft+"Next Player :"+h[this.getNextPlayer()].getPlayerName(),
+                        "("+cardLeft+" Card Left) Next is"+h[this.getNextPlayer()].getPlayerName()+"turn",
                         Arrays.asList(
                                 new PostbackAction("NEXT",
                                                    "00nextPlay")
