@@ -109,7 +109,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             cardNo = Integer.toString(j);
                        }
                         
-                        column [j] = new CarouselColumn(imageUrl,cardName,"("+hand.size()+" Card Left) "+"Upcard is ",Arrays.asList(
+                        column [j] = new CarouselColumn(imageUrl,cardName,"("+hand.size()+" Card Left) "+"Upcard is "+upCard,Arrays.asList(
                             new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
                         
                        
@@ -131,7 +131,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             cardNo = Integer.toString(j);
                        }
                         
-                        column [j] = new CarouselColumn(imageUrl,cardName,"("+hand.size()+" Card Left) "+"Upcard is ",Arrays.asList(
+                        column [j] = new CarouselColumn(imageUrl,cardName,"("+hand.size()+" Card Left) "+"Upcard is "+upCard,Arrays.asList(
                             new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
                         
                            
