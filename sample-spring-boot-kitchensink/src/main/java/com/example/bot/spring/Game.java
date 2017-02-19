@@ -268,7 +268,8 @@ System.out.println(response.code() + " " + response.message());
                     " (" + h[currPlayer] + ")");
                 */
                 Card playedCard = h[currPlayer].play(this);
-                String playerName = h[currPlayer].getPlayerName()+" ("+h[currPlayer].size()+" Card left)";
+                String playerName = h[currPlayer].getPlayerName();
+                String cardLeft = String.valueOf(h[currPlayer].size());
                 if (playedCard == null) {
                     Card drawnCard;
                     try {
@@ -293,13 +294,13 @@ System.out.println(response.code() + " " + response.message());
                     imageUrl = createUri("/static/buttons/"+playedCard+".jpg");
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
-                        playerName,
-                        "plays "+ playedCard + ".",
+                        playerName+"plays "+ playedCard + ".",
+                        cardLeft+"Next Player :"+h[this.getNextPlayer()].getPlayerName(),
                         Arrays.asList(
                                 new PostbackAction("NEXT",
                                                    "00nextPlay")
                         ));
-                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+                TemplateMessage templateMessage = new TemplateMessage(playerName+"plays "+ playedCard + ".", buttonsTemplate);
                     pushButton(userId, templateMessage);
                     
                     KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
@@ -327,9 +328,9 @@ System.out.println(response.code() + " " + response.message());
                     if (upCard.followedByCall()) {
                         calledColor = h[currPlayer].callColor(this);
                         mostRecentColorCalled[currPlayer] = calledColor;
-                       /* this.pushText(userId," (and calls " + calledColor +
+                        this.pushText(userId," (and calls " + calledColor +
                             ")."); 
-                        */
+                        
                     }
                     else {
                         calledColor = UnoPlayer.Color.NONE;
