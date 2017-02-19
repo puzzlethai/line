@@ -118,11 +118,11 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
             System.exit(1);
         }   
         direction = Direction.FORWARDS;
-        /*
+        
         currPlayer =
             new java.util.Random().nextInt(scoreboard.getNumPlayers());      
-        */
-        currPlayer = scoreboard.getNumPlayers() -1;
+        
+        // currPlayer = scoreboard.getNumPlayers() -1;
         calledColor = UnoPlayer.Color.NONE;
     }
 
@@ -357,7 +357,8 @@ System.out.println(response.code() + " " + response.message());
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
-                    String picName = h[this.getNextPlayer()].getPlayerName();
+                    int nextPlayer = this.getNextPlayer();
+                    String picName = h[nextPlayer].getPlayerName();
                     if (playerName.startsWith("BOT")) {
                     picName = picName.substring(4);
                             } 
