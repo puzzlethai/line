@@ -295,7 +295,7 @@ System.out.println(response.code() + " " + response.message());
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         playerName+" plays "+ playedCard + ".",
-                        "("+cardLeft+" Card Left) "+direction.toString()+" direction",
+                        "("+cardLeft+" Card Left) ",
                         Arrays.asList(
                                 new PostbackAction("NEXT",
                                                    "00nextPlay")
