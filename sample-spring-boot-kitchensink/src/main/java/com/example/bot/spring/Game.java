@@ -357,7 +357,7 @@ System.out.println(response.code() + " " + response.message());
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
-                    String picName = h[currPlayer].getPlayerName();
+                    String picName = h[this.getNextPlayer()].getPlayerName();
                     if (playerName.startsWith("BOT")) {
                     picName = picName.substring(4);
                             } 
