@@ -367,7 +367,7 @@ System.out.println(response.code() + " " + response.message());
                 String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC31 : Conservative BOT\n \uD83D\uDC38 : Greedy BOT\n \uFF10\u0084 : Crafty BOGT", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC31 : Conservative BOT\n \uD83D\uDC38 : Greedy BOT\n \uF480\u8284 : Crafty BOGT", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")
