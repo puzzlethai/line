@@ -295,7 +295,7 @@ System.out.println(response.code() + " " + response.message());
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         playerName+"plays "+ playedCard + ".",
-                        "("+cardLeft+" Card Left) Next is"+h[this.getNextPlayer()].getPlayerName()+"turn",
+                        "("+cardLeft+" Card Left) Direction is "+direction.toString(),
                         Arrays.asList(
                                 new PostbackAction("NEXT",
                                                    "00nextPlay")
@@ -328,7 +328,7 @@ System.out.println(response.code() + " " + response.message());
                     if (upCard.followedByCall()) {
                         calledColor = h[currPlayer].callColor(this);
                         mostRecentColorCalled[currPlayer] = calledColor;
-                        this.pushText(userId," (and calls " + calledColor +
+                        this.pushText(userId,playerName+" calls " + calledColor +
                             ")."); 
                         
                     }

@@ -87,19 +87,15 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     if (wait) {
                     
                     round = round +1;
-                    String cardName = "Unplayable Card[ " ;
+                    String cardName = "U have [ " ;
                     for (int m=0; m< handNotPlay.size();m++){
                         
                         cardName = cardName+handNotPlay.get(m).toString()+" ";
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
-                    cardName = cardName+"]";
-                        try {
-                            this.pushText(userId, cardName);
-                        } catch (IOException ex) {
-                           // Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                    cardName = cardName+"] ";
+                       
                     if (handCanPlay.size()<6){
                         CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
                     for (int j=0; j< handCanPlay.size();j++){
