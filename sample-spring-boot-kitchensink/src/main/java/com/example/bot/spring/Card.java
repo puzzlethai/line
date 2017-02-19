@@ -13,6 +13,15 @@
  */
 package com.example.bot.spring;
 
+import com.linecorp.bot.client.LineMessagingServiceBuilder;
+import com.linecorp.bot.model.PushMessage;
+import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.response.BotApiResponse;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import lombok.NonNull;
+import retrofit2.Response;
+
 public class Card {
 
     /**
@@ -26,7 +35,7 @@ public class Card {
     private UnoPlayer.Color color;
     private UnoPlayer.Rank rank;
     private int number;
-
+final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
     /**
      * Constructor for non-number cards (skips, wilds, etc.)
      */
@@ -175,6 +184,24 @@ public class Card {
         return rank == UnoPlayer.Rank.WILD || rank == UnoPlayer.Rank.WILD_D4;
     }
 
+     private void pushText(@NonNull String userId, @NonNull String messages)  {
+       TextMessage textMessage = new TextMessage(messages);
+PushMessage pushMessage = new PushMessage(
+        userId,
+        textMessage
+);
+try {
+Response<BotApiResponse> response =
+        LineMessagingServiceBuilder
+                .create(channalKey)
+                .build()
+                .pushMessage(pushMessage)
+                .execute();
+System.out.println(response.code() + " " + response.message());
+} catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
     /**
      * This method should be called immediately after a Card is played,
      * and will trigger the effect peculiar to that card. For most cards,
@@ -188,23 +215,27 @@ public class Card {
      * when a player must draw as a result of this card's effect, yet the
      * draw cannot occur because of un-shufflable deck exhaustion.
      */
-    void performCardEffect(Game game) throws EmptyDeckException {
+    void performCardEffect(Game game, String userId, String pictureName) throws EmptyDeckException {
         switch (rank) {
             case SKIP:
+                this.pushText(userId,"SKIP"+ pictureName+ "Turn" );
                 game.advanceToNextPlayer();
                 game.advanceToNextPlayer();
                 break;
             case REVERSE:
+                this.pushText(userId,"Reverse Direction" );
                 game.reverseDirection();
                 game.advanceToNextPlayer();
                 break;
             case DRAW_TWO:
+                this.pushText(userId,pictureName+ "is skipped and draws 2 Cards."  );
                 nextPlayerDraw(game);
                 nextPlayerDraw(game);
                 game.advanceToNextPlayer();
                 game.advanceToNextPlayer();
                 break;
             case WILD_D4:
+                this.pushText(userId,pictureName+ "is skipped and draws 4 Cards." );
                 nextPlayerDraw(game);
                 nextPlayerDraw(game);
                 nextPlayerDraw(game);

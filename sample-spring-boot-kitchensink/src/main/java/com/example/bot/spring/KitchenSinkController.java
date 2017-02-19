@@ -85,7 +85,7 @@ import retrofit2.Response;
 @LineMessageHandler
 public class KitchenSinkController {
     
-    static boolean PRINT_VERBOSE = true;
+    static boolean PRINT_VERBOSE = false;  // ของจริง ลบออกไปเลย
     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 
 static HashMap<String,String> gameStatus = new HashMap<String,String>();

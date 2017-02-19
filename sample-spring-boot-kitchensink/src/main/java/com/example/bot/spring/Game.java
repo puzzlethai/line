@@ -357,7 +357,7 @@ System.out.println(response.code() + " " + response.message());
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
-                    playedCard.performCardEffect(this);
+                    playedCard.performCardEffect(this,userId,pictureName);
                 }
                 else {
                     advanceToNextPlayer();
