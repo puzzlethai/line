@@ -357,7 +357,11 @@ System.out.println(response.code() + " " + response.message());
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
-                    playedCard.performCardEffect(this,userId,pictureName);
+                    String picName = h[currPlayer].getPlayerName();
+                    if (playerName.startsWith("BOT")) {
+                    picName = picName.substring(4);
+                            } 
+                    playedCard.performCardEffect(this,userId,picName);
                 }
                 else {
                     advanceToNextPlayer();
@@ -366,7 +370,7 @@ System.out.println(response.code() + " " + response.message());
         }
         catch (EmptyDeckException e) {
             this.pushText(userId,"Deck exhausted! This game is a draw.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         
     }
