@@ -198,9 +198,9 @@ System.out.println(response.code() + " " + response.message());
         //this.pushText(userId, "before Scoreboard");
         KitchenSinkController.eventPressed.put(userId,false);
         KitchenSinkController.colorPressed.put(userId,false);
-        playerNames.add("BOT1\uDBC0\uDC5C");
-        playerNames.add("BOT2\uDBC0\uDC84");
-        playerNames.add("BOT3\uDBC0\uDC8A");
+        playerNames.add("BOT1\uD83D\uDC2F");
+        playerNames.add("BOT2\uD83D\uDC37");
+        playerNames.add("BOT3\uD83D\uDC38");
         playerNames.add(userName);
         playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer");
         playerClasses.add("com.example.bot.spring.nds63_UnoPlayer"); 
@@ -367,7 +367,7 @@ System.out.println(response.code() + " " + response.message());
                 String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "\uDBC0\uDC5C : Conservative BOT\n \uD83D\uDC38 : Greedy BOT\n \uDBC0\uDC84 : Crafty BOGT", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC2F : Conservative BOT\n \uD83D\uDC37 : Greedy BOT\n \uDBC0\uDC38 : Crafty BOGT", Arrays.asList(
                                         
                                         new PostbackAction("Join Group1",
                                                            "JoinGroup1")

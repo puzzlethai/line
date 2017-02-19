@@ -269,6 +269,12 @@ System.out.println(response.code() + " " + response.message());
                 */
                 Card playedCard = h[currPlayer].play(this);
                 String playerName = h[currPlayer].getPlayerName();
+                String pictureName;
+                if (playerName.startsWith("BOT")) {
+                    pictureName = playerName.substring(3);
+                            } else {
+                    pictureName = playerName;
+                }
                 String cardLeft = String.valueOf(h[currPlayer].size());
                 if (playedCard == null) {
                     Card drawnCard;
@@ -283,7 +289,7 @@ System.out.println(response.code() + " " + response.message());
                     }
                     h[currPlayer].addCard(drawnCard);
                     //this.pushText(userId,playerName+" has to draw (" + drawnCard + ").");
-                     this.pushText(userId,playerName+" draw card.");
+                     this.pushText(userId,pictureName+" draw card. \uDBC0\uDC7E");
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {  
@@ -295,12 +301,12 @@ System.out.println(response.code() + " " + response.message());
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         null,
-                        playerName+" plays "+ playedCard + "."+"("+cardLeft+" Card Left)",
+                        pictureName+" plays "+ playedCard + "."+"("+cardLeft+" Card Left)",
                         Arrays.asList(
                                 new PostbackAction("NEXT",
                                                    "00nextPlay")
                         ));
-                TemplateMessage templateMessage = new TemplateMessage(playerName+"plays "+ playedCard + ".", buttonsTemplate);
+                TemplateMessage templateMessage = new TemplateMessage(pictureName+" plays "+ playedCard + ".", buttonsTemplate);
                     pushButton(userId, templateMessage);
                     
                     KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
@@ -328,7 +334,7 @@ System.out.println(response.code() + " " + response.message());
                     if (upCard.followedByCall()) {
                         calledColor = h[currPlayer].callColor(this);
                         mostRecentColorCalled[currPlayer] = calledColor;
-                        this.pushText(userId,playerName+" calls \'" + calledColor+"\'" ); 
+                        this.pushText(userId,pictureName+" calls \'" + calledColor+"\'" ); 
                         
                     }
                     else {
@@ -340,14 +346,14 @@ System.out.println(response.code() + " " + response.message());
                     for (int j=0; j<scoreboard.getNumPlayers(); j++) {
                         roundPoints += h[j].countCards();
                     }
-                    this.pushText(userId,"\n" + h[currPlayer].getPlayerName() +
-                        " wins! ( " + roundPoints + " points.)");
+                    this.pushText(userId,"\n" + pictureName +
+                        " wins! ( " + roundPoints + " points.)\uDBC0\uDC7F");
                     scoreboard.addToScore(currPlayer,roundPoints);
                     //this.pushText(userId,"---------------\n" + scoreboard);
                     return;
                 }
                 if (h[currPlayer].size() == 1) {
-                    this.pushText(userId,playerName+ "\' UNO! \'");
+                    this.pushText(userId,pictureName+ "says \' UNO! \'\uDBC0\uDC85");
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
