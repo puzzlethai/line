@@ -109,7 +109,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             cardNo = Integer.toString(j);
                        }
                         
-                        column [j] = new CarouselColumn(imageUrl,cardName,"Upcard is "+upCard+" Please Select",Arrays.asList(
+                        column [j] = new CarouselColumn(imageUrl,cardName,"("+hand.size()+" Card Left) "+"Upcard is ",Arrays.asList(
                             new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
                         
                        
@@ -131,7 +131,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             cardNo = Integer.toString(j);
                        }
                         
-                        column [j] = new CarouselColumn(imageUrl,cardName,"Upcard is "+upCard+" Please Select",Arrays.asList(
+                        column [j] = new CarouselColumn(imageUrl,cardName,"("+hand.size()+" Card Left) "+"Upcard is ",Arrays.asList(
                             new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
                         
                            
@@ -151,7 +151,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             cardNo = Integer.toString(j);
                        }
                         
-                        column2 [j] = new CarouselColumn(imageUrl,cardName,"Upcard is "+upCard+" Please Select",Arrays.asList(
+                        column2 [j] = new CarouselColumn(imageUrl,cardName,"("+hand.size()+" Card Left) "+"Upcard is "+upCard,Arrays.asList(
                             new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
                         
                         
@@ -364,6 +364,7 @@ while ((System.currentTimeMillis()-startTime)<60000)
 }
 
        if (KitchenSinkController.colorPressed.get(userId)){
+           /*
                         try {                  
                         this.pushText(userId,"You Select: "+KitchenSinkController.gameStatus.get(userId));
                     } catch (IOException ex) {
@@ -371,6 +372,7 @@ while ((System.currentTimeMillis()-startTime)<60000)
                     
                             
                             }
+                        */
                     KitchenSinkController.colorPressed.replace(userId, false);
                     switch (KitchenSinkController.gameStatus.get(userId))
                     {

@@ -295,7 +295,7 @@ System.out.println(response.code() + " " + response.message());
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         playerName+"plays "+ playedCard + ".",
-                        "("+cardLeft+" Card Left) Direction is "+direction.toString(),
+                        "("+cardLeft+" Card Left) "+direction.toString()+" direction",
                         Arrays.asList(
                                 new PostbackAction("NEXT",
                                                    "00nextPlay")
@@ -328,8 +328,7 @@ System.out.println(response.code() + " " + response.message());
                     if (upCard.followedByCall()) {
                         calledColor = h[currPlayer].callColor(this);
                         mostRecentColorCalled[currPlayer] = calledColor;
-                        this.pushText(userId,playerName+" calls " + calledColor +
-                            ")."); 
+                        this.pushText(userId,playerName+" calls \'" + calledColor+"\'" ); 
                         
                     }
                     else {
@@ -342,15 +341,15 @@ System.out.println(response.code() + " " + response.message());
                         roundPoints += h[j].countCards();
                     }
                     this.pushText(userId,"\n" + h[currPlayer].getPlayerName() +
-                        " wins! (and collects " + roundPoints + " points.)");
+                        " wins! ( " + roundPoints + " points.)");
                     scoreboard.addToScore(currPlayer,roundPoints);
-                    this.pushText(userId,"---------------\n" + scoreboard);
+                    //this.pushText(userId,"---------------\n" + scoreboard);
                     return;
                 }
                 if (h[currPlayer].size() == 1) {
-                    this.pushText(userId,playerName+ " UNO!");
+                    this.pushText(userId,playerName+ "\' UNO! \'");
                 }
-                this.pushText(userId,"\n");
+                // this.pushText(userId,"\n");
                 if (playedCard != null) {
                     playedCard.performCardEffect(this);
                 }
