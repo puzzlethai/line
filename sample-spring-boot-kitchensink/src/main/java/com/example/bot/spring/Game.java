@@ -271,7 +271,7 @@ System.out.println(response.code() + " " + response.message());
                 String playerName = h[currPlayer].getPlayerName();
                 String pictureName;
                 if (playerName.startsWith("BOT")) {
-                    pictureName = playerName.substring(3);
+                    pictureName = playerName.substring(4);
                             } else {
                     pictureName = playerName;
                 }
@@ -296,7 +296,7 @@ System.out.println(response.code() + " " + response.message());
                     
                     // this.pushText(userId,playerName+" plays " + playedCard + " on " + upCard + ".");
                     // this.pushText(userId,playerName+" plays " + playedCard + ".");
-                    if (playerName.contains("BOT")){ // ต้องข้าม Human Player ทำเฉพาะ BOT 
+                    if (playerName.startsWith("BOT")){ // ต้องข้าม Human Player ทำเฉพาะ BOT 
                     imageUrl = createUri("/static/buttons/"+playedCard+".jpg");
                      ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
@@ -347,13 +347,13 @@ System.out.println(response.code() + " " + response.message());
                         roundPoints += h[j].countCards();
                     }
                     this.pushText(userId,"\n" + pictureName +
-                        " wins! ( " + roundPoints + " points.)\uDBC0\uDC7F");
+                        " wins! (" + roundPoints + " points.)\uDBC0\uDC7F");
                     scoreboard.addToScore(currPlayer,roundPoints);
                     //this.pushText(userId,"---------------\n" + scoreboard);
                     return;
                 }
                 if (h[currPlayer].size() == 1) {
-                    this.pushText(userId,pictureName+ "says \' UNO! \'\uDBC0\uDC85");
+                    this.pushText(userId,pictureName+ " says \' UNO! \'\uDBC0\uDC85");
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
