@@ -86,14 +86,14 @@ import retrofit2.Response;
 public class KitchenSinkController {
     
     static boolean PRINT_VERBOSE = false;  // ของจริง ลบออกไปเลย
-    final String channalKey ="EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=";
+    final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 
 static HashMap<String,String> gameStatus = new HashMap<String,String>();
 static HashMap<String,Boolean> eventPressed = new HashMap<String,Boolean>();
 static HashMap<String,Boolean> colorPressed = new HashMap<String,Boolean>();
-boolean joined = false;
-boolean playing = false;
-int round = 0;
+static HashMap<String,Boolean> joined = new HashMap<String,Boolean>();
+static HashMap<String,Boolean> playing = new HashMap<String,Boolean>();
+static HashMap<String,Integer> round = new HashMap<String,Integer>();
     @Autowired
     private LineMessagingService lineMessagingService;
 
@@ -190,8 +190,14 @@ System.out.println(response.code() + " " + response.message());
         
         //this.replyText(replyToken, "before Scoreboard");
         // if ((KitchenSinkController.gameStatus.get(userId).startsWith("JoinGroup"))&&(!joined))
-        if ((eventData.startsWith("JoinGroup"))&&(!joined)) {
-            joined = true;
+        if (KitchenSinkController.joined.containsKey(userId)) {
+            
+        } else {
+            KitchenSinkController.joined.put(userId, false);
+        }  // New
+        
+        if ((eventData.startsWith("JoinGroup"))&&(!joined.get(userId))) {
+            joined.replace(userId, true);
             this.replyText(replyToken, userName+ " : You have joined Uno " + eventData.substring(4));
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
@@ -215,16 +221,23 @@ System.out.println(response.code() + " " + response.message());
                 Game g = new Game(s,playerClasses,userId);
               //  this.pushText(userId, "before play");
             eventData = "00Card0"; // Start Valueof PostBackEvent Select Card
-              playing = true;
+            if (KitchenSinkController.playing.containsKey(userId)) {
+            KitchenSinkController.playing.replace(userId, true);
+        } else {
+            KitchenSinkController.playing.put(userId, true);
+        }  // New
+              
                 g.play();
             playerNames.clear();
             playerClasses.clear();
-            round = 0;
-            joined = false;
-            playing = false;
+            // round = 0;
+            KitchenSinkController.round.clear();
+            joined.replace(userId, false);
             KitchenSinkController.colorPressed.clear();   // Newest ดูให้ดีว่าถ้าเป็น multiuser แล้วส่งผลไหม
             KitchenSinkController.eventPressed.clear();
             KitchenSinkController.gameStatus.clear();
+            KitchenSinkController.playing.clear();
+            KitchenSinkController.joined.clear();
             //KitchenSinkController.gameStatus = "notPlayYet";
         }
         catch (Exception e) {
@@ -232,17 +245,19 @@ System.out.println(response.code() + " " + response.message());
         }
         }  else{   // not JoinGroup
             if ((eventData.substring(2,6).equals("Card"))){
-            round = round +1;
+                
+                KitchenSinkController.round.replace(userId, KitchenSinkController.round.get(userId)+1);
+            // round = round +1;
             
             int temp = Integer.parseInt(eventData.substring(6));
           //  this.pushText(userId,"round ="+round+" temp ="+temp);
-            if (temp ==round){
+            if (temp ==KitchenSinkController.round.get(userId)){
                 // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
                 KitchenSinkController.eventPressed.replace(userId,true);
     //this.pushText(userId,status);
             } else {
-                round = round -1;
-            
+              //  round = round -1;
+            KitchenSinkController.round.replace(userId, KitchenSinkController.round.get(userId)-1);
             }
             
             
@@ -358,12 +373,22 @@ System.out.println(response.code() + " " + response.message());
     private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws IOException {
         String text = content.getText();
+String userId = event.getSource().getUserId();
 
-        //log.info("Got text message from {}: {}", replyToken, text);
+        if (KitchenSinkController.playing.containsKey(userId)) {
+            
+        } else {
+            KitchenSinkController.playing.put(userId, false);
+        }  // New
         switch (text) {
             case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
-                if (!playing){
-                joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
+                if (!KitchenSinkController.playing.get(userId)){
+                    if (KitchenSinkController.round.containsKey(userId)) {
+            KitchenSinkController.round.replace(userId, 0);
+        } else {
+            KitchenSinkController.round.put(userId, 0);
+        }  // New
+                // joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
                 String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
@@ -395,29 +420,7 @@ System.out.println(response.code() + " " + response.message());
             } 
                 break;
             }
-            case "profile": {
-                String userId = event.getSource().getUserId();
-                if (userId != null) {
-                    Response<UserProfileResponse> response = lineMessagingService
-                            .getProfile(userId)
-                            .execute();
-                    if (response.isSuccessful()) {
-                        UserProfileResponse profiles = response.body();
-                        this.reply(
-                                replyToken,
-                                Arrays.asList(new TextMessage(
-                                                      "Display name: " + profiles.getDisplayName()),
-                                              new TextMessage("Status message: "
-                                                              + profiles.getStatusMessage()))
-                        );
-                    } else {
-                        this.replyText(replyToken, response.errorBody().string());
-                    }
-                } else {
-                    this.replyText(replyToken, "Bot can't use profile API without user ID");
-                }
-                break;
-            }
+            
             case "bye": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
