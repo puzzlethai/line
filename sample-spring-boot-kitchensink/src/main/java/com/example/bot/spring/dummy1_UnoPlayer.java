@@ -87,14 +87,22 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                  //   if (wait) {
                     
                     round = round +1;
-                    String cardName = "U have [ " ;
+                    String cardName = "\u274C" ;
                     for (int m=0; m< handNotPlay.size();m++){
                         
                         cardName = cardName+handNotPlay.get(m).toString()+" ";
                         //System.out.print("["+nameOfCard+"]");
                     
                 }
-                    cardName = cardName+"] ";
+                    cardName = cardName+"\b\u274C \2705";
+                    
+                    for (int p=0; p< handCanPlay.size();p++){
+                        
+                        cardName = cardName+handCanPlay.get(p).toString()+" ";
+                        //System.out.print("["+nameOfCard+"]");
+                    
+                }
+                    cardName = cardName+"\b\u2705";
                        
                     if (handCanPlay.size()<6){
                         CarouselColumn[] column = new CarouselColumn[handCanPlay.size()];
@@ -109,7 +117,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                             cardNo = Integer.toString(j);
                        }
                         
-                        column [j] = new CarouselColumn(imageUrl,cardName,"("+hand.size()+" Card Left) "+"Upcard is "+upCard,Arrays.asList(
+                        column [j] = new CarouselColumn(imageUrl,"U have "+hand.size()+" card: can play "+handCanPlay.size(),cardName+"\nUpcard is "+upCard,Arrays.asList(
                             new PostbackAction("Select "+nameOfCard,cardNo+"Card"+round)));
                         
                        

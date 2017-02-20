@@ -353,7 +353,7 @@ System.out.println(response.code() + " " + response.message());
                     return;
                 }
                 if (h[currPlayer].size() == 1) {
-                    this.pushText(userId,pictureName+ " says \' UNO! \'\uDBC0\uDC85");
+                    this.pushText(userId,pictureName+ " says \' UNO! \'\uDBC0\uDC8A");
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
