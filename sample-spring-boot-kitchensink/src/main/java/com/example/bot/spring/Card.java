@@ -223,19 +223,19 @@ System.out.println(response.code() + " " + response.message());
                 game.advanceToNextPlayer();
                 break;
             case REVERSE:
-                this.pushText(userId,"Reverse Direction \u2B8E" );
+                this.pushText(userId,"Reverse Direction \uDBC0\uDC86" );
                 game.reverseDirection();
                 game.advanceToNextPlayer();
                 break;
             case DRAW_TWO:
-                this.pushText(userId,pictureName+ "draws 2 Cards&SKIP."  );
+                this.pushText(userId,pictureName+ " draws 2 Cards&SKIP."  );
                 nextPlayerDraw(game);
                 nextPlayerDraw(game);
                 game.advanceToNextPlayer();
                 game.advanceToNextPlayer();
                 break;
             case WILD_D4:
-                this.pushText(userId,pictureName+ "draws 4 Cards&SKIP." );
+                this.pushText(userId,pictureName+ " draws 4 Cards&SKIP." );
                 nextPlayerDraw(game);
                 nextPlayerDraw(game);
                 nextPlayerDraw(game);
