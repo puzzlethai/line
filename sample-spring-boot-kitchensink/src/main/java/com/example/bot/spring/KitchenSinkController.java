@@ -231,13 +231,13 @@ System.out.println(response.code() + " " + response.message());
             playerNames.clear();
             playerClasses.clear();
             // round = 0;
-            KitchenSinkController.round.clear();
-            joined.replace(userId, false);
-            KitchenSinkController.colorPressed.clear();   // Newest ดูให้ดีว่าถ้าเป็น multiuser แล้วส่งผลไหม
-            KitchenSinkController.eventPressed.clear();
-            KitchenSinkController.gameStatus.clear();
-            KitchenSinkController.playing.clear();
-            KitchenSinkController.joined.clear();
+            KitchenSinkController.round.replace(userId, 0);
+//            KitchenSinkController.joined.replace(userId, false);
+//            KitchenSinkController.colorPressed.replace(userId,false);  // Newest ดูให้ดีว่าถ้าเป็น multiuser แล้วส่งผลไหม
+//            KitchenSinkController.eventPressed.clear();
+//            KitchenSinkController.gameStatus.clear();
+//            KitchenSinkController.playing.clear();
+//            KitchenSinkController.joined.clear();
             //KitchenSinkController.gameStatus = "notPlayYet";
         }
         catch (Exception e) {
