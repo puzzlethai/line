@@ -357,7 +357,20 @@ System.out.println(response.code() + " " + response.message());
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
-                    int nextPlayer = this.getNextPlayer();
+                    int nextPlayer = currPlayer;
+                     if (direction == Direction.FORWARDS) {
+           nextPlayer = (currPlayer + 1) % scoreboard.getNumPlayers();
+        }
+        else {
+            if (currPlayer == 0) {
+                nextPlayer = scoreboard.getNumPlayers() - 1;
+            }
+            else {
+                nextPlayer = currPlayer - 1;
+            }
+        }
+                    
+                    
                     String picName = h[nextPlayer].getPlayerName();
                     if (playerName.startsWith("BOT")) {
                     picName = picName.substring(4);
