@@ -372,7 +372,7 @@ System.out.println(response.code() + " " + response.message());
                     
                     
                     String picName = h[nextPlayer].getPlayerName();
-                    if (playerName.startsWith("BOT")) {
+                    if (picName.startsWith("BOT")) {
                     picName = picName.substring(4);
                             } 
                     playedCard.performCardEffect(this,userId,picName);
