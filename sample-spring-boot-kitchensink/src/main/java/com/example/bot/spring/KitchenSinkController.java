@@ -235,7 +235,7 @@ System.out.println(response.code() + " " + response.message());
             round = round +1;
             
             int temp = Integer.parseInt(eventData.substring(6));
-          //  this.pushText(userId,"round ="+round+" temp ="+temp);
+            this.pushText(userId,"round ="+round+" temp ="+temp);
             if (temp ==round){
                 // if ((KitchenSinkController.gameStatus.substring(2,6).equals("Card"))&&(temp ==round)){
                 KitchenSinkController.eventPressed.replace(userId,true);

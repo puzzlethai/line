@@ -218,7 +218,7 @@ System.out.println(response.code() + " " + response.message());
     void performCardEffect(Game game, String userId, String pictureName) throws EmptyDeckException {
         switch (rank) {
             case SKIP:
-                this.pushText(userId,"SKIP"+ pictureName+ "Turn" );
+                this.pushText(userId,"SKIP "+ pictureName+ " Turn" );
                 game.advanceToNextPlayer();
                 game.advanceToNextPlayer();
                 break;

@@ -84,7 +84,7 @@ public class dummy1_UnoPlayer implements UnoPlayer {
                     return -1;
                     
                 }else { // แสดง Card ที่สามารถเล่นได้ให้ ผู้เล่นดู 
-                    if (wait) {
+                 //   if (wait) {
                     
                     round = round +1;
                     String cardName = "U have [ " ;
@@ -224,7 +224,7 @@ while ((System.currentTimeMillis()-startTime)<60000)
     }
 }  
 
-                }
+               // }
                        
                     // รับ input จาก User ว่าจะเลือก Card ไหน
                     int number1 = 0;
@@ -244,11 +244,12 @@ while ((System.currentTimeMillis()-startTime)<60000)
                     KitchenSinkController.eventPressed.replace(userId, false);
                       str = KitchenSinkController.gameStatus.get(userId).substring(0,2); // first 2 digit is CardNO.
                     number1 = Integer.valueOf(str);
-                    } else {
-                        wait = false;
+                    } else { // didn't press 
+                        // wait = false;
+                        round = round -1;
                         number1 =0;
                         try {                  
-                        this.pushText(userId,"!!TIME OUT!! You didn't select the card. Our System play for You");
+                        this.pushText(userId,"!!TIME OUT!! You didn't select the card. System select for You");
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
