@@ -271,11 +271,8 @@ System.out.println(response.code() + " " + response.message());
      * 
      */
     public void play() throws IOException  {
-        //println("Initial upcard is " + upCard + ".");
         
-        this.pushText(userId, "Initial upcard is " + upCard + ".");
-        String imageUrl = createUri("/static/buttons/"+upCard+".jpg");
-        pushImage(userId,imageUrl); 
+        
         //  Newest Test
         String turnPlayer ="";
         String tempPlayer1,tempPlayer2,tempPlayer3,tempPlayer4;
@@ -309,6 +306,11 @@ System.out.println(response.code() + " " + response.message());
         this.pushText(userId,turnPlayer);
         
         //  Newest Test
+        
+        this.pushText(userId, "Initial upcard is " + upCard + ".");
+        String imageUrl = createUri("/static/buttons/"+upCard+".jpg");
+        pushImage(userId,imageUrl); 
+        
         try {
             while (true) {
                 //print("Hand #" + currPlayer + " (" + h[currPlayer] + ")");
