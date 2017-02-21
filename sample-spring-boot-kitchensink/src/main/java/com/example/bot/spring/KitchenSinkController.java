@@ -71,12 +71,12 @@ import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.print.DocFlavor;
+// Eak Newest import javax.print.DocFlavor;
 
 import lombok.NonNull;
-import lombok.Value;
+// Eak Newest import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.ResponseBody;
+// Eak Newest import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 
@@ -85,7 +85,7 @@ import retrofit2.Response;
 @LineMessageHandler
 public class KitchenSinkController {
     
-    static boolean PRINT_VERBOSE = false;  // ของจริง ลบออกไปเลย
+    static boolean PRINT_VERBOSE = false;  
      final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 
 static HashMap<String,String> gameStatus = new HashMap<String,String>();
@@ -182,7 +182,7 @@ String userId = event.getSource().getUserId();
             KitchenSinkController.joined.put(userId, false);
         }  // New
                 // joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
-                String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
+               // Eak Newest String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
                                 new CarouselColumn(null, "GROUP1", "\uD83D\uDC2F : Conservative BOT\n\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOGT", Arrays.asList(
@@ -455,60 +455,7 @@ String userId = event.getSource().getUserId();
         }
     
     }
-//    public void handlePostbackEvent(PostbackEvent event) throws IOException {
-//         ArrayList<String> playerNames = new ArrayList<String>();
-//     ArrayList<String> playerClasses = new ArrayList<String>();
-//        String replyToken = event.getReplyToken();
-//        String groupJoin = event.getPostbackContent().getData();
-//        String userId = event.getSource().getUserId();
-//        String userName ="";  
-//                if (userId != null) {
-//                    Response<UserProfileResponse> response = lineMessagingService
-//                            .getProfile(userId)
-//                            .execute();
-//                    if (response.isSuccessful()) {
-//                        UserProfileResponse profiles = response.body();
-//                        userName = profiles.getDisplayName();
-//                        
-//                    } else {
-//                        this.replyText(replyToken, response.errorBody().string());
-//                    }
-//                } else {
-//                    this.replyText(replyToken, "Bot can't use profile API without user ID");
-//                }
-//        this.replyText(replyToken, userName+ " : You have joined Uno " + groupJoin.substring(4));
-//        //this.replyText(replyToken, "before Scoreboard");
-//        
-//                
-//        
-//        this.pushText(userId, "before Scoreboard");
-//        playerNames.add("BOT1");
-//        playerNames.add("BOT2");
-//        playerNames.add("BOT3");
-//        playerNames.add(userName);
-//        playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer");
-//        playerClasses.add("com.example.bot.spring.nds63_UnoPlayer"); 
-//        playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer");
-//        
-//        playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer");
-//        
-//       try {
-//            
-//            Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
-//            this.pushText(userId, "after Scoreboard");
-//                Game g = new Game(s,playerClasses,userId);
-//                this.pushText(userId, "before play");
-//                g.play();
-//            playerNames.clear();
-//            playerClasses.clear();
-//           
-//        }
-//        catch (Exception e) {
-//            this.pushText(userId,e.getMessage());
-//        }
-//        
-//                
-//    }
+
 
     @EventMapping
     public void handleBeaconEvent(BeaconEvent event) {

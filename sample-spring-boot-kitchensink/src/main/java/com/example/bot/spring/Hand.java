@@ -20,6 +20,7 @@ import retrofit2.Response;
  */
 public class Hand {
 
+    final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
     private ArrayList<Card> cards;
     private UnoPlayer player;
     private String playerName;
@@ -41,7 +42,8 @@ public class Hand {
             //System.out.println("Problem with " + unoPlayerClassName + ".");
             this.pushText(userId, "error try "+e.getMessage());
             e.printStackTrace(); 
-            System.exit(1);
+            //Eak Newest System.exit(1);
+            throw new IOException(e);
         }
         this.playerName = playerName;
         cards = new ArrayList<Card>();
@@ -56,7 +58,7 @@ PushMessage pushMessage = new PushMessage(
 
 Response<BotApiResponse> response =
         LineMessagingServiceBuilder
-                .create("xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=")
+                .create(channalKey)
                 .build()
                 .pushMessage(pushMessage)
                 .execute();

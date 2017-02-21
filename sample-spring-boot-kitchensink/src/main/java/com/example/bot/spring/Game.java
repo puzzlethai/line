@@ -4,22 +4,15 @@ package com.example.bot.spring;
 import com.linecorp.bot.client.LineMessagingService;
 import com.linecorp.bot.client.LineMessagingServiceBuilder;
 import com.linecorp.bot.model.PushMessage;
-import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.action.PostbackAction;
 import com.linecorp.bot.model.message.ImageMessage;
-import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TemplateMessage;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.message.template.ButtonsTemplate;
 import com.linecorp.bot.model.response.BotApiResponse;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -57,7 +50,7 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
      * itself, and that this object provides a double-dispatch vehicle
      * through which select methods can access that state.
      */
-    private GameState state;
+    // Eak Newest private GameState state;
 
     /* package-visibility variables to simplify access between Game and
      * GameState classes */
@@ -83,7 +76,7 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
      * fully-qualified package/class name of a class that implements the
      * UnoPlayer interface.
      */
-    public Game(Scoreboard scoreboard, ArrayList<String> playerClassList,String userId) throws IOException {
+    public Game(Scoreboard scoreboard, ArrayList<String> playerClassList,String userId) throws IOException, Exception {
         
         this.scoreboard = scoreboard;
         this.userId = userId;
@@ -115,7 +108,8 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
         }
         catch (Exception e) {
             this.pushText(userId,"Can't deal initial hands!"+e.getMessage());
-            System.exit(1);
+           // Eak Newest System.exit(1);
+           throw new Exception(e);
         }   
         direction = Direction.FORWARDS;
         
@@ -187,35 +181,9 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
         }
     }
     @Autowired
-    private LineMessagingService lineMessagingService;
+    //  Eak Newest private LineMessagingService lineMessagingService;
     
-    
-    /*
-private void reply(@NonNull String replyToken, @NonNull Message message) {
-        reply(replyToken, Collections.singletonList(message));
-    }
 
-    private void reply(@NonNull String replyToken, @NonNull List<Message> messages) {
-        try {
-            Response<BotApiResponse> apiResponse = lineMessagingService
-                    .replyMessage(new ReplyMessage(replyToken, messages))
-                    .execute();
-            
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    private void replyText(@NonNull String replyToken, @NonNull String message) {
-        if (replyToken.isEmpty()) {
-            throw new IllegalArgumentException("replyToken must not be empty");
-        }
-        if (message.length() > 1000) {
-            message = message.substring(0, 1000 - 2) + "……";
-        }
-        this.reply(replyToken, new TextMessage(message));
-    }
-    */
     private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
        TextMessage textMessage = new TextMessage(messages);
 PushMessage pushMessage = new PushMessage(
@@ -231,6 +199,7 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
+    /* Eak Newest
     private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
       // TextMessage textMessage = new TextMessage(messages);
       ImageMessage imageMessage = new ImageMessage(imageUrl, imageUrl);
@@ -247,6 +216,7 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
+    */
     private void pushButton(@NonNull String userId, TemplateMessage templateMessage) throws IOException {
        
 PushMessage pushMessage = new PushMessage(
@@ -312,8 +282,8 @@ System.out.println(response.code() + " " + response.message());
         // pushImage(userId,imageUrl); 
         ButtonsTemplate upCardbuttonsTemplate = new ButtonsTemplate(
                         imageUrl,
-                        turnPlayer,
                         "Initial upcard is " + upCard + ".",
+                        turnPlayer,
                         Arrays.asList(
                                 new PostbackAction("     ",
                                                    "nothingelse")
