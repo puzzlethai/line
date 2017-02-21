@@ -195,12 +195,12 @@ String userId = event.getSource().getUserId();
                                                            "JoinGroup2")
                                         
                                 )),
-                                new CarouselColumn(null,"GROUP3", "\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT\n\u2642 : Conservative BOT", Arrays.asList(
+                                new CarouselColumn(null,"GROUP3", "\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT\n\uD83D\uDC2F : Conservative BOT", Arrays.asList(
                                         new PostbackAction("Join Group3",
                                                            "JoinGroup3")
                                         
                                 )),
-                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC3C : Carefully BOT \n\uD83D\uDC2F : Conservative BOT \n\uD83D\uDC37 : Greedy BOT", Arrays.asList(
+                                new CarouselColumn(null, "GROUP4", "\uD83D\uDC3C : Carefully BOT \n\uD83D\uDC2F : Conservative BOT \n\uD83D\uDC37 : Greedy BOT", Arrays.asList(
                                         
                                         new PostbackAction("Join Group4",
                                                            "JoinGroup4")
@@ -333,25 +333,65 @@ String userId = event.getSource().getUserId();
 //        }  // New
         
         if ((eventData.startsWith("JoinGroup"))&&(!joined.get(userId))) {
+            String group = eventData.substring(9);
             KitchenSinkController.joined.replace(userId, true);
-            this.replyText(replyToken, userName+ " : You have joined Uno " + eventData.substring(4));
+            this.replyText(replyToken, userName+ " : You have joined UnoGroup " +group);
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
         //this.pushText(userId, "before Scoreboard");
         KitchenSinkController.eventPressed.put(userId,false);
         KitchenSinkController.colorPressed.put(userId,false);
         
-        playerNames.add("BOT1\uD83D\uDC2F");
-        playerNames.add("BOT2\uD83D\uDC37");
-        playerNames.add("BOT3\uD83D\uDC38");
-        playerNames.add(userName);
-        playerClasses.add("com.example.bot.spring.dummy4_UnoPlayer");
-        playerClasses.add("com.example.bot.spring.nds63_UnoPlayer"); 
-        playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer");
-        
-        playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer");
-      
-       try {
+        switch (group) {
+            case "1" :  playerNames.add("BOT1\uD83D\uDC2F");  // Tiger
+                        playerNames.add("BOT2\uD83D\uDC37");  // Pig
+                        playerNames.add("BOT3\uD83D\uDC38");  // Frog
+                        playerNames.add(userName);
+                        playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer"); // Tiger
+                        playerClasses.add("com.example.bot.spring.nds63_UnoPlayer");  // Pig
+                        playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer"); // Frog
+                        playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer"); // Human
+                        break;
+            case "2" :  
+                        playerNames.add("BOT2\uD83D\uDC37"); // Pig
+                        playerNames.add("BOT3\uD83D\uDC38"); // Frog
+                        playerNames.add("BOT4\uD83D\uDC3C"); // Panda 
+                        playerNames.add(userName);
+                        
+                        playerClasses.add("com.example.bot.spring.nds63_UnoPlayer");  // Pig
+                        playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer"); // Frog
+                        playerClasses.add("com.example.bot.spring.dummy4_UnoPlayer"); // Panda
+                        playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer");
+                        break;
+            case "3" :  playerNames.add("BOT3\uD83D\uDC38"); // Frog
+                        playerNames.add("BOT4\uD83D\uDC3C"); // Panda 
+                        playerNames.add("BOT1\uD83D\uDC2F");  // Tiger
+                        playerNames.add(userName);
+                        playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer"); // Frog
+                        playerClasses.add("com.example.bot.spring.dummy4_UnoPlayer"); // Panda
+                        playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer"); // Tiger
+                        playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer");
+                        break;
+            case "4" :  playerNames.add("BOT4\uD83D\uDC3C"); // Panda 
+                        playerNames.add("BOT1\uD83D\uDC2F");  // Tiger
+                        playerNames.add("BOT2\uD83D\uDC37"); // Pig
+                        playerNames.add(userName);
+                        playerClasses.add("com.example.bot.spring.dummy4_UnoPlayer"); // Panda
+                        playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer"); // Tiger
+                        playerClasses.add("com.example.bot.spring.nds63_UnoPlayer");  // Pig
+                        playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer");
+                        break;
+            default :   playerNames.add("BOT1\uD83D\uDC2F");  // Tiger
+                        playerNames.add("BOT2\uD83D\uDC37");  // Pig
+                        playerNames.add("BOT3\uD83D\uDC38");  // Frog
+                        playerNames.add(userName);
+                        playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer"); // Tiger
+                        playerClasses.add("com.example.bot.spring.nds63_UnoPlayer");  // Pig
+                        playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer"); // Frog
+                        playerClasses.add("com.example.bot.spring.dummy1_UnoPlayer"); // Human
+                        break;
+        }
+ try {
             
             Scoreboard s = new Scoreboard(playerNames.toArray(new String[0]));
            // this.pushText(userId, "after Scoreboard");
