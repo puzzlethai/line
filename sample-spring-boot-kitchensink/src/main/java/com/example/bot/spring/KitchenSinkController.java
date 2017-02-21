@@ -157,7 +157,141 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
-    
+        private void handleTextContent(String replyToken, Event event, TextMessageContent content)
+            throws IOException {
+        String text = content.getText();
+String userId = event.getSource().getUserId();
+
+        if (KitchenSinkController.playing.containsKey(userId)) {
+            
+        } else {
+            KitchenSinkController.playing.put(userId, false);
+        }  // New
+        switch (text) {
+            case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
+                if (!KitchenSinkController.playing.get(userId)){
+                    if (KitchenSinkController.round.containsKey(userId)) {
+            KitchenSinkController.round.replace(userId, 0);
+        } else {
+            KitchenSinkController.round.put(userId, 0);
+        }  // New
+         
+                    if (KitchenSinkController.joined.containsKey(userId)) {
+            KitchenSinkController.joined.replace(userId, false);
+        } else {
+            KitchenSinkController.joined.put(userId, false);
+        }  // New
+                // joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
+                String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
+                CarouselTemplate carouselTemplate = new CarouselTemplate(
+                        Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC2F : Conservative BOT\n\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOGT", Arrays.asList(
+                                        
+                                        new PostbackAction("Join Group1",
+                                                           "JoinGroup1")
+                                )),
+                                new CarouselColumn(null,"GROUP2", "\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT", Arrays.asList(
+                                        new PostbackAction("Join Group2",
+                                                           "JoinGroup2")
+                                        
+                                )),
+                                new CarouselColumn(null,"GROUP3", "\uD83D\uDC38 : Crafty BOT\n\u26D1 : Carefully BOT\n\u2642 : Conservative BOT", Arrays.asList(
+                                        new PostbackAction("Join Group3",
+                                                           "JoinGroup3")
+                                        
+                                )),
+                                new CarouselColumn(null, "GROUP1", "\u26D1 : Carefully BOT \n \u2642 : Conservative BOT \n \u2696 : Greedy BOT", Arrays.asList(
+                                        
+                                        new PostbackAction("Join Group4",
+                                                           "JoinGroup4")
+                                ))
+                                        
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Your Line App is not support Please Update", carouselTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+            } 
+                break;
+            }
+            
+            case "bye": {
+                Source source = event.getSource();
+                if (source instanceof GroupSource) {
+                    this.replyText(replyToken, "Leaving group");
+                    lineMessagingService.leaveGroup(((GroupSource) source).getGroupId())
+                                        .execute();
+                } else if (source instanceof RoomSource) {
+                    this.replyText(replyToken, "Leaving room");
+                    lineMessagingService.leaveRoom(((RoomSource) source).getRoomId())
+                                        .execute();
+                } else {
+                    this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+                }
+                break;
+            }
+            case "confirm": {
+                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                        "Do it?",
+                        new MessageAction("Yes", "Yes!"),
+                        new MessageAction("No", "No!")
+                );
+                TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+            }
+            
+            case "buttons": {
+                String imageUrl = createUri("/static/buttons/1040.jpg");
+                ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
+                        imageUrl,
+                        "My button sample",
+                        "Hello, my button",
+                        Arrays.asList(
+                                new URIAction("Go to line.me",
+                                              "https://line.me"),
+                                new PostbackAction("Say hello1",
+                                                   "hello こんにちは"),
+                                new PostbackAction("言 hello2",
+                                                   "hello こんにちは",
+                                                   "hello こんにちは"),
+                                new MessageAction("Say message",
+                                                  "Rice=米")
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+            }
+            case "carousel": {
+                String imageUrl = createUri("/static/buttons/1040.jpg");
+                CarouselTemplate carouselTemplate = new CarouselTemplate(
+                        Arrays.asList(
+                                new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
+                                        new URIAction("Go to line.me",
+                                                      "https://line.me"),
+                                        new PostbackAction("Say hello1",
+                                                           "hello こんにちは")
+                                )),
+                                new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
+                                        new PostbackAction("言 hello2",
+                                                           "hello こんにちは",
+                                                           "hello こんにちは"),
+                                        new MessageAction("Say message",
+                                                          "Rice=米")
+                                ))
+                        ));
+                TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
+                this.reply(replyToken, templateMessage);
+                break;
+            }
+            default:
+                //log.info("Returns echo message {}: {}", replyToken, text);
+                this.replyText(
+                        replyToken,
+                        text
+                );
+                break;
+        }
+    }
     @EventMapping
     public void handlePostbackEvent(PostbackEvent event) throws IOException {
         
@@ -191,14 +325,15 @@ System.out.println(response.code() + " " + response.message());
         
         //this.replyText(replyToken, "before Scoreboard");
         // if ((KitchenSinkController.gameStatus.get(userId).startsWith("JoinGroup"))&&(!joined))
-        if (KitchenSinkController.joined.containsKey(userId)) {
-            
-        } else {
-            KitchenSinkController.joined.put(userId, false);
-        }  // New
+//        if (KitchenSinkController.joined.containsKey(userId)) {
+//            
+//            
+//        } else {
+//            KitchenSinkController.joined.put(userId, false);
+//        }  // New
         
         if ((eventData.startsWith("JoinGroup"))&&(!joined.get(userId))) {
-            joined.replace(userId, true);
+            KitchenSinkController.joined.replace(userId, true);
             this.replyText(replyToken, userName+ " : You have joined Uno " + eventData.substring(4));
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
@@ -224,9 +359,9 @@ System.out.println(response.code() + " " + response.message());
             eventData = "00Card0"; // Start Valueof PostBackEvent Select Card
             if (KitchenSinkController.playing.containsKey(userId)) {
             KitchenSinkController.playing.replace(userId, true);
-        } else {
+        } else {  // New
             KitchenSinkController.playing.put(userId, true);
-        }  // New
+        } 
               
                 g.play();
             playerNames.clear();
@@ -376,135 +511,7 @@ System.out.println(response.code() + " " + response.message());
         );
     }
 
-    private void handleTextContent(String replyToken, Event event, TextMessageContent content)
-            throws IOException {
-        String text = content.getText();
-String userId = event.getSource().getUserId();
 
-        if (KitchenSinkController.playing.containsKey(userId)) {
-            
-        } else {
-            KitchenSinkController.playing.put(userId, false);
-        }  // New
-        switch (text) {
-            case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
-                if (!KitchenSinkController.playing.get(userId)){
-                    if (KitchenSinkController.round.containsKey(userId)) {
-            KitchenSinkController.round.replace(userId, 0);
-        } else {
-            KitchenSinkController.round.put(userId, 0);
-        }  // New
-                // joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
-                String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
-                CarouselTemplate carouselTemplate = new CarouselTemplate(
-                        Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC2F : Conservative BOT\n\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOGT", Arrays.asList(
-                                        
-                                        new PostbackAction("Join Group1",
-                                                           "JoinGroup1")
-                                )),
-                                new CarouselColumn(null,"GROUP2", "\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT", Arrays.asList(
-                                        new PostbackAction("Join Group2",
-                                                           "JoinGroup2")
-                                        
-                                )),
-                                new CarouselColumn(null,"GROUP3", "\uD83D\uDC38 : Crafty BOT\n\u26D1 : Carefully BOT\n\u2642 : Conservative BOT", Arrays.asList(
-                                        new PostbackAction("Join Group3",
-                                                           "JoinGroup3")
-                                        
-                                )),
-                                new CarouselColumn(null, "GROUP1", "\u26D1 : Carefully BOT \n \u2642 : Conservative BOT \n \u2696 : Greedy BOT", Arrays.asList(
-                                        
-                                        new PostbackAction("Join Group4",
-                                                           "JoinGroup4")
-                                ))
-                                        
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("Your Line App is not support Please Update", carouselTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            } 
-                break;
-            }
-            
-            case "bye": {
-                Source source = event.getSource();
-                if (source instanceof GroupSource) {
-                    this.replyText(replyToken, "Leaving group");
-                    lineMessagingService.leaveGroup(((GroupSource) source).getGroupId())
-                                        .execute();
-                } else if (source instanceof RoomSource) {
-                    this.replyText(replyToken, "Leaving room");
-                    lineMessagingService.leaveRoom(((RoomSource) source).getRoomId())
-                                        .execute();
-                } else {
-                    this.replyText(replyToken, "Bot can't leave from 1:1 chat");
-                }
-                break;
-            }
-            case "confirm": {
-                ConfirmTemplate confirmTemplate = new ConfirmTemplate(
-                        "Do it?",
-                        new MessageAction("Yes", "Yes!"),
-                        new MessageAction("No", "No!")
-                );
-                TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            }
-            
-            case "buttons": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
-                ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
-                        imageUrl,
-                        "My button sample",
-                        "Hello, my button",
-                        Arrays.asList(
-                                new URIAction("Go to line.me",
-                                              "https://line.me"),
-                                new PostbackAction("Say hello1",
-                                                   "hello こんにちは"),
-                                new PostbackAction("言 hello2",
-                                                   "hello こんにちは",
-                                                   "hello こんにちは"),
-                                new MessageAction("Say message",
-                                                  "Rice=米")
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            }
-            case "carousel": {
-                String imageUrl = createUri("/static/buttons/1040.jpg");
-                CarouselTemplate carouselTemplate = new CarouselTemplate(
-                        Arrays.asList(
-                                new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                        new URIAction("Go to line.me",
-                                                      "https://line.me"),
-                                        new PostbackAction("Say hello1",
-                                                           "hello こんにちは")
-                                )),
-                                new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                        new PostbackAction("言 hello2",
-                                                           "hello こんにちは",
-                                                           "hello こんにちは"),
-                                        new MessageAction("Say message",
-                                                          "Rice=米")
-                                ))
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            }
-            default:
-                //log.info("Returns echo message {}: {}", replyToken, text);
-                this.replyText(
-                        replyToken,
-                        text
-                );
-                break;
-        }
-    }
 
     private static String createUri(String path) {
         return ServletUriComponentsBuilder.fromCurrentContextPath()

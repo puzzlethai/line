@@ -283,7 +283,7 @@ System.out.println(response.code() + " " + response.message());
                     }
                     catch (Exception e) {
                         //print("...deck exhausted, remixing...");
-                        this.pushText(userId,"...deck exhausted, remixing...");
+                        this.pushText(userId,"Deck exhausted, remixing...");
                         deck.remix();
                         drawnCard = deck.draw(); // what if cann't draw()
                     }

@@ -256,7 +256,7 @@ System.out.println(response.code() + " " + response.message());
             drawnCard = game.deck.draw();
         }
         catch (EmptyDeckException e) {
-            game.print("...deck exhausted, remixing...");
+            game.print("Deck exhausted , remixing");
             game.deck.remix();
             drawnCard = game.deck.draw();
         }

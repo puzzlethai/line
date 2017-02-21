@@ -257,7 +257,7 @@ while ((System.currentTimeMillis()-startTime)<60000)
                         round = round -1;
                         number1 =0;
                         try {                  
-                        this.pushText(userId,"!!TIME OUT!! You didn't select the card. System select for You");
+                        this.pushText(userId,"TIME OUT: System select for You");
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
@@ -393,7 +393,7 @@ while ((System.currentTimeMillis()-startTime)<60000)
                     }
                     } else {
                         try {                  
-                        this.pushText(userId,"!!TIME OUT!! You didn't choose the color we choose for YOU");
+                        this.pushText(userId,"TIME OUT: System select for YOU");
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
