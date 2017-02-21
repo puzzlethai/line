@@ -170,13 +170,14 @@ String userId = event.getSource().getUserId();
         }  // New
         switch (text) {
             case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
+                String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
-                        null,
+                        imageUrl,
                         "Welcome to UNO game",
                         "Select the following choices",
                         Arrays.asList(
-                                new URIAction("Go to line.me",
-                                              "https://line.me"),
+                                new URIAction("How to play UNO",
+                                              "http://www.wikihow.com/Play-UNO"),
                                 new PostbackAction("Play with BOT",
                                                    "00PlayBOT"),
                                 
