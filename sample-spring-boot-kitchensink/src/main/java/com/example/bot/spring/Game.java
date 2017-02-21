@@ -303,13 +303,23 @@ System.out.println(response.code() + " " + response.message());
         } else {
             turnPlayer = turnPlayer+"->"+tempPlayer4;
         }
-        this.pushText(userId,turnPlayer);
+       // this.pushText(userId,turnPlayer);
         
         //  Newest Test
         
-        this.pushText(userId, "Initial upcard is " + upCard + ".");
+       // this.pushText(userId, "Initial upcard is " + upCard + ".");
         String imageUrl = createUri("/static/buttons/"+upCard+".jpg");
-        pushImage(userId,imageUrl); 
+        // pushImage(userId,imageUrl); 
+        ButtonsTemplate upCardbuttonsTemplate = new ButtonsTemplate(
+                        imageUrl,
+                        turnPlayer,
+                        "Initial upcard is " + upCard + ".",
+                        Arrays.asList(
+                                new PostbackAction("     ",
+                                                   "nothingelse")
+                        ));
+                TemplateMessage upCardtemplateMessage = new TemplateMessage("Initial upcard is " + upCard + ".", upCardbuttonsTemplate);
+                    pushButton(userId, upCardtemplateMessage);
         
         try {
             while (true) {
