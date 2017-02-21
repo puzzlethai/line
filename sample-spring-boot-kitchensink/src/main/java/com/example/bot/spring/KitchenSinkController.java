@@ -140,7 +140,7 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
-    
+   /* Eak Newwest 
     private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
       // TextMessage textMessage = new TextMessage(messages);
       ImageMessage imageMessage = new ImageMessage(imageUrl, imageUrl);
@@ -157,6 +157,7 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
+    */
         private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws IOException {
         String text = content.getText();
@@ -323,15 +324,8 @@ String userId = event.getSource().getUserId();
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
         
-        //this.replyText(replyToken, "before Scoreboard");
-        // if ((KitchenSinkController.gameStatus.get(userId).startsWith("JoinGroup"))&&(!joined))
-//        if (KitchenSinkController.joined.containsKey(userId)) {
-//            
-//            
-//        } else {
-//            KitchenSinkController.joined.put(userId, false);
-//        }  // New
-        
+if (eventData.equals("00PlayBot")){
+} else       
         if ((eventData.startsWith("JoinGroup"))&&(!joined.get(userId))) {
             String group = eventData.substring(9);
             KitchenSinkController.joined.replace(userId, true);
@@ -425,7 +419,8 @@ String userId = event.getSource().getUserId();
         catch (Exception e) {
             this.pushText(userId,e.getMessage());
         }
-        }  else{   // not JoinGroup
+        }
+        else{   // not JoinGroup
             if ((eventData.substring(2,6).equals("Card"))){
                 
                 KitchenSinkController.round.replace(userId, KitchenSinkController.round.get(userId)+1);

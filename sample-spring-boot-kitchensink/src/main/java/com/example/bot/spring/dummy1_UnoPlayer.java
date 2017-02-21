@@ -257,7 +257,7 @@ while ((System.currentTimeMillis()-startTime)<60000)
                         round = round -1;
                         number1 =0;
                         try {                  
-                        this.pushText(userId,"TIME OUT: System select for You");
+                        this.pushText(userId,"TIME OUT: We select for U");
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
@@ -393,7 +393,7 @@ while ((System.currentTimeMillis()-startTime)<60000)
                     }
                     } else {
                         try {                  
-                        this.pushText(userId,"TIME OUT: System select for YOU");
+                        this.pushText(userId,"TIME OUT: We select for U");
                     } catch (IOException ex) {
                         //Logger.getLogger(dummy1_UnoPlayer.class.getName()).log(Level.SEVERE, null, ex);
                     
