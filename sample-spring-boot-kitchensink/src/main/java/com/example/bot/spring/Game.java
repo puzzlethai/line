@@ -107,7 +107,7 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
                 }
             }
             upCard = deck.draw();
-            while (upCard.followedByCall()) {
+            while (upCard.isSpacialCard()) {
                 deck.discard(upCard);
                 deck.remix();
                 upCard = deck.draw();

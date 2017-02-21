@@ -183,6 +183,10 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
     public boolean followedByCall() {
         return rank == UnoPlayer.Rank.WILD || rank == UnoPlayer.Rank.WILD_D4;
     }
+    
+    public boolean isSpacialCard() {
+        return rank == UnoPlayer.Rank.WILD || rank == UnoPlayer.Rank.WILD_D4 || rank == UnoPlayer.Rank.SKIP || rank == UnoPlayer.Rank.REVERSE ||rank == UnoPlayer.Rank.DRAW_TWO;
+    }
 
      private void pushText(@NonNull String userId, @NonNull String messages)  {
        TextMessage textMessage = new TextMessage(messages);
