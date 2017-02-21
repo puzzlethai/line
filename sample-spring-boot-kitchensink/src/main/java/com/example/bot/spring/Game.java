@@ -154,7 +154,19 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
             }
         }
     }
-
+    private int getNextPlay(int current) {
+        if (direction == Direction.FORWARDS) {
+            return (current + 1) % scoreboard.getNumPlayers();
+        }
+        else {
+            if (current== 0) {
+                return scoreboard.getNumPlayers() - 1;
+            }
+            else {
+                return current - 1;
+            }
+        }
+    }
     /**
      * Go ahead and advance to the next player.
      */
@@ -250,6 +262,7 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     } 
+    
     /**
      * Play an entire Game of Uno from start to finish. Hands should have
      * already been dealt before this method is called, and a valid up card
@@ -263,6 +276,39 @@ System.out.println(response.code() + " " + response.message());
         this.pushText(userId, "Initial upcard is " + upCard + ".");
         String imageUrl = createUri("/static/buttons/"+upCard+".jpg");
         pushImage(userId,imageUrl); 
+        //  Newest Test
+        String turnPlayer ="";
+        String tempPlayer1,tempPlayer2,tempPlayer3,tempPlayer4;
+        tempPlayer1 = h[currPlayer].getPlayerName();
+        if (tempPlayer1.startsWith("BOT")) {
+            turnPlayer = tempPlayer1.substring(4);
+        } else {
+            turnPlayer = tempPlayer1;
+        }
+        int tempInt = this.getNextPlay(currPlayer);
+        tempPlayer2 = h[tempInt].getPlayerName();
+        if (tempPlayer2.startsWith("BOT")) {
+            turnPlayer = turnPlayer+"->"+tempPlayer2.substring(4);
+        } else {
+            turnPlayer = turnPlayer+"->"+tempPlayer2;
+        }
+        tempInt = this.getNextPlay(tempInt);
+        tempPlayer3 = h[tempInt].getPlayerName();
+        if (tempPlayer3.startsWith("BOT")) {
+            turnPlayer = turnPlayer+"->"+tempPlayer3.substring(4);
+        } else {
+            turnPlayer = turnPlayer+"->"+tempPlayer3;
+        }
+        tempInt = this.getNextPlay(tempInt);
+        tempPlayer4 = h[tempInt].getPlayerName();
+        if (tempPlayer4.startsWith("BOT")) {
+            turnPlayer = turnPlayer+"->"+tempPlayer4.substring(4);
+        } else {
+            turnPlayer = turnPlayer+"->"+tempPlayer4;
+        }
+        this.pushText(userId,turnPlayer);
+        
+        //  Newest Test
         try {
             while (true) {
                 //print("Hand #" + currPlayer + " (" + h[currPlayer] + ")");
