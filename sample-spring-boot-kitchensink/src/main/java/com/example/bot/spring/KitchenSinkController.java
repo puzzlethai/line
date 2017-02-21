@@ -195,12 +195,12 @@ String userId = event.getSource().getUserId();
                                                            "JoinGroup2")
                                         
                                 )),
-                                new CarouselColumn(null,"GROUP3", "\uD83D\uDC38 : Crafty BOT\n\u26D1 : Carefully BOT\n\u2642 : Conservative BOT", Arrays.asList(
+                                new CarouselColumn(null,"GROUP3", "\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT\n\u2642 : Conservative BOT", Arrays.asList(
                                         new PostbackAction("Join Group3",
                                                            "JoinGroup3")
                                         
                                 )),
-                                new CarouselColumn(null, "GROUP1", "\u26D1 : Carefully BOT \n \u2642 : Conservative BOT \n \u2696 : Greedy BOT", Arrays.asList(
+                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC3C : Carefully BOT \n\uD83D\uDC2F : Conservative BOT \n\uD83D\uDC37 : Greedy BOT", Arrays.asList(
                                         
                                         new PostbackAction("Join Group4",
                                                            "JoinGroup4")
@@ -340,11 +340,12 @@ String userId = event.getSource().getUserId();
         //this.pushText(userId, "before Scoreboard");
         KitchenSinkController.eventPressed.put(userId,false);
         KitchenSinkController.colorPressed.put(userId,false);
+        
         playerNames.add("BOT1\uD83D\uDC2F");
         playerNames.add("BOT2\uD83D\uDC37");
         playerNames.add("BOT3\uD83D\uDC38");
         playerNames.add(userName);
-        playerClasses.add("com.example.bot.spring.dummy3_UnoPlayer");
+        playerClasses.add("com.example.bot.spring.dummy4_UnoPlayer");
         playerClasses.add("com.example.bot.spring.nds63_UnoPlayer"); 
         playerClasses.add("com.example.bot.spring.dummy2_UnoPlayer");
         
@@ -402,7 +403,7 @@ String userId = event.getSource().getUserId();
             }
             
             
-        } else {
+        } else { //not JoinGroup not Card
                 if (eventData.equals("00nextPlay")||eventData.equals("ColorRed")||eventData.equals("ColorGreen")||eventData.equals("ColorBlue")||eventData.equals("ColorYellow")) {
                     KitchenSinkController.colorPressed.replace(userId, true);
                 } else {

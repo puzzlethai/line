@@ -124,6 +124,10 @@ final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPH
         
         // currPlayer = scoreboard.getNumPlayers() -1;
         calledColor = UnoPlayer.Color.NONE;
+//        String playerTurn;
+//        for (int j=0; j<scoreboard.getNumPlayers();j++){
+//            
+//        }
     }
 
  /*   private void printState() {
@@ -283,7 +287,7 @@ System.out.println(response.code() + " " + response.message());
                     }
                     catch (Exception e) {
                         //print("...deck exhausted, remixing...");
-                        this.pushText(userId,"Deck exhausted, remixing...");
+                        this.pushText(userId,"Deck exhausted, remixing");
                         deck.remix();
                         drawnCard = deck.draw(); // what if cann't draw()
                     }
