@@ -86,7 +86,7 @@ import retrofit2.Response;
 public class KitchenSinkController {
     
     static boolean PRINT_VERBOSE = false;  // ของจริง ลบออกไปเลย
-    final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
+     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 
 static HashMap<String,String> gameStatus = new HashMap<String,String>();
 static HashMap<String,Boolean> eventPressed = new HashMap<String,Boolean>();
@@ -94,6 +94,7 @@ static HashMap<String,Boolean> colorPressed = new HashMap<String,Boolean>();
 static HashMap<String,Boolean> joined = new HashMap<String,Boolean>();
 static HashMap<String,Boolean> playing = new HashMap<String,Boolean>();
 static HashMap<String,Integer> round = new HashMap<String,Integer>();
+
     @Autowired
     private LineMessagingService lineMessagingService;
 
@@ -232,6 +233,11 @@ System.out.println(response.code() + " " + response.message());
             playerClasses.clear();
             // round = 0;
             KitchenSinkController.round.replace(userId, 0);
+                if (KitchenSinkController.playing.containsKey(userId)) {
+            KitchenSinkController.playing.replace(userId, false);
+        } else {
+            KitchenSinkController.playing.put(userId, false);
+                } 
 //            KitchenSinkController.joined.replace(userId, false);
 //            KitchenSinkController.colorPressed.replace(userId,false);  // Newest ดูให้ดีว่าถ้าเป็น multiuser แล้วส่งผลไหม
 //            KitchenSinkController.eventPressed.clear();
