@@ -169,7 +169,9 @@ String userId = event.getSource().getUserId();
             KitchenSinkController.playing.put(userId, false);
         }  // New
         switch (text) {
-            case "play uno": {  // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
+            case "play uno": {
+               // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
+               if (!KitchenSinkController.playing.get(userId)){
                 String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
@@ -186,6 +188,7 @@ String userId = event.getSource().getUserId();
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
                 this.reply(replyToken, templateMessage);
+               }
                 /*
                 if (!KitchenSinkController.playing.get(userId)){
                     if (KitchenSinkController.round.containsKey(userId)) {
@@ -389,12 +392,15 @@ if (eventData.equals("00PlayBOT")){
         if ((eventData.startsWith("JoinGroup"))&&(!joined.get(userId))) {
             String group = eventData.substring(9);
             KitchenSinkController.joined.replace(userId, true);
-            this.replyText(replyToken, userName+ " : You have joined UnoGroup " +group);
+            this.replyText(replyToken, userName+ " : You have joined Group" +group);
         ArrayList<String> playerNames = new ArrayList<String>();
      ArrayList<String> playerClasses = new ArrayList<String>();
         //this.pushText(userId, "before Scoreboard");
         KitchenSinkController.eventPressed.put(userId,false);
         KitchenSinkController.colorPressed.put(userId,false);
+        if (userName.length() > 6) {
+                userName  = userName.substring(0,6);
+        }
         
         switch (group) {
             case "1" :  playerNames.add("BOT1\uD83D\uDC2F");  // Tiger
