@@ -166,22 +166,22 @@ System.out.println(response.code() + " " + response.message());
 String userId = event.getSource().getUserId();
 
          if (KitchenSinkController.playing.containsKey(userId)) {
-            KitchenSinkController.playing.replace(userId, false);
+            //KitchenSinkController.playing.replace(userId, false);
         } else {
             KitchenSinkController.playing.put(userId, false);
          }  // New
         switch (text.toLowerCase()) {
             case "menu": {
                // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
-               String readme = "Due to small screen size \n and for the sake of easy to see the previous card.\n"
-                       + " UNO bot use the following to represent the card.\n" 
-                       + "R = Red, G=Green B=Blue Y=Yellow \n"
-                       + " So  R4 = Red Card Number 4 \n"
-                       + " YS = Yellow Skip Card \n"
-                       + " GR = Green Reverse Card \n"
-                       + " Bplus2 = Blue Draw Two Card \n"
-                       + " W = Wild Card. \n"
-                       + " W4 = Wild Draw Four Card. ";
+               String readme = "Due to small screen size \n";
+//                       + " UNO bot use the following to represent the card.\n" 
+//                       + "R = Red, G=Green B=Blue Y=Yellow \n"
+//                       + " So  R4 = Red Card Number 4 \n"
+//                       + " YS = Yellow Skip Card \n"
+//                       + " GR = Green Reverse Card \n"
+//                       + " Bplus2 = Blue Draw Two Card \n"
+//                       + " W = Wild Card. \n"
+//                       + " W4 = Wild Draw Four Card.";
                if (!KitchenSinkController.playing.get(userId)){
                 String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
@@ -191,8 +191,8 @@ String userId = event.getSource().getUserId();
                         Arrays.asList(
                                 new URIAction("How to play UNO",
                                               "http://www.wikihow.com/Play-UNO"),
-//                                new MessageAction("READ ME first",
-//                                                  readme),
+                                new MessageAction("READ ME first",
+                                                 readme),
                                 new PostbackAction("Play with BOT",
                                                    "00PlayBOT"),
                                 new MessageAction("Play with friends",
