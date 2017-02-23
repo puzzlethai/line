@@ -165,11 +165,11 @@ System.out.println(response.code() + " " + response.message());
         String text = content.getText();
 String userId = event.getSource().getUserId();
 
-        if (KitchenSinkController.playing.containsKey(userId)) {
-            
+         if (KitchenSinkController.playing.containsKey(userId)) {
+            KitchenSinkController.playing.replace(userId, false);
         } else {
             KitchenSinkController.playing.put(userId, false);
-        }  // New
+         }  // New
         switch (text.toLowerCase()) {
             case "menu": {
                // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
