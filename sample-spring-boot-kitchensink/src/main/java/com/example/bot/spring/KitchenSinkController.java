@@ -539,8 +539,9 @@ if (eventData.equals("00PlayBOT")){
                         String imageUrl = createUri("/static/buttons/Uno_hint2.png");
                     this.pushImage(userId, imageUrl);
                 } else {
+                        this.pushText(userId, "Not Starts with Card or Color");
                     }
-                this.pushText(userId, "Not Starts with Card or Color");
+                
                 }
             }
             
