@@ -173,15 +173,15 @@ String userId = event.getSource().getUserId();
         switch (text.toLowerCase()) {
             case "menu": {
                // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
-               String readme = "Due to small screen size \n"
-                      + " UNO bot use the following to represent the card.\n" 
-                       + "R = Red, G=Green B=Blue Y=Yellow \n"
-                       + " So  R4 = Red Card Number 4 \n"
+               String readme = "Due to small screen size,"
+                      + " UNO bot use the abbrev. to represent the card. " 
+                       + "R = Red, G=Green B=Blue Y=Yellow eg.\n"
+                       + "R4 = Red Card Number 4 \n"
                       + " YS = Yellow Skip Card \n"
-                       + " GR = Green Reverse Card \n";
-//                       + " Bplus2 = Blue Draw Two Card \n"
-//                       + " W = Wild Card. \n"
-//                       + " W4 = Wild Draw Four Card.";
+                       + " GR = Green Reverse Card \n"
+                       + " Bplus2 = Blue Draw Two Card \n"
+                       + " W = Wild Card. \n"
+                       + " W4 = Wild Draw Four Card.";
                if (!KitchenSinkController.playing.get(userId)){
                 String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
