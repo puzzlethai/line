@@ -124,8 +124,12 @@ static HashMap<String,Integer> round = new HashMap<String,Integer>();
 
     @EventMapping
     public void handleJoinEvent(JoinEvent event) {
+        
+        //this.replyText(replyToken, "Joined " + event.getSource());
+        String  welcome = "Welcome to UNO Card game Bot \n"
+                + "To play a game please type \"menu\n";
         String replyToken = event.getReplyToken();
-        this.replyText(replyToken, "Joined " + event.getSource());
+        this.replyText(replyToken, welcome);
     }
     private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
        TextMessage textMessage = new TextMessage(messages);
@@ -142,7 +146,7 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
-   /* Eak Newwest 
+   
     private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
       // TextMessage textMessage = new TextMessage(messages);
       ImageMessage imageMessage = new ImageMessage(imageUrl, imageUrl);
@@ -159,7 +163,7 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
-    */
+    
         private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws IOException {
         String text = content.getText();
@@ -174,14 +178,14 @@ String userId = event.getSource().getUserId();
             case "menu": {
                // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
                String readme = "Due to small screen size,"
-                      + " UNO bot use the abbrev. to represent the card. " 
+                      + "UNO bot use the abbrev. to represent the card. " 
                        + "R = Red, G=Green B=Blue Y=Yellow eg.\n"
                        + "R4 = Red Card Number 4 \n"
-                      + " YS = Yellow Skip Card \n"
-                       + " GR = Green Reverse Card \n"
-                       + " Bplus2 = Blue Draw Two Card \n"
-                       + " W = Wild Card. \n"
-                       + " W4 = Wild Draw Four Card.";
+                      + "YS = Yellow Skip Card \n"
+                       + "GR = Green Reverse Card \n"
+                       + "Bplus2 = Blue Draw 2 Cards \n"
+                       + "W = Wild Card. \n"
+                       + "W4 = Wild Draw Four Cards.";
                if (!KitchenSinkController.playing.get(userId)){
                 String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
@@ -193,10 +197,12 @@ String userId = event.getSource().getUserId();
                                               "http://www.wikihow.com/Play-UNO"),
                                 new MessageAction("READ ME first",
                                                  readme),
+                                new PostbackAction("READ ME second","00ReadME2"),
                                 new PostbackAction("Play with BOT",
                                                    "00PlayBOT"),
                                 new MessageAction("Play with friends",
                                                   "Coming Soon in the LINE near you")
+                                
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
                 this.reply(replyToken, templateMessage);
@@ -323,6 +329,7 @@ String userId = event.getSource().getUserId();
             default:
                 //log.info("Returns echo message {}: {}", replyToken, text);
                 //this.replyText(replyToken,text);
+                this.replyText(replyToken,"To play game just type \" menu \" ");
                 break;
         }
     }
@@ -525,8 +532,12 @@ if (eventData.equals("00PlayBOT")){
         } else { //not JoinGroup not Card
                 if (eventData.equals("00nextPlay")||eventData.equals("ColorRed")||eventData.equals("ColorGreen")||eventData.equals("ColorBlue")||eventData.equals("ColorYellow")) {
                     KitchenSinkController.colorPressed.replace(userId, true);
+                } else { //not next Play
+                    if (eventData.equals("00ReadME2")) {
+                        String imageUrl = createUri("/static/buttons/Uno_hint2.png");
+                    this.pushImage(userId, imageUrl);
                 } else {
-                    
+                    }
                 this.pushText(userId, "Not Starts with Card or Color");
                 }
             }
