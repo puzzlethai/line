@@ -177,15 +177,7 @@ String userId = event.getSource().getUserId();
         switch (text.toLowerCase()) {
             case "menu": {
                // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
-               String readme = "Due to small screen size,"
-                      + "UNO bot use the abbrev. to represent the card. " 
-                       + "R = Red, G=Green B=Blue Y=Yellow eg.\n"
-                       + "R4 = Red Card Number 4 \n"
-                      + "YS = Yellow Skip Card \n"
-                       + "GR = Green Reverse Card \n"
-                       + "Bplus2 = Blue Draw 2 Cards \n"
-                       + "W = Wild Card. \n"
-                       + "W4 = Wild Draw Four Cards.";
+            
                if (!KitchenSinkController.playing.get(userId)){
                 String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
@@ -195,16 +187,16 @@ String userId = event.getSource().getUserId();
                         Arrays.asList(
                                 new URIAction("How to play UNO",
                                               "http://www.wikihow.com/Play-UNO"),
-                                new MessageAction("READ ME first",
-                                                 readme),
-                                new PostbackAction("READ ME second","00ReadME2"),
+                               
+                                new PostbackAction("READ ME first",
+                                        "00ReadME2"),
                                 new PostbackAction("Play with BOT",
                                                    "00PlayBOT"),
                                 new MessageAction("Play with friends",
                                                   "Coming Soon in the LINE near you")
                                 
                         ));
-                TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+                TemplateMessage templateMessage = new TemplateMessage("Please Select Menu", buttonsTemplate);
                 this.reply(replyToken, templateMessage);
                }
                 /*
@@ -534,6 +526,16 @@ if (eventData.equals("00PlayBOT")){
                     KitchenSinkController.colorPressed.replace(userId, true);
                 } else { //not next Play
                     if (eventData.equals("00ReadME2")) {
+                                       String readme = "Due to small screen size,"
+                      + "UNO bot use the abbrev. to represent the card. " 
+                       + "R = Red, G=Green B=Blue Y=Yellow eg.\n"
+                       + "R4 = Red Card Number 4 \n"
+                      + "YS = Yellow Skip Card \n"
+                       + "GR = Green Reverse Card \n"
+                       + "Bplus2 = Blue Draw 2 Cards \n"
+                       + "W = Wild Card. \n"
+                       + "W4 = Wild Draw Four Cards.";
+                                       this.replyText(replyToken, readme);
                         String imageUrl = createUri("/static/buttons/Uno_hint2.png");
                     this.pushImage(userId, imageUrl);
                 } else {
