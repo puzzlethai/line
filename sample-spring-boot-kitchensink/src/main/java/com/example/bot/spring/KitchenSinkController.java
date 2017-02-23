@@ -116,6 +116,8 @@ static HashMap<String,Integer> round = new HashMap<String,Integer>();
 
     @EventMapping
     public void handleFollowEvent(FollowEvent event) {
+        String  welcome = "Welcome to UNO Card game Bot \n"
+                + "To play a game please type \"play uno\n";
         String replyToken = event.getReplyToken();
         this.replyText(replyToken, "Got followed event");
     }
@@ -168,7 +170,7 @@ String userId = event.getSource().getUserId();
         } else {
             KitchenSinkController.playing.put(userId, false);
         }  // New
-        switch (text) {
+        switch (text.toLowerCase()) {
             case "play uno": {
                // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
                String readme = "Due to small screen size \n and for the sake of easy to see the previous card.\n"
