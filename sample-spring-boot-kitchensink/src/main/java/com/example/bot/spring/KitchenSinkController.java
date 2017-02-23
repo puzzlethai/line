@@ -117,9 +117,9 @@ static HashMap<String,Integer> round = new HashMap<String,Integer>();
     @EventMapping
     public void handleFollowEvent(FollowEvent event) {
         String  welcome = "Welcome to UNO Card game Bot \n"
-                + "To play a game please type \"play uno\n";
+                + "To play a game please type \"menu\n";
         String replyToken = event.getReplyToken();
-        this.replyText(replyToken, "Got followed event");
+        this.replyText(replyToken, welcome);
     }
 
     @EventMapping
@@ -171,7 +171,7 @@ String userId = event.getSource().getUserId();
             KitchenSinkController.playing.put(userId, false);
         }  // New
         switch (text.toLowerCase()) {
-            case "play uno": {
+            case "menu": {
                // อย่าลืมว่า ต้องมีตัว check ไม่ให้ พิมพ์ play uno ซ้ำ notPlayyet
                String readme = "Due to small screen size \n and for the sake of easy to see the previous card.\n"
                        + " UNO bot use the following to represent the card.\n" 
@@ -498,6 +498,11 @@ if (eventData.equals("00PlayBOT")){
         }
         catch (Exception e) {
             this.pushText(userId,e.getMessage());
+            if (KitchenSinkController.playing.containsKey(userId)) {
+            KitchenSinkController.playing.replace(userId, false);
+        } else {
+            KitchenSinkController.playing.put(userId, false);
+                } 
         }
         }
         else{   // not JoinGroup
