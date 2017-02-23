@@ -191,11 +191,10 @@ String userId = event.getSource().getUserId();
                         Arrays.asList(
                                 new URIAction("How to play UNO",
                                               "http://www.wikihow.com/Play-UNO"),
-                                new MessageAction("READ ME firdst",
-                                                  readme),
+//                                new MessageAction("READ ME first",
+//                                                  readme),
                                 new PostbackAction("Play with BOT",
                                                    "00PlayBOT"),
-                                
                                 new MessageAction("Play with friends",
                                                   "Coming Soon in the LINE near you")
                         ));
