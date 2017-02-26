@@ -292,16 +292,21 @@ String userId = event.getSource().getUserId();
                 this.reply(replyToken, templateMessage);
                 break;
             }
-            case "test" : this.replyText(replyToken,text);
-            break;
+            case "test" : {
+                this.replyText(replyToken,text);
+                break;
+            }
+            
             case "builddb" : {
                 buildDB();
+                 break;
             }
-                break;
+               
             case "readdb" :{
                 readDB(replyToken);
-            }
                 break;
+            }
+                
             default:
                 //log.info("Returns echo message {}: {}", replyToken, text);
                 //this.replyText(replyToken,text);
