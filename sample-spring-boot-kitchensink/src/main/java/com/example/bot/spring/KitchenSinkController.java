@@ -170,10 +170,10 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
-    public void writeRow(String ID,String displayName,String status){
-//        String fileName = "playerName.txt";
-//String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fileName;
-        String fileLocation = createUri("/static/buttons/playerName.txt");
+    public void writeRow(String replyToken,String ID,String displayName,String status){
+        String fileName = "playerName.txt";
+String fileLocation = new File("/static/buttons").getAbsolutePath() + "\\" + fileName;
+        //String fileLocation = createUri("/static/buttons/playerName.txt");
   
 		File file = new File(fileLocation);
 		
@@ -187,16 +187,17 @@ System.out.println(response.code() + " " + response.message());
 			//System.out.println("Write success!");
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated tcatch block
 		//	e.printStackTrace();
+                this.replyText(replyToken,e.getMessage());
 		}
     }
         private ArrayList<Customer>  readData(String userId) throws Exception {
             ArrayList<Customer> myArrList = new ArrayList<Customer>();
             Customer  customer = new Customer();
-//            String fileName = "playerName.txt";
-//String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fileName;
-            String fileLocation = createUri("/static/buttons/playerName.txt");
+            String fileName = "playerName.txt";
+String fileLocation = new File("/static/buttons").getAbsolutePath() + fileName;
+           // String fileLocation = createUri("/static/buttons/playerName.txt");
         BufferedReader br = new BufferedReader(new FileReader(
             fileLocation));
         String playerLine = br.readLine();
@@ -321,9 +322,9 @@ String userId = event.getSource().getUserId();
                 break;
             }
             case "writerow" : {
-                writeRow("1", "EAK", "0");
-                writeRow("2", "Ozone","1");
-                this.replyText(replyToken,"Finished write");
+                writeRow(replyToken,"1", "EAK", "0");
+                writeRow(replyToken,"2", "Ozone","1");
+                //this.replyText(replyToken,"Finished write");
             break;
             }
             case "readdata" : {
