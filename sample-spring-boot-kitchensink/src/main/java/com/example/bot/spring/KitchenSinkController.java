@@ -171,9 +171,9 @@ Response<BotApiResponse> response =
 System.out.println(response.code() + " " + response.message());
     }
     public void writeRow(String ID,String displayName,String status){
-        String fileName = "playerName.txt";
-String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fileName;
-       // String imageUrl = createUri("/static/buttons/playerName.txt");
+//        String fileName = "playerName.txt";
+//String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fileName;
+        String fileLocation = createUri("/static/buttons/playerName.txt");
   
 		File file = new File(fileLocation);
 		
@@ -194,9 +194,9 @@ String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fil
         private ArrayList<Customer>  readData(String userId) throws Exception {
             ArrayList<Customer> myArrList = new ArrayList<Customer>();
             Customer  customer = new Customer();
-            String fileName = "playerName.txt";
-String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fileName;
-            //String imageUrl = createUri("/static/buttons/playerName.txt");
+//            String fileName = "playerName.txt";
+//String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fileName;
+            String fileLocation = createUri("/static/buttons/playerName.txt");
         BufferedReader br = new BufferedReader(new FileReader(
             fileLocation));
         String playerLine = br.readLine();
