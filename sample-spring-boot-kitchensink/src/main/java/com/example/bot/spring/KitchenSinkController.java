@@ -97,6 +97,9 @@ static HashMap<String,Integer> round = new HashMap<String,Integer>();
 
     @Autowired
     private LineMessagingService lineMessagingService;
+    
+    @Autowired
+    CustomerRepository repository;
 
     @EventMapping
     public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws IOException {
@@ -147,6 +150,23 @@ Response<BotApiResponse> response =
 System.out.println(response.code() + " " + response.message());
     }
    
+       public void  buildDB(){
+        repository.save(new Customer("1", "Ozone"));
+        repository.save(new Customer("2", "Focus"));
+        
+    }
+       public void readDB(String replyToken){
+           ArrayList<String> myArrList = new ArrayList<String>();
+     int i = 0;
+        for(Customer cust : repository.findAll()){
+            myArrList.add(cust.toString());
+           
+            this.replyText(replyToken, myArrList.get(i));
+            i=i+1;
+        }
+         
+       }
+    
     private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
       // TextMessage textMessage = new TextMessage(messages);
       ImageMessage imageMessage = new ImageMessage(imageUrl, imageUrl);
@@ -199,50 +219,7 @@ String userId = event.getSource().getUserId();
                 TemplateMessage templateMessage = new TemplateMessage("Please Select Menu", buttonsTemplate);
                 this.reply(replyToken, templateMessage);
                }
-                /*
-                if (!KitchenSinkController.playing.get(userId)){
-                    if (KitchenSinkController.round.containsKey(userId)) {
-            KitchenSinkController.round.replace(userId, 0);
-        } else {
-            KitchenSinkController.round.put(userId, 0);
-        }  // New
-         
-                    if (KitchenSinkController.joined.containsKey(userId)) {
-            KitchenSinkController.joined.replace(userId, false);
-        } else {
-            KitchenSinkController.joined.put(userId, false);
-        }  // New
-                // joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
-               // Eak Newest String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
-                CarouselTemplate carouselTemplate = new CarouselTemplate(
-                        Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC2F : Conservative BOT\n\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOGT", Arrays.asList(
-                                        
-                                        new PostbackAction("Join Group1",
-                                                           "JoinGroup1")
-                                )),
-                                new CarouselColumn(null,"GROUP2", "\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT", Arrays.asList(
-                                        new PostbackAction("Join Group2",
-                                                           "JoinGroup2")
-                                        
-                                )),
-                                new CarouselColumn(null,"GROUP3", "\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT\n\uD83D\uDC2F : Conservative BOT", Arrays.asList(
-                                        new PostbackAction("Join Group3",
-                                                           "JoinGroup3")
-                                        
-                                )),
-                                new CarouselColumn(null, "GROUP4", "\uD83D\uDC3C : Carefully BOT \n\uD83D\uDC2F : Conservative BOT \n\uD83D\uDC37 : Greedy BOT", Arrays.asList(
-                                        
-                                        new PostbackAction("Join Group4",
-                                                           "JoinGroup4")
-                                ))
-                                        
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("Your Line App is not support Please Update", carouselTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            } 
-                */
+
                 break;
             }
             
@@ -317,7 +294,14 @@ String userId = event.getSource().getUserId();
             }
             case "test" : this.replyText(replyToken,text);
             break;
-                
+            case "builddb" : {
+                buildDB();
+            }
+                break;
+            case "readdb" :{
+                readDB(replyToken);
+            }
+                break;
             default:
                 //log.info("Returns echo message {}: {}", replyToken, text);
                 //this.replyText(replyToken,text);
