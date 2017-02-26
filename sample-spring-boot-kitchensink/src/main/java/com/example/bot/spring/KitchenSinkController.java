@@ -69,8 +69,15 @@ import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 // Eak Newest import javax.print.DocFlavor;
 
 import lombok.NonNull;
@@ -163,7 +170,43 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
-    
+    public void writeRow(String ID,String displayName,String status){
+        String imageUrl = createUri("/static/buttons/playerName.txt");
+  
+		File file = new File(imageUrl);
+		
+		FileWriter writer;
+		try {
+			
+			writer = new FileWriter(file, true);  //True = Append to file, false = Overwrite
+			writer.write(ID+","+displayName+","+status+"\n");
+			writer.close();
+			
+			System.out.println("Write success!");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		}
+    }
+        private ArrayList<Customer>  readData() throws Exception {
+            ArrayList<Customer> myArrList = new ArrayList<Customer>();
+            Customer  customer = new Customer();
+            String imageUrl = createUri("/static/buttons/playerName.txt");
+        BufferedReader br = new BufferedReader(new FileReader(
+            imageUrl));
+        String playerLine = br.readLine();
+        while (playerLine != null) {
+            Scanner line = new Scanner(playerLine).useDelimiter(",");
+            customer.setId(line.next());
+            customer.setDisplayName(line.next());
+            customer.setStatus(line.next());
+            myArrList.add(customer);
+            playerLine = br.readLine();
+        }
+        return myArrList;
+    }
+                
         private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws IOException {
         String text = content.getText();
@@ -199,50 +242,7 @@ String userId = event.getSource().getUserId();
                 TemplateMessage templateMessage = new TemplateMessage("Please Select Menu", buttonsTemplate);
                 this.reply(replyToken, templateMessage);
                }
-                /*
-                if (!KitchenSinkController.playing.get(userId)){
-                    if (KitchenSinkController.round.containsKey(userId)) {
-            KitchenSinkController.round.replace(userId, 0);
-        } else {
-            KitchenSinkController.round.put(userId, 0);
-        }  // New
-         
-                    if (KitchenSinkController.joined.containsKey(userId)) {
-            KitchenSinkController.joined.replace(userId, false);
-        } else {
-            KitchenSinkController.joined.put(userId, false);
-        }  // New
-                // joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
-               // Eak Newest String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
-                CarouselTemplate carouselTemplate = new CarouselTemplate(
-                        Arrays.asList(
-                                new CarouselColumn(null, "GROUP1", "\uD83D\uDC2F : Conservative BOT\n\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOGT", Arrays.asList(
-                                        
-                                        new PostbackAction("Join Group1",
-                                                           "JoinGroup1")
-                                )),
-                                new CarouselColumn(null,"GROUP2", "\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT", Arrays.asList(
-                                        new PostbackAction("Join Group2",
-                                                           "JoinGroup2")
-                                        
-                                )),
-                                new CarouselColumn(null,"GROUP3", "\uD83D\uDC38 : Crafty BOT\n\uD83D\uDC3C : Carefully BOT\n\uD83D\uDC2F : Conservative BOT", Arrays.asList(
-                                        new PostbackAction("Join Group3",
-                                                           "JoinGroup3")
-                                        
-                                )),
-                                new CarouselColumn(null, "GROUP4", "\uD83D\uDC3C : Carefully BOT \n\uD83D\uDC2F : Conservative BOT \n\uD83D\uDC37 : Greedy BOT", Arrays.asList(
-                                        
-                                        new PostbackAction("Join Group4",
-                                                           "JoinGroup4")
-                                ))
-                                        
-                        ));
-                TemplateMessage templateMessage = new TemplateMessage("Your Line App is not support Please Update", carouselTemplate);
-                this.reply(replyToken, templateMessage);
-                break;
-            } 
-                */
+
                 break;
             }
             
@@ -314,6 +314,26 @@ String userId = event.getSource().getUserId();
                 TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
                 this.reply(replyToken, templateMessage);
                 break;
+            }
+            case "writerow" : {
+                writeRow("1", "EAK", "0");
+                writeRow("2", "Ozone","1");
+                this.replyText(replyToken,"Finished write");
+            break;
+            }
+            case "readdata" : {
+                ArrayList<Customer> myArrList = new ArrayList<Customer>();
+            try {
+                myArrList = readData();
+            } catch (Exception ex) {
+                //Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                String tempStr ="";
+                for (int i=0;i<myArrList.size();i++){
+                    tempStr = tempStr + myArrList.get(i).toString()+";";
+                }        
+                this.replyText(replyToken,tempStr);
+            break;
             }
             case "test" : this.replyText(replyToken,text);
             break;
