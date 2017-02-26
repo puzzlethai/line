@@ -180,7 +180,7 @@ String fileLocation = new File("/static/buttons/playerName.txt").getAbsolutePath
 		FileWriter writer;
 		try {
 			
-			writer = new FileWriter(file, true);  //True = Append to file, false = Overwrite
+			writer = new FileWriter(file, false);  //True = Append to file, false = Overwrite
 			writer.write(ID+","+displayName+","+status+"\n");
 			writer.close();
 			
