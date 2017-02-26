@@ -182,14 +182,14 @@ System.out.println(response.code() + " " + response.message());
 			writer.write(ID+","+displayName+","+status+"\n");
 			writer.close();
 			
-			System.out.println("Write success!");
+			//System.out.println("Write success!");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		//	e.printStackTrace();
 		}
     }
-        private ArrayList<Customer>  readData() throws Exception {
+        private ArrayList<Customer>  readData(String userId) throws Exception {
             ArrayList<Customer> myArrList = new ArrayList<Customer>();
             Customer  customer = new Customer();
             String imageUrl = createUri("/static/buttons/playerName.txt");
@@ -201,6 +201,7 @@ System.out.println(response.code() + " " + response.message());
             customer.setId(line.next());
             customer.setDisplayName(line.next());
             customer.setStatus(line.next());
+            this.pushText(userId, customer.toString());
             myArrList.add(customer);
             playerLine = br.readLine();
         }
@@ -324,9 +325,9 @@ String userId = event.getSource().getUserId();
             case "readdata" : {
                 ArrayList<Customer> myArrList = new ArrayList<Customer>();
             try {
-                myArrList = readData();
+                myArrList = readData(userId);
             } catch (Exception ex) {
-                //Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
+                this.replyText(replyToken,ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
             }
                 String tempStr ="";
                 for (int i=0;i<myArrList.size();i++){
