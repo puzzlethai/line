@@ -171,9 +171,11 @@ Response<BotApiResponse> response =
 System.out.println(response.code() + " " + response.message());
     }
     public void writeRow(String ID,String displayName,String status){
-        String imageUrl = createUri("/static/buttons/playerName.txt");
+        String fileName = "playerName.txt";
+String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fileName;
+       // String imageUrl = createUri("/static/buttons/playerName.txt");
   
-		File file = new File(imageUrl);
+		File file = new File(fileLocation);
 		
 		FileWriter writer;
 		try {
@@ -192,9 +194,11 @@ System.out.println(response.code() + " " + response.message());
         private ArrayList<Customer>  readData(String userId) throws Exception {
             ArrayList<Customer> myArrList = new ArrayList<Customer>();
             Customer  customer = new Customer();
-            String imageUrl = createUri("/static/buttons/playerName.txt");
+            String fileName = "playerName.txt";
+String fileLocation = new File("static\\buttons").getAbsolutePath() + "\\" + fileName;
+            //String imageUrl = createUri("/static/buttons/playerName.txt");
         BufferedReader br = new BufferedReader(new FileReader(
-            imageUrl));
+            fileLocation));
         String playerLine = br.readLine();
         while (playerLine != null) {
             Scanner line = new Scanner(playerLine).useDelimiter(",");
