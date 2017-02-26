@@ -98,7 +98,7 @@ static HashMap<String,Integer> round = new HashMap<String,Integer>();
     @Autowired
     private LineMessagingService lineMessagingService;
     
-    @Autowired
+    
     CustomerRepository repository;
 
     @EventMapping
