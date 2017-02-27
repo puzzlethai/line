@@ -75,6 +75,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -389,6 +390,22 @@ String userId = event.getSource().getUserId();
                     tempStr = tempStr + myArrList.get(i).toString()+";";
                 }        
                 this.replyText(replyToken,tempStr);
+            break;
+            }
+            case "path" : {
+                    String imageUrl = createUri("/static/buttons/UNOback2.jpg");
+                    
+                    Path inputPath = Paths.get(imageUrl);
+                    Path fullPath = inputPath.toAbsolutePath();
+                    Path realPath = inputPath.toRealPath();
+                this.replyText(replyToken,"full is:" +fullPath.toString());
+                this.replyText(replyToken,"Real is:" +realPath.toString());
+                String imageUrl2 = "/static/buttons/playerName.txt";
+                inputPath = Paths.get(imageUrl2);
+                fullPath = inputPath.toAbsolutePath();
+                realPath = inputPath.toRealPath();
+                this.replyText(replyToken,"full is:" +fullPath.toString());
+                this.replyText(replyToken,"Real is:" +realPath.toString());
             break;
             }
             case "test" : this.replyText(replyToken,text);
