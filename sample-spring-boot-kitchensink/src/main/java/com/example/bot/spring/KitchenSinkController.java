@@ -201,12 +201,14 @@ System.out.println(response.code() + " " + response.message());
         private ArrayList<Customer>  readData(String userId) throws Exception {
             ArrayList<Customer> myArrList = new ArrayList<Customer>();
             Customer  customer = new Customer();
-            String fileName = "playerName.txt";
+         //   String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath();
     //        String fileLocation = createUri("/static/buttons/playerName.txt");
-    String fileLocation ="playerName.txt";
-        BufferedReader br = new BufferedReader(new FileReader(
-            fileLocation));
+    String fileLocation = "/static/buttons/playerName.txt";
+//        BufferedReader br = new BufferedReader(new FileReader(
+//            fileLocation));
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
+        
         String playerLine = br.readLine();
         while (playerLine != null) {
             Scanner line = new Scanner(playerLine).useDelimiter(",");
@@ -217,6 +219,9 @@ System.out.println(response.code() + " " + response.message());
             myArrList.add(customer);
             playerLine = br.readLine();
         }
+        } catch (IOException e) {
+			this.pushText(userId, e.getMessage());
+		}
         return myArrList;
     }
         Function<String, Customer> mapLineToCustomer = new Function<String, Customer>() {
