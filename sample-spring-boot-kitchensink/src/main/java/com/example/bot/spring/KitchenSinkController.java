@@ -184,10 +184,15 @@ Response<BotApiResponse> response =
 System.out.println(response.code() + " " + response.message());
     }
     public void writeRow(String replyToken,String ID,String displayName,String status){
-        String fileName = "playerName.txt";
+       // String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath(); 
         //String fileLocation = createUri("/static/buttons/playerName.txt");
-  String fileLocation ="playerName.txt";
+  //String fileLocation ="playerName.txt";
+                           String imageUrl = "/static/buttons/playerName.txt";
+                Path inputPath = Paths.get(imageUrl);
+                    Path fullPath = inputPath.toAbsolutePath();
+                    this.replyText(replyToken,"full is:" +fullPath.toString());
+         String fileLocation = fullPath.toString();
 		File file = new File(fileLocation);
 		
 		FileWriter writer;
@@ -212,9 +217,14 @@ System.out.println(response.code() + " " + response.message());
          //   String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath();
     //        String fileLocation = createUri("/static/buttons/playerName.txt");
-    String fileLocation = "playerName.txt";
+   // String fileLocation = "playerName.txt";
 //        BufferedReader br = new BufferedReader(new FileReader(
 //            fileLocation));
+                         String imageUrl = "/static/buttons/playerName.txt";
+                Path inputPath = Paths.get(imageUrl);
+                    Path fullPath = inputPath.toAbsolutePath();
+                    this.pushText(userId,"full is:" +fullPath.toString());
+         String fileLocation = fullPath.toString();
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
         
         String playerLine = br.readLine();
@@ -250,7 +260,11 @@ System.out.println(response.code() + " " + response.message());
 };     
         
      private ArrayList<Customer>  readFile(String userId) throws Exception {
-         String fileLocation = "playerName.txt";
+                         String imageUrl = "/static/buttons/playerName.txt";
+                Path inputPath = Paths.get(imageUrl);
+                    Path fullPath = inputPath.toAbsolutePath();
+                    this.pushText(userId,"full is:" +fullPath.toString());
+         String fileLocation = fullPath.toString();
          List<Customer> customer = Files
             .lines(Paths
                     .get(fileLocation))
@@ -386,6 +400,7 @@ String userId = event.getSource().getUserId();
             break;
             }
             case "readfile" : {
+
                 ArrayList<Customer> myArrList = new ArrayList<Customer>();
             try {
                 myArrList = readFile(userId);
