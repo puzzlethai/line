@@ -220,7 +220,7 @@ System.out.println(response.code() + " " + response.message());
    // String fileLocation = "playerName.txt";
 //        BufferedReader br = new BufferedReader(new FileReader(
 //            fileLocation));
-                         String imageUrl = "/static/buttons/playerName.txt";
+                         String imageUrl = "/static/buttons/UNOback2.jpg";
                 Path inputPath = Paths.get(imageUrl);
                     Path fullPath = inputPath.toAbsolutePath();
                     this.pushText(userId,"full is:" +fullPath.toString());
@@ -421,6 +421,7 @@ String userId = event.getSource().getUserId();
                     Path fullPath = inputPath.toAbsolutePath();
                     this.pushText(userId,"full is:" +fullPath.toString());
                     String imageUrl2 = "/static/buttons/playerName.txt";
+                    inputPath = Paths.get(imageUrl2);
                     fullPath = inputPath.toAbsolutePath();
                      this.pushText(userId,"full is:" +fullPath.toString());
                     Path realPath= new Path() {
@@ -563,7 +564,7 @@ String userId = event.getSource().getUserId();
                 
                 this.pushText(userId,"Real is:" +realPath.toString());
                 
-                inputPath = Paths.get(imageUrl2);
+                
                 
                 realPath = inputPath.toRealPath();
                
