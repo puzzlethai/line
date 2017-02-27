@@ -204,7 +204,7 @@ System.out.println(response.code() + " " + response.message());
          //   String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath();
     //        String fileLocation = createUri("/static/buttons/playerName.txt");
-    String fileLocation = "/static/buttons/playerName.txt";
+    String fileLocation = createUri("/static/buttons/playerName.txt");
 //        BufferedReader br = new BufferedReader(new FileReader(
 //            fileLocation));
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
@@ -220,7 +220,7 @@ System.out.println(response.code() + " " + response.message());
             playerLine = br.readLine();
         }
         } catch (IOException e) {
-			this.pushText(userId, e.getMessage());
+			this.pushText(userId,"error"+ e.getMessage());
 		}
         return myArrList;
     }
@@ -242,9 +242,10 @@ System.out.println(response.code() + " " + response.message());
 };     
         
      private ArrayList<Customer>  readFile(String userId) throws Exception {
+         String fileLocation = createUri("/static/buttons/playerName.txt");
           List<Customer> customer = Files
             .lines(Paths
-                    .get("/static/buttons/playerName.txt"))
+                    .get(fileLocation))
             .map(mapLineToCustomer).collect(Collectors.toList());
         return (ArrayList<Customer>) customer; 
      }   
@@ -381,7 +382,7 @@ String userId = event.getSource().getUserId();
             try {
                 myArrList = readFile(userId);
             } catch (Exception ex) {
-                this.replyText(replyToken,ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
+                this.replyText(replyToken,"ERROR:"+ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
             }
                 String tempStr ="";
                 for (int i=0;i<myArrList.size();i++){
