@@ -174,7 +174,7 @@ System.out.println(response.code() + " " + response.message());
         String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath(); 
         //String fileLocation = createUri("/static/buttons/playerName.txt");
-  String fileLocation ="src/main/resources/static/buttons/playerName.txt";
+  String fileLocation ="playerName.txt";
 		File file = new File(fileLocation);
 		
 		FileWriter writer;
@@ -198,7 +198,7 @@ System.out.println(response.code() + " " + response.message());
             String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath();
     //        String fileLocation = createUri("/static/buttons/playerName.txt");
-    String fileLocation ="src/main/resources/static/buttons/playerName.txt";
+    String fileLocation ="playerName.txt";
         BufferedReader br = new BufferedReader(new FileReader(
             fileLocation));
         String playerLine = br.readLine();
