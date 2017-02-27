@@ -220,11 +220,22 @@ System.out.println(response.code() + " " + response.message());
    // String fileLocation = "playerName.txt";
 //        BufferedReader br = new BufferedReader(new FileReader(
 //            fileLocation));
-                         String imageUrl = "/static/buttons/UNOback2.jpg";
-                Path inputPath = Paths.get(imageUrl);
+//                         String imageUrl = "/static/buttons/UNOback2.jpg";
+//                Path inputPath = Paths.get(imageUrl);
+//                    Path fullPath = inputPath.toAbsolutePath();
+//                    this.pushText(userId,"full is:" +fullPath.toString());
+                    String imageUrl = createUri("/static/buttons/UNOback2.jpg");
+                    
+                    Path inputPath = Paths.get(imageUrl);
                     Path fullPath = inputPath.toAbsolutePath();
+                    Path fileName = inputPath.getFileName();
                     this.pushText(userId,"full is:" +fullPath.toString());
-         String fileLocation = fullPath.toString();
+                    this.pushText(userId,"filename is:" +fileName.toString());
+                    String tempStr = fullPath.toString();
+                    String regex = "\\s*\\bUNOback2.jpg\\b\\s*";
+tempStr = tempStr.replaceAll(regex, "");
+
+         String fileLocation = tempStr+"playerName.txt";
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
         
         String playerLine = br.readLine();
@@ -260,11 +271,23 @@ System.out.println(response.code() + " " + response.message());
 };     
         
      private ArrayList<Customer>  readFile(String userId) throws Exception {
-                         String imageUrl = "/static/buttons/playerName.txt";
-                Path inputPath = Paths.get(imageUrl);
+//                         String imageUrl = "/static/buttons/playerName.txt";
+//                Path inputPath = Paths.get(imageUrl);
+//                    Path fullPath = inputPath.toAbsolutePath();
+//                    this.pushText(userId,"full is:" +fullPath.toString());
+//         String fileLocation = fullPath.toString();
+String imageUrl = createUri("/static/buttons/UNOback2.jpg");
+                    
+                    Path inputPath = Paths.get(imageUrl);
                     Path fullPath = inputPath.toAbsolutePath();
+                    Path fileName = inputPath.getFileName();
                     this.pushText(userId,"full is:" +fullPath.toString());
-         String fileLocation = fullPath.toString();
+                    this.pushText(userId,"filename is:" +fileName.toString());
+                    String tempStr = fullPath.toString();
+                    String regex = "\\s*\\bUNOback2.jpg\\b\\s*";
+tempStr = tempStr.replaceAll(regex, "");
+
+         String fileLocation = tempStr+"playerName.txt";
          List<Customer> customer = Files
             .lines(Paths
                     .get(fileLocation))
