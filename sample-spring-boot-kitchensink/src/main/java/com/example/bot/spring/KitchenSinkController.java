@@ -74,11 +74,18 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.net.URI;
+import java.nio.file.FileSystem;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.logging.Level;
@@ -397,15 +404,155 @@ String userId = event.getSource().getUserId();
                     
                     Path inputPath = Paths.get(imageUrl);
                     Path fullPath = inputPath.toAbsolutePath();
-                    Path realPath = inputPath.toRealPath();
-                this.replyText(replyToken,"full is:" +fullPath.toString());
-                this.replyText(replyToken,"Real is:" +realPath.toString());
-                String imageUrl2 = "/static/buttons/playerName.txt";
+                    this.pushText(userId,"full is:" +fullPath.toString());
+                    String imageUrl2 = "/static/buttons/playerName.txt";
+                    fullPath = inputPath.toAbsolutePath();
+                     this.pushText(userId,"full is:" +fullPath.toString());
+                    Path realPath= new Path() {
+                        @Override
+                        public FileSystem getFileSystem() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public boolean isAbsolute() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path getRoot() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path getFileName() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path getParent() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public int getNameCount() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path getName(int i) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path subpath(int i, int i1) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public boolean startsWith(Path path) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public boolean startsWith(String string) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public boolean endsWith(Path path) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public boolean endsWith(String string) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path normalize() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path resolve(Path path) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path resolve(String string) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path resolveSibling(Path path) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path resolveSibling(String string) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path relativize(Path path) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public URI toUri() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path toAbsolutePath() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Path toRealPath(LinkOption... los) throws IOException {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public File toFile() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public WatchKey register(WatchService ws, WatchEvent.Kind<?>[] kinds, WatchEvent.Modifier... mdfrs) throws IOException {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public WatchKey register(WatchService ws, WatchEvent.Kind<?>... kinds) throws IOException {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public Iterator<Path> iterator() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+
+                        @Override
+                        public int compareTo(Path path) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+                    };
+                    try {
+                    realPath = inputPath.toRealPath();
+                    } catch (Exception x) {
+   this.pushText(userId,"Eror :" +x.getMessage());   // Logic for case when file doesn't exist.
+
+}
+                
+                this.pushText(userId,"Real is:" +realPath.toString());
+                
                 inputPath = Paths.get(imageUrl2);
-                fullPath = inputPath.toAbsolutePath();
+                
                 realPath = inputPath.toRealPath();
-                this.replyText(replyToken,"full is:" +fullPath.toString());
-                this.replyText(replyToken,"Real is:" +realPath.toString());
+               
+                this.pushText(userId,"Real is:" +realPath.toString());
             break;
             }
             case "test" : this.replyText(replyToken,text);
