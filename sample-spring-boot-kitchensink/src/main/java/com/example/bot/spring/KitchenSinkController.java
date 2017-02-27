@@ -419,156 +419,16 @@ String userId = event.getSource().getUserId();
                     
                     Path inputPath = Paths.get(imageUrl);
                     Path fullPath = inputPath.toAbsolutePath();
+                    Path fileName = inputPath.getFileName();
                     this.pushText(userId,"full is:" +fullPath.toString());
-                    String imageUrl2 = "/static/buttons/playerName.txt";
-                    inputPath = Paths.get(imageUrl2);
-                    fullPath = inputPath.toAbsolutePath();
-                     this.pushText(userId,"full is:" +fullPath.toString());
-                    Path realPath= new Path() {
-                        @Override
-                        public FileSystem getFileSystem() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public boolean isAbsolute() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path getRoot() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path getFileName() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path getParent() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public int getNameCount() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path getName(int i) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path subpath(int i, int i1) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public boolean startsWith(Path path) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public boolean startsWith(String string) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public boolean endsWith(Path path) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public boolean endsWith(String string) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path normalize() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path resolve(Path path) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path resolve(String string) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path resolveSibling(Path path) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path resolveSibling(String string) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path relativize(Path path) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public URI toUri() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path toAbsolutePath() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Path toRealPath(LinkOption... los) throws IOException {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public File toFile() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public WatchKey register(WatchService ws, WatchEvent.Kind<?>[] kinds, WatchEvent.Modifier... mdfrs) throws IOException {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public WatchKey register(WatchService ws, WatchEvent.Kind<?>... kinds) throws IOException {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public Iterator<Path> iterator() {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-
-                        @Override
-                        public int compareTo(Path path) {
-                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                        }
-                    };
-                    try {
-                    realPath = inputPath.toRealPath();
-                    } catch (Exception x) {
-   this.pushText(userId,"Eror :" +x.getMessage());   // Logic for case when file doesn't exist.
-
-}
-                
-                this.pushText(userId,"Real is:" +realPath.toString());
-                
-                
-                
-                realPath = inputPath.toRealPath();
-               
-                this.pushText(userId,"Real is:" +realPath.toString());
+                    this.pushText(userId,"filename is:" +fileName.toString());
+                    String tempStr = fullPath.toString();
+                    String regex = "\\s*\\bUNOback2.jpg\\b\\s*";
+tempStr = tempStr.replaceAll(regex, "");
+ this.pushText(userId,"only dir is:" +tempStr);
+  this.pushText(userId,"new filename is:" +tempStr+"playerName.txt");
+                   
+                    
             break;
             }
             case "test" : this.replyText(replyToken,text);
