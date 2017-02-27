@@ -180,7 +180,7 @@ System.out.println(response.code() + " " + response.message());
 		FileWriter writer;
 		try {
 			
-			writer = new FileWriter(file, false);  //True = Append to file, false = Overwrite
+			writer = new FileWriter(file, true);  //True = Append to file, false = Overwrite
 			writer.write(ID+","+displayName+","+status+"\n");
 			writer.close();
 			
@@ -192,6 +192,7 @@ System.out.println(response.code() + " " + response.message());
                 this.replyText(replyToken,e.getMessage());
 		}
     }
+    
         private ArrayList<Customer>  readData(String userId) throws Exception {
             ArrayList<Customer> myArrList = new ArrayList<Customer>();
             Customer  customer = new Customer();
