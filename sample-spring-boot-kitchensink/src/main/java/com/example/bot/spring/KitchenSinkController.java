@@ -204,7 +204,7 @@ System.out.println(response.code() + " " + response.message());
          //   String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath();
     //        String fileLocation = createUri("/static/buttons/playerName.txt");
-    String fileLocation = createUri("/static/buttons/playerName.txt");
+    String fileLocation = "playerName.txt";
 //        BufferedReader br = new BufferedReader(new FileReader(
 //            fileLocation));
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
@@ -242,8 +242,8 @@ System.out.println(response.code() + " " + response.message());
 };     
         
      private ArrayList<Customer>  readFile(String userId) throws Exception {
-         String fileLocation = createUri("/static/buttons/playerName.txt");
-          List<Customer> customer = Files
+         String fileLocation = "playerName.txt";
+         List<Customer> customer = Files
             .lines(Paths
                     .get(fileLocation))
             .map(mapLineToCustomer).collect(Collectors.toList());
