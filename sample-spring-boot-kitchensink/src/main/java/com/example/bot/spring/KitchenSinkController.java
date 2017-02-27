@@ -224,6 +224,7 @@ System.out.println(response.code() + " " + response.message());
 //                Path inputPath = Paths.get(imageUrl);
 //                    Path fullPath = inputPath.toAbsolutePath();
 //                    this.pushText(userId,"full is:" +fullPath.toString());
+/*
                     String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                     
                     Path inputPath = Paths.get(imageUrl);
@@ -236,6 +237,8 @@ System.out.println(response.code() + " " + response.message());
 tempStr = tempStr.replaceAll(regex, "");
 
          String fileLocation = tempStr+"playerName.txt";
+         */
+String fileLocation = "/app/playerName.txt";
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
         
         String playerLine = br.readLine();
