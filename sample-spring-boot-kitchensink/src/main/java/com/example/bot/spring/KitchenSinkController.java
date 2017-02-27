@@ -16,6 +16,7 @@
 
 package com.example.bot.spring;
 
+import com.google.common.base.Splitter;
 import java.io.IOException;
 
 import java.io.UncheckedIOException;
@@ -73,11 +74,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 // Eak Newest import javax.print.DocFlavor;
 
 import lombok.NonNull;
@@ -214,7 +219,30 @@ System.out.println(response.code() + " " + response.message());
         }
         return myArrList;
     }
-                
+        Function<String, Customer> mapLineToCustomer = new Function<String, Customer>() {
+
+    public Customer apply(String line) {
+
+        Customer customer = new Customer();
+
+        List<String> customerPieces = Splitter.on(",").trimResults()
+                .omitEmptyStrings().splitToList(line);
+
+        customer.setId(customerPieces.get(0));
+        customer.setDisplayName(customerPieces.get(1));
+        customer.setStatus(customerPieces.get(2));
+
+        return customer;
+    }
+};     
+        
+     private ArrayList<Customer>  readFile(String userId) throws Exception {
+          List<Customer> customer = Files
+            .lines(Paths
+                    .get("/static/buttons/playerName.txt"))
+            .map(mapLineToCustomer).collect(Collectors.toList());
+        return (ArrayList<Customer>) customer; 
+     }   
         private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws IOException {
         String text = content.getText();
@@ -333,6 +361,20 @@ String userId = event.getSource().getUserId();
                 ArrayList<Customer> myArrList = new ArrayList<Customer>();
             try {
                 myArrList = readData(userId);
+            } catch (Exception ex) {
+                this.replyText(replyToken,ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                String tempStr ="";
+                for (int i=0;i<myArrList.size();i++){
+                    tempStr = tempStr + myArrList.get(i).toString()+";";
+                }        
+                this.replyText(replyToken,tempStr);
+            break;
+            }
+            case "readfile" : {
+                ArrayList<Customer> myArrList = new ArrayList<Customer>();
+            try {
+                myArrList = readFile(userId);
             } catch (Exception ex) {
                 this.replyText(replyToken,ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
             }

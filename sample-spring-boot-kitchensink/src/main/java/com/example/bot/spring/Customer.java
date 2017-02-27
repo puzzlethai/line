@@ -34,7 +34,7 @@ public void setStatus(String status) {
  @Override
     public String toString() {
         return String.format(
-                "Customer[id=%s, displayName='%s', status='%s']",
+                "Customer[id=%s, displayName=%s, status=%s]",
                 id, displayName, status);
     }
 }
