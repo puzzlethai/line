@@ -183,15 +183,15 @@ Response<BotApiResponse> response =
                 .execute();
 System.out.println(response.code() + " " + response.message());
     }
-    public void writeRow(String replyToken,String ID,String displayName,String status){
+    public void writeRow(String userId,String ID,String displayName,String status) throws IOException{
        // String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath(); 
         //String fileLocation = createUri("/static/buttons/playerName.txt");
   //String fileLocation ="playerName.txt";
-                           String imageUrl = "/static/buttons/playerName.txt";
+                           String imageUrl = "playerName.txt";
                 Path inputPath = Paths.get(imageUrl);
                     Path fullPath = inputPath.toAbsolutePath();
-                    this.replyText(replyToken,"full is:" +fullPath.toString());
+                    this.pushText(userId,"full is:" +fullPath.toString());
          String fileLocation = fullPath.toString();
 		File file = new File(fileLocation);
 		
@@ -201,13 +201,13 @@ System.out.println(response.code() + " " + response.message());
 			writer = new FileWriter(file, true);  //True = Append to file, false = Overwrite
 			writer.write(ID+","+displayName+","+status+"\n");
 			writer.close();
-			
+			this.pushText(userId,"write file"+file.getAbsolutePath());
 			//System.out.println("Write success!");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated tcatch block
 		//	e.printStackTrace();
-                this.replyText(replyToken,e.getMessage());
+                this.pushText(userId,e.getMessage());
 		}
     }
     
@@ -403,8 +403,8 @@ String userId = event.getSource().getUserId();
                 break;
             }
             case "writerow" : {
-                writeRow(replyToken,"1", "EAK", "0");
-                writeRow(replyToken,"2", "Ozone","1");
+                writeRow(userId,"1", "EAK", "0");
+                writeRow(userId,"2", "Ozone","1");
                 //this.replyText(replyToken,"Finished write");
             break;
             }
