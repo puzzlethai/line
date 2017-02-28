@@ -246,7 +246,8 @@ String imageUrl = "playerName.txt";
                     this.pushText(userId,"full is:" +fullPath.toString());
          String fileLocation = fullPath.toString();
 //String fileLocation = "playerName.txt";
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
+        try (BufferedReader br = Files.newBufferedReader(Paths
+                    .get(String.valueOf(this.getClass().getResource("/static/buttons/playerName.txt"))))) {
         
         String playerLine = br.readLine();
         while (playerLine != null) {
@@ -302,7 +303,7 @@ String imageUrl = "playerName.txt";
 //  String fileLocation = "playerName.txt";
          List<Customer> customer = Files
             .lines(Paths
-                    .get(fileLocation))
+                    .get(String.valueOf(this.getClass().getResource("/static/buttons/playerName.txt"))))
             .map(mapLineToCustomer).collect(Collectors.toList());
         return (ArrayList<Customer>) customer; 
      }   
