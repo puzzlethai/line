@@ -188,7 +188,7 @@ System.out.println(response.code() + " " + response.message());
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath(); 
         //String fileLocation = createUri("/static/buttons/playerName.txt");
   //String fileLocation ="playerName.txt";
-                           String imageUrl = "playerName.txt";
+                           String imageUrl = "/public/playerName.txt";
                 Path inputPath = Paths.get(imageUrl);
                     Path fullPath = inputPath.toAbsolutePath();
                     this.pushText(userId,"full is:" +fullPath.toString());
@@ -238,7 +238,7 @@ tempStr = tempStr.replaceAll(regex, "");
 
          String fileLocation = tempStr+"playerName.txt";
          */
-String fileLocation = "/META-INF/resources/playerName.txt";
+String fileLocation = "/public/playerName.txt";
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
         
         String playerLine = br.readLine();
@@ -281,16 +281,17 @@ String fileLocation = "/META-INF/resources/playerName.txt";
 //         String fileLocation = fullPath.toString();
 String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                     
-                    Path inputPath = Paths.get(imageUrl);
-                    Path fullPath = inputPath.toAbsolutePath();
-                    Path fileName = inputPath.getFileName();
-                    this.pushText(userId,"full is:" +fullPath.toString());
-                    this.pushText(userId,"filename is:" +fileName.toString());
-                    String tempStr = fullPath.toString();
-                    String regex = "\\s*\\bUNOback2.jpg\\b\\s*";
-tempStr = tempStr.replaceAll(regex, "");
+//                    Path inputPath = Paths.get(imageUrl);
+//                    Path fullPath = inputPath.toAbsolutePath();
+//                    Path fileName = inputPath.getFileName();
+//                    this.pushText(userId,"full is:" +fullPath.toString());
+//                    this.pushText(userId,"filename is:" +fileName.toString());
+//                    String tempStr = fullPath.toString();
+//                    String regex = "\\s*\\bUNOback2.jpg\\b\\s*";
+//tempStr = tempStr.replaceAll(regex, "");
 
-         String fileLocation = tempStr+"playerName.txt";
+//         String fileLocation = tempStr+"playerName.txt";
+String fileLocation = "/resources/playerName.txt";
          List<Customer> customer = Files
             .lines(Paths
                     .get(fileLocation))
