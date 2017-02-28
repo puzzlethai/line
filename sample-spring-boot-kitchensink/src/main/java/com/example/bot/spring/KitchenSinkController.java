@@ -239,7 +239,13 @@ tempStr = tempStr.replaceAll(regex, "");
 
          String fileLocation = tempStr+"playerName.txt";
          */
-String fileLocation = "playerName.txt";
+String imageUrl = "playerName.txt";
+                Path inputPath = Paths.get("playerName.txt");
+                this.pushText(userId,"input is:" +inputPath.toString());
+                    Path fullPath = inputPath.resolve(imageUrl);
+                    this.pushText(userId,"full is:" +fullPath.toString());
+         String fileLocation = fullPath.toString();
+//String fileLocation = "playerName.txt";
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
         
         String playerLine = br.readLine();
@@ -275,12 +281,13 @@ String fileLocation = "playerName.txt";
 };     
         
      private ArrayList<Customer>  readFile(String userId) throws Exception {
-//                         String imageUrl = "/static/buttons/playerName.txt";
-//                Path inputPath = Paths.get(imageUrl);
-//                    Path fullPath = inputPath.toAbsolutePath();
-//                    this.pushText(userId,"full is:" +fullPath.toString());
-//         String fileLocation = fullPath.toString();
-String imageUrl = createUri("/static/buttons/UNOback2.jpg");
+                         String imageUrl = "/static/buttons/playerName.txt";
+                Path inputPath = Paths.get("static","buttons","playerName.txt");
+                this.pushText(userId,"input is:" +inputPath.toString());
+                    Path fullPath = inputPath.resolve(imageUrl);
+                    this.pushText(userId,"full is:" +fullPath.toString());
+         String fileLocation = fullPath.toString();
+// String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                     
 //                    Path inputPath = Paths.get(imageUrl);
 //                    Path fullPath = inputPath.toAbsolutePath();
@@ -292,7 +299,7 @@ String imageUrl = createUri("/static/buttons/UNOback2.jpg");
 //tempStr = tempStr.replaceAll(regex, "");
 
 //         String fileLocation = tempStr+"playerName.txt";
-String fileLocation = "playerName.txt";
+//  String fileLocation = "playerName.txt";
          List<Customer> customer = Files
             .lines(Paths
                     .get(fileLocation))
