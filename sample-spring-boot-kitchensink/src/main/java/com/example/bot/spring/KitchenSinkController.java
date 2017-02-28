@@ -238,7 +238,7 @@ tempStr = tempStr.replaceAll(regex, "");
 
          String fileLocation = tempStr+"playerName.txt";
          */
-String fileLocation = "/app/playerName.txt";
+String fileLocation = "/META-INF/resources/playerName.txt";
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
         
         String playerLine = br.readLine();
@@ -453,6 +453,35 @@ String userId = event.getSource().getUserId();
 tempStr = tempStr.replaceAll(regex, "");
  this.pushText(userId,"only dir is:" +tempStr);
   this.pushText(userId,"new filename is:" +tempStr+"playerName.txt");
+                   
+                    
+            break;
+            }
+                        case "paths" : {
+                    //String imageUrl = createUri("/static/buttons/UNOback2.jpg");
+                    
+                    Path inputPath = Paths.get("/META-INF/resources/playerName.txt");
+                    Path fullPath = inputPath.toAbsolutePath();
+                    this.pushText(userId,"full is:" +fullPath.toString());
+                    this.pushText(userId,"normal is:" +inputPath.toString());
+                    inputPath = Paths.get("/resources/playerName.txt");
+                    fullPath = inputPath.toAbsolutePath();
+                    this.pushText(userId,"full is:" +fullPath.toString());
+                    this.pushText(userId,"normal is:" +inputPath.toString());
+                    inputPath = Paths.get("static/buttons/playerName.txt");
+                    fullPath = inputPath.toAbsolutePath();
+                    this.pushText(userId,"full is:" +fullPath.toString());
+                    this.pushText(userId,"normal is:" +inputPath.toString());
+                    this.pushText(userId,"real is:"+Paths.get("playerName.txt").toString());
+                    
+//                    Path fileName = inputPath.getFileName();
+//                    this.pushText(userId,"full is:" +fullPath.toString());
+//                    this.pushText(userId,"filename is:" +fileName.toString());
+//                    String tempStr = fullPath.toString();
+//                    String regex = "\\s*\\bUNOback2.jpg\\b\\s*";
+//tempStr = tempStr.replaceAll(regex, "");
+// this.pushText(userId,"only dir is:" +tempStr);
+//  this.pushText(userId,"new filename is:" +tempStr+"playerName.txt");
                    
                     
             break;
