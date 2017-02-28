@@ -193,6 +193,7 @@ System.out.println(response.code() + " " + response.message());
                     Path fullPath = inputPath.toAbsolutePath();
                     this.pushText(userId,"full is:" +fullPath.toString());
          String fileLocation = fullPath.toString();
+         fileLocation = "playerName.txt";
 		File file = new File(fileLocation);
 		
 		FileWriter writer;
@@ -238,7 +239,7 @@ tempStr = tempStr.replaceAll(regex, "");
 
          String fileLocation = tempStr+"playerName.txt";
          */
-String fileLocation = "/public/playerName.txt";
+String fileLocation = "playerName.txt";
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileLocation))) {
         
         String playerLine = br.readLine();
@@ -291,7 +292,7 @@ String imageUrl = createUri("/static/buttons/UNOback2.jpg");
 //tempStr = tempStr.replaceAll(regex, "");
 
 //         String fileLocation = tempStr+"playerName.txt";
-String fileLocation = "/resources/playerName.txt";
+String fileLocation = "playerName.txt";
          List<Customer> customer = Files
             .lines(Paths
                     .get(fileLocation))
