@@ -96,6 +96,8 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 // Eak Newest import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 // Eak Newest import okhttp3.ResponseBody;
 import retrofit2.Response;
 
@@ -104,7 +106,8 @@ import retrofit2.Response;
 @Slf4j
 @LineMessageHandler
 public class KitchenSinkController {
-    
+    @Value(value = "classpath:/static/buttons/playerName.txt")
+private Resource staticButtons;
     static boolean PRINT_VERBOSE = false;  
      final String channalKey ="EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=";
 
@@ -239,15 +242,17 @@ tempStr = tempStr.replaceAll(regex, "");
 
          String fileLocation = tempStr+"playerName.txt";
          */
-String imageUrl = "playerName.txt";
-                Path inputPath = Paths.get("playerName.txt");
-                this.pushText(userId,"input is:" +inputPath.toString());
-                    Path fullPath = inputPath.resolve(imageUrl);
-                    this.pushText(userId,"full is:" +fullPath.toString());
-         String fileLocation = fullPath.toString();
+//String imageUrl = "playerName.txt";
+//                Path inputPath = Paths.get("playerName.txt");
+//                this.pushText(userId,"input is:" +inputPath.toString());
+//                    Path fullPath = inputPath.resolve(imageUrl);
+//                    this.pushText(userId,"full is:" +fullPath.toString());
+//         String fileLocation = fullPath.toString();
+         File test = staticButtons.getFile();
+         
 //String fileLocation = "playerName.txt";
-        try (BufferedReader br = Files.newBufferedReader(Paths
-                    .get(String.valueOf(this.getClass().getResource("/static/buttons/playerName.txt"))))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(test)))
+                    {
         
         String playerLine = br.readLine();
         while (playerLine != null) {
