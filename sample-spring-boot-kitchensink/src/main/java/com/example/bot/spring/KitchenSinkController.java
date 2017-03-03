@@ -257,7 +257,7 @@ tempStr = tempStr.replaceAll(regex, "");
         String playerLine = br.readLine();
         while (playerLine != null) {
             Scanner line = new Scanner(playerLine).useDelimiter(",");
-            customer.setId(line.next());
+            customer.setUserId(line.next());
             customer.setDisplayName(line.next());
             customer.setStatus(line.next());
             this.pushText(userId, customer.toString());
@@ -278,14 +278,14 @@ tempStr = tempStr.replaceAll(regex, "");
         List<String> customerPieces = Splitter.on(",").trimResults()
                 .omitEmptyStrings().splitToList(line);
 
-        customer.setId(customerPieces.get(0));
+        customer.setUserId(customerPieces.get(0));
         customer.setDisplayName(customerPieces.get(1));
         customer.setStatus(customerPieces.get(2));
 
         return customer;
     }
 };     
-        
+
      private ArrayList<Customer>  readFile(String userId) throws Exception {
                          String imageUrl = "/static/buttons/playerName.txt";
                 Path inputPath = Paths.get("static","buttons","playerName.txt");
@@ -427,17 +427,21 @@ String userId = event.getSource().getUserId();
             break;
             }
             case "readdata" : {
-                ArrayList<Customer> myArrList = new ArrayList<Customer>();
-            try {
-                myArrList = readData(userId);
-            } catch (Exception ex) {
-                this.replyText(replyToken,ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                String tempStr ="";
-                for (int i=0;i<myArrList.size();i++){
-                    tempStr = tempStr + myArrList.get(i).toString()+";";
-                }        
-                this.replyText(replyToken,tempStr);
+                CustomerRepository repository = null;
+                for (Customer customer : repository.findAll()) {
+				this.pushText(userId,customer.toString());
+			}
+//                ArrayList<Customer> myArrList = new ArrayList<Customer>();
+//            try {
+//                myArrList = readData(userId);
+//            } catch (Exception ex) {
+//                this.replyText(replyToken,ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//                String tempStr ="";
+//                for (int i=0;i<myArrList.size();i++){
+//                    tempStr = tempStr + myArrList.get(i).toString()+";";
+//                }        
+//                this.replyText(replyToken,tempStr);
             break;
             }
             case "readfile" : {

@@ -4,20 +4,26 @@
  * and open the template in the editor.
  */
 package com.example.bot.spring;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
 /**
  *
  * @author OZONE
  */
+@Entity
 public class Customer {
-    private String id;  
-private String displayName,status;  
+    @Column
+    private String userId;  
+    @Column
+private String displayName;
+@Column    
+private String status;  
   
-public String getId() {  
-    return id;  
+public String getUserId() {  
+    return userId;  
 }  
-public void setId(String id) {  
-    this.id = id;  
+public void setUserId(String userId) {  
+    this.userId = userId;  
 }  
 public String getDisplayName() {  
     return displayName;  
@@ -35,6 +41,6 @@ public void setStatus(String status) {
     public String toString() {
         return String.format(
                 "Customer[id=%s, displayName=%s, status=%s]",
-                id, displayName, status);
+                userId, displayName, status);
     }
 }
