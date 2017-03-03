@@ -102,13 +102,14 @@ subprojects {
             dependency 'com.squareup.retrofit2:retrofit:2.1.0'
             dependency 'org.assertj:assertj-core:3.5.2' // Update from 2.5.0 (by Spring-Boot and Spring IO)
             dependency 'org.projectlombok:lombok:1.16.12'
-            dependency 'javax.persistence:persistence-api:1.0.2'
+            //dependency 'javax.persistence:persistence-api:1.0.2'  //newwest
+            
         }
     }
 
     dependencies {
         
-        compile ("org.springframework.boot:spring-boot-starter-data-jpa") //newest
+        compile("org.springframework.boot:spring-boot-starter-data-jpa") //newest
         compileOnly 'org.projectlombok:lombok'
         testCompileOnly 'org.projectlombok:lombok'
 
@@ -120,6 +121,7 @@ subprojects {
         testCompile 'org.hibernate:hibernate-validator'
         testCompile 'org.springframework.boot:spring-boot-starter-test' // MockHttpServletRequest
         testCompile 'org.springframework.boot:spring-boot-starter-logging'
+         
     }
 
     compileJava.dependsOn(processResources) // http://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor
