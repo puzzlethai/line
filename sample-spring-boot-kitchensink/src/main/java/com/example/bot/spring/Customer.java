@@ -4,19 +4,19 @@
  * and open the template in the editor.
  */
 package com.example.bot.spring;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+
+
 /**
  *
  * @author OZONE
  */
-@Entity
+
 public class Customer {
-    @Column
+    
     private String userId;  
-    @Column
+    
 private String displayName;
-@Column    
+   
 private String status;  
   
 public String getUserId() {  
