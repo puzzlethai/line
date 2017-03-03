@@ -76,7 +76,7 @@ subprojects {
         logger.warn("There's no .git directory. Can't create git.properties.");
     }
     apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'org.springframework.boot'  // newest
+   // apply plugin: 'org.springframework.boot'  // newest
     
 
 
@@ -108,7 +108,7 @@ subprojects {
 
     dependencies {
         
-        compile ("org.springframework.boot:spring-boot-starter-data-jpa")
+        compile ("org.springframework.boot:spring-boot-starter-data-jpa") //newest
         compileOnly 'org.projectlombok:lombok'
         testCompileOnly 'org.projectlombok:lombok'
 
