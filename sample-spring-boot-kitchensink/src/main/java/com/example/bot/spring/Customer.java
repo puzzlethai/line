@@ -13,7 +13,7 @@ import javax.persistence.*;
  * @author OZONE
  */
 @Entity
-@Table(name = "Customer")
+
 public class Customer implements Serializable {
     
 private static final long serialVersionUID = -3009157732242241606L;    

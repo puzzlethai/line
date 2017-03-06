@@ -95,15 +95,15 @@ import java.util.stream.Collectors;
 
 import lombok.NonNull;
 // Eak Newest import lombok.Value;
-// Eak Newest import lombok.extern.slf4j.Slf4j;
+ import lombok.extern.slf4j.Slf4j;
 // Eak Newest import org.springframework.beans.factory.annotation.Value;
 // Eak import org.springframework.core.io.Resource;
-// Eak Newest import okhttp3.ResponseBody;
+ import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 
 
-//@Slf4j
+@Slf4j
 @LineMessageHandler
 public class KitchenSinkController {
 
