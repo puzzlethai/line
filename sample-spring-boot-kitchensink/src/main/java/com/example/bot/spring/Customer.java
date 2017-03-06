@@ -13,10 +13,10 @@ import javax.persistence.*;
  * @author OZONE
  */
 @Entity
-
-public class Customer implements Serializable {
-    
-private static final long serialVersionUID = -3009157732242241606L;    
+public class Customer {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;    
     @Column
     private String userId;  
 @Column    
