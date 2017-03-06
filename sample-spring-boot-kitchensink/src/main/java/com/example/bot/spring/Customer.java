@@ -6,19 +6,33 @@
 package com.example.bot.spring;
 
 
+import java.io.Serializable;
+import javax.persistence.*;
 /**
  *
  * @author OZONE
  */
-
-public class Customer {
+@Entity
+@Table(name = "Customer")
+public class Customer implements Serializable {
     
+private static final long serialVersionUID = -3009157732242241606L;    
+    @Column
     private String userId;  
-    
+@Column    
 private String displayName;
-   
+@Column   
 private String status;  
+
+protected Customer() {
+    }
   
+    public Customer(String UserId, String DisplayName,String Status) {
+        this.userId = UserId;
+        this.displayName = DisplayName;
+        this.status = Status;
+    }
+    
 public String getUserId() {  
     return userId;  
 }  
