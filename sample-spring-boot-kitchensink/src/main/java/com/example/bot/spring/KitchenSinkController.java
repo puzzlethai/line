@@ -106,8 +106,7 @@ import retrofit2.Response;
 @Slf4j
 @LineMessageHandler
 public class KitchenSinkController {
-    @Value(value = "classpath:/static/buttons/playerName.txt")
-private Resource staticButtons;
+
     static boolean PRINT_VERBOSE = false;  
      final String channalKey ="EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=";
 
@@ -248,10 +247,10 @@ tempStr = tempStr.replaceAll(regex, "");
 //                    Path fullPath = inputPath.resolve(imageUrl);
 //                    this.pushText(userId,"full is:" +fullPath.toString());
 //         String fileLocation = fullPath.toString();
-         File test = staticButtons.getFile();
+         // File test = staticButtons.getFile();
          
-//String fileLocation = "playerName.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(test)))
+String fileLocation = "playerName.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(fileLocation)))
                     {
         
         String playerLine = br.readLine();
