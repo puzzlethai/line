@@ -19,9 +19,15 @@ package com.example.bot.spring;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import javax.activation.DataSource;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @SpringBootApplication
 public class KitchenSinkApplication {
@@ -31,5 +37,14 @@ public class KitchenSinkApplication {
         downloadedContentDir = Files.createTempDirectory("line-bot");
         SpringApplication.run(KitchenSinkApplication.class, args);
     }
+    @Configuration
+public class DatabaseConfig {
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
+        return (DataSource) DataSourceBuilder.create().build();
+    }
+}
 
 }
