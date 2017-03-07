@@ -7,13 +7,18 @@ package com.example.bot.spring;
 
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
  *
  * @author OZONE
  */
 @Entity
-public class Customer {
+public class Customer implements Serializable{
+    private static final long serialVersionUID = -3009157732242241606L;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;    
