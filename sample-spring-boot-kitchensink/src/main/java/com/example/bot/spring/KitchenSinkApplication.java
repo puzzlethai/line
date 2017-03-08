@@ -22,7 +22,15 @@ import java.nio.file.Path;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.CacheManager;    // eak add
+import org.springframework.context.annotation.Bean;  //eak add
+import org.springframework.cache.annotation.EnableCaching;     // eak add
+import org.springframework.context.annotation.Configuration;    // eak add
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories; //eak add
 
+@Configuration  // eak add
+@EnableJpaRepositories  //eak add
+@EnableCaching   // eak add
 @SpringBootApplication
 public class KitchenSinkApplication {
     static Path downloadedContentDir;
