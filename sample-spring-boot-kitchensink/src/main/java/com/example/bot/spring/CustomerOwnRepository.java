@@ -15,7 +15,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 
-
 public interface CustomerOwnRepository extends Repository<Customer,Long>{
 	@Query(value="select displayName from Customer b where b.displayName=?1")
 	List<Customer> findByUserId(String userId);
