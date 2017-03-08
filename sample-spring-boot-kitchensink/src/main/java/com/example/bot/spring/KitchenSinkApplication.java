@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;    // eak add
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories; //eak add
 
 @Configuration  // eak add
-@EnableJpaRepositories  //eak add
+@EnableJpaRepositories(basePackages="com.example.bot.spring", entityManagerFactoryRef="emf")  //eak add
 @EnableCaching   // eak add
 @SpringBootApplication
 public class KitchenSinkApplication {
