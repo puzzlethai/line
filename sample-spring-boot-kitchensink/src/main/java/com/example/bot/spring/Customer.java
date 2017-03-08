@@ -17,7 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name="Customer.findByPrice",query="select userId,displayName,status from Customer b where b.status=?'1'")
+@NamedQuery(name="Customer.findByPrice",query="select userId,displayName,status from Customer b where b.status=?1")
 public class Customer implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
