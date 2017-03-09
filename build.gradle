@@ -21,12 +21,15 @@ buildscript {
         mavenCentral()
         maven { url 'https://plugins.gradle.org/m2/' }
         maven { url 'https://repo.spring.io/plugins-release' }
+         maven { url "https://repository.jboss.org/nexus/content/repositories/releases" } //Eak add
+
     }
     dependencies {
         classpath 'gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17'
         classpath 'io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE'
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE'
+        // Eak classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE'
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE' //EAk add
     }
 }
 
@@ -99,6 +102,8 @@ subprojects {
     }
 
     dependencies {
+        compile 'org.springframework.boot:spring-boot-starter-data-jpa' // EAk add
+    compile 'com.h2database:h2'  // Eak add
         compileOnly 'org.projectlombok:lombok'
         testCompileOnly 'org.projectlombok:lombok'
 
