@@ -102,8 +102,8 @@ subprojects {
     }
 
     dependencies {
-        compile 'org.springframework.boot:spring-boot-starter-data-jpa' // EAk add
-    compile 'com.h2database:h2'  // Eak add
+        runtime 'org.springframework.boot:spring-boot-starter-data-jpa' // EAk add
+    runtime 'com.h2database:h2'  // Eak add
         compileOnly 'org.projectlombok:lombok'
         testCompileOnly 'org.projectlombok:lombok'
 
