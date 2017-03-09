@@ -64,6 +64,9 @@ subprojects {
     apply plugin: 'propdeps-eclipse'
     apply plugin: 'findbugs'
     apply plugin: 'java'
+    apply plugin: 'idea'                      //Eak add
+    apply plugin: 'org.springframework.boot' //Eak add
+
        findbugs{
    ignoreFailures=true
   findbugsTest.enabled=false
@@ -120,6 +123,8 @@ subprojects {
     compileJava.dependsOn(processResources) // http://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor
 
     jar {
+//        baseName = 'gs-accessing-data-jpa'  // EAK add
+//    version =  '0.1.0'  // EAK add
         manifest {
             attributes 'Implementation-Title': project.name,
                     'Implementation-Version': version
