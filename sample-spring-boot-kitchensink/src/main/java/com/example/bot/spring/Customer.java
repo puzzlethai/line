@@ -20,47 +20,25 @@ import javax.persistence.Id;
 
 @Entity
 public class Customer {
-    
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;    
+    private Long id;
+    private String firstName;
+    private String lastName;
 
-    private String userId;  
- 
-private String displayName;
-  private String status;  
+    protected Customer() {}
 
-protected Customer() {
+    public Customer(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
-  
-    public Customer(String UserId, String DisplayName,String Status) {
-        this.userId = UserId;
-        this.displayName = DisplayName;
-        this.status = Status;
-    }
-    
-public String getUserId() {  
-    return userId;  
-}  
-public void setUserId(String userId) {  
-    this.userId = userId;  
-}  
-public String getDisplayName() {  
-    return displayName;  
-}  
-public void setDisplayName(String displayName) {  
-    this.displayName = displayName;  
-}  
-public String getStatus() {  
-    return status;  
-}  
-public void setStatus(String status) {  
-    this.status = status;  
-}  
- @Override
+
+    @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d,userid=%s, displayName=%s, status=%s]",
-                id,userId, displayName, status);
+                "Customer[id=%d, firstName='%s', lastName='%s']",
+                id, firstName, lastName);
     }
+
 }

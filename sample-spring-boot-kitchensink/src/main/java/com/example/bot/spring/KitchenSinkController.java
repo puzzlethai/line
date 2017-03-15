@@ -214,9 +214,9 @@ System.out.println(response.code() + " " + response.message());
 		}
     }
     
-        private ArrayList<Customer>  readData(String userId) throws Exception {
-            ArrayList<Customer> myArrList = new ArrayList<Customer>();
-            Customer  customer = new Customer();
+//        private ArrayList<Customer>  readData(String userId) throws Exception {
+//            ArrayList<Customer> myArrList = new ArrayList<Customer>();
+//            Customer  customer = new Customer();
          //   String fileName = "playerName.txt";
 //String fileLocation = new File("static/buttons/playerName.txt").getAbsolutePath();
     //        String fileLocation = createUri("/static/buttons/playerName.txt");
@@ -249,68 +249,68 @@ tempStr = tempStr.replaceAll(regex, "");
 //         String fileLocation = fullPath.toString();
          // File test = staticButtons.getFile();
          
-String fileLocation = "playerName.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(fileLocation)))
-                    {
-        
-        String playerLine = br.readLine();
-        while (playerLine != null) {
-            Scanner line = new Scanner(playerLine).useDelimiter(",");
-            customer.setUserId(line.next());
-            customer.setDisplayName(line.next());
-            customer.setStatus(line.next());
-            this.pushText(userId, customer.toString());
-            myArrList.add(customer);
-            playerLine = br.readLine();
-        }
-        } catch (IOException e) {
-			this.pushText(userId,"error"+ e.getMessage());
-		}
-        return myArrList;
-    }
-        Function<String, Customer> mapLineToCustomer = new Function<String, Customer>() {
+//String fileLocation = "playerName.txt";
+//        try (BufferedReader br = new BufferedReader(new FileReader(fileLocation)))
+//                    {
+//        
+//        String playerLine = br.readLine();
+//        while (playerLine != null) {
+//            Scanner line = new Scanner(playerLine).useDelimiter(",");
+//            customer.setUserId(line.next());
+//            customer.setDisplayName(line.next());
+//            customer.setStatus(line.next());
+//            this.pushText(userId, customer.toString());
+//            myArrList.add(customer);
+//            playerLine = br.readLine();
+//        }
+//        } catch (IOException e) {
+//			this.pushText(userId,"error"+ e.getMessage());
+//		}
+//        return myArrList;
+//    }
+//        Function<String, Customer> mapLineToCustomer = new Function<String, Customer>() {
 
-    public Customer apply(String line) {
+//    public Customer apply(String line) {
+//
+//        Customer customer = new Customer();
+//
+//        List<String> customerPieces = Splitter.on(",").trimResults()
+//                .omitEmptyStrings().splitToList(line);
+//
+//        customer.setUserId(customerPieces.get(0));
+//        customer.setDisplayName(customerPieces.get(1));
+//        customer.setStatus(customerPieces.get(2));
+//
+//        return customer;
+//    }
+// };     
 
-        Customer customer = new Customer();
-
-        List<String> customerPieces = Splitter.on(",").trimResults()
-                .omitEmptyStrings().splitToList(line);
-
-        customer.setUserId(customerPieces.get(0));
-        customer.setDisplayName(customerPieces.get(1));
-        customer.setStatus(customerPieces.get(2));
-
-        return customer;
-    }
-};     
-
-     private ArrayList<Customer>  readFile(String userId) throws Exception {
-                         String imageUrl = "/static/buttons/playerName.txt";
-                Path inputPath = Paths.get("static","buttons","playerName.txt");
-                this.pushText(userId,"input is:" +inputPath.toString());
-                    Path fullPath = inputPath.resolve(imageUrl);
-                    this.pushText(userId,"full is:" +fullPath.toString());
-         String fileLocation = fullPath.toString();
-// String imageUrl = createUri("/static/buttons/UNOback2.jpg");
-                    
-//                    Path inputPath = Paths.get(imageUrl);
-//                    Path fullPath = inputPath.toAbsolutePath();
-//                    Path fileName = inputPath.getFileName();
+//     private ArrayList<Customer>  readFile(String userId) throws Exception {
+//                         String imageUrl = "/static/buttons/playerName.txt";
+//                Path inputPath = Paths.get("static","buttons","playerName.txt");
+//                this.pushText(userId,"input is:" +inputPath.toString());
+//                    Path fullPath = inputPath.resolve(imageUrl);
 //                    this.pushText(userId,"full is:" +fullPath.toString());
-//                    this.pushText(userId,"filename is:" +fileName.toString());
-//                    String tempStr = fullPath.toString();
-//                    String regex = "\\s*\\bUNOback2.jpg\\b\\s*";
-//tempStr = tempStr.replaceAll(regex, "");
-
-//         String fileLocation = tempStr+"playerName.txt";
-//  String fileLocation = "playerName.txt";
-         List<Customer> customer = Files
-            .lines(Paths
-                    .get(String.valueOf(this.getClass().getResource("/static/buttons/playerName.txt"))))
-            .map(mapLineToCustomer).collect(Collectors.toList());
-        return (ArrayList<Customer>) customer; 
-     }   
+//         String fileLocation = fullPath.toString();
+//// String imageUrl = createUri("/static/buttons/UNOback2.jpg");
+//                    
+////                    Path inputPath = Paths.get(imageUrl);
+////                    Path fullPath = inputPath.toAbsolutePath();
+////                    Path fileName = inputPath.getFileName();
+////                    this.pushText(userId,"full is:" +fullPath.toString());
+////                    this.pushText(userId,"filename is:" +fileName.toString());
+////                    String tempStr = fullPath.toString();
+////                    String regex = "\\s*\\bUNOback2.jpg\\b\\s*";
+////tempStr = tempStr.replaceAll(regex, "");
+//
+////         String fileLocation = tempStr+"playerName.txt";
+////  String fileLocation = "playerName.txt";
+//         List<Customer> customer = Files
+//            .lines(Paths
+//                    .get(String.valueOf(this.getClass().getResource("/static/buttons/playerName.txt"))))
+//            .map(mapLineToCustomer).collect(Collectors.toList());
+//        return (ArrayList<Customer>) customer; 
+//     }   
         private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws IOException {
         String text = content.getText();
@@ -425,39 +425,39 @@ String userId = event.getSource().getUserId();
                 //this.replyText(replyToken,"Finished write");
             break;
             }
-            case "readdata" : {
-                CustomerRepository repository = null;
-                for (Customer customer : repository.findAll()) {
-				this.pushText(userId,customer.toString());
-			}
+//            case "readdata" : {
+//                CustomerRepository repository = null;
+//                for (Customer customer : repository.findAll()) {
+//				this.pushText(userId,customer.toString());
+//			}
+////                ArrayList<Customer> myArrList = new ArrayList<Customer>();
+////            try {
+////                myArrList = readData(userId);
+////            } catch (Exception ex) {
+////                this.replyText(replyToken,ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
+////            }
+////                String tempStr ="";
+////                for (int i=0;i<myArrList.size();i++){
+////                    tempStr = tempStr + myArrList.get(i).toString()+";";
+////                }        
+////                this.replyText(replyToken,tempStr);
+//            break;
+//            }
+//            case "readfile" : {
+//
 //                ArrayList<Customer> myArrList = new ArrayList<Customer>();
 //            try {
-//                myArrList = readData(userId);
+//                myArrList = readFile(userId);
 //            } catch (Exception ex) {
-//                this.replyText(replyToken,ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
+//                this.replyText(replyToken,"ERROR:"+ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 //                String tempStr ="";
 //                for (int i=0;i<myArrList.size();i++){
 //                    tempStr = tempStr + myArrList.get(i).toString()+";";
 //                }        
 //                this.replyText(replyToken,tempStr);
-            break;
-            }
-            case "readfile" : {
-
-                ArrayList<Customer> myArrList = new ArrayList<Customer>();
-            try {
-                myArrList = readFile(userId);
-            } catch (Exception ex) {
-                this.replyText(replyToken,"ERROR:"+ex.getMessage());//Logger.getLogger(KitchenSinkController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                String tempStr ="";
-                for (int i=0;i<myArrList.size();i++){
-                    tempStr = tempStr + myArrList.get(i).toString()+";";
-                }        
-                this.replyText(replyToken,tempStr);
-            break;
-            }
+//            break;
+//            }
             case "path" : {
                     String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                     
