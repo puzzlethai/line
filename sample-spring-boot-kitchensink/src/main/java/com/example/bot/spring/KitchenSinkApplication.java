@@ -37,14 +37,4 @@ public class KitchenSinkApplication {
         downloadedContentDir = Files.createTempDirectory("line-bot");
         SpringApplication.run(KitchenSinkApplication.class, args);
     }
-    @Configuration
-public class DatabaseConfig {
-    @Bean
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource() {
-        return (DataSource) DataSourceBuilder.create().build();
-    }
-}
-
 }

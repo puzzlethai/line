@@ -6,31 +6,29 @@
 package com.example.bot.spring;
 
 
-import java.io.Serializable;
-import javax.persistence.Column;
+;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.springframework.stereotype.Component;
+
 /**
  *
  * @author OZONE
  */
 
-@Component
+
 @Entity
-public class Customer implements Serializable{
-    private static final long serialVersionUID = -3009157732242241606L;
+public class Customer {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;    
-    @Column
+
     private String userId;  
-@Column    
+ 
 private String displayName;
-@Column   
-private String status;  
+  private String status;  
 
 protected Customer() {
     }
@@ -62,7 +60,7 @@ public void setStatus(String status) {
  @Override
     public String toString() {
         return String.format(
-                "Customer[id=%s, displayName=%s, status=%s]",
-                userId, displayName, status);
+                "Customer[id=%d,userid=%s, displayName=%s, status=%s]",
+                id,userId, displayName, status);
     }
 }

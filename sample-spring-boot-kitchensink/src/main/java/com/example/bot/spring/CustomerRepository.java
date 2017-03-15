@@ -11,11 +11,9 @@ package com.example.bot.spring;
  */
 
 import java.util.List;
-import org.springframework.data.domain.*;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
     
-Page<Customer> findAll(Pageable pageable);
     List<Customer> findBydisplayName(String displayName);
 }
