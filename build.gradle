@@ -76,10 +76,8 @@ subprojects {
         logger.warn("There's no .git directory. Can't create git.properties.");
     }
     apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'org.springframework.boot'  // newest
     
-
-
+  
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
