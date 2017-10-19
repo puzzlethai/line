@@ -138,7 +138,7 @@ static HashMap<String,Integer> round = new HashMap<String,Integer>();
 
     @EventMapping
     public void handleFollowEvent(FollowEvent event) {
-        String  welcome = "Welcome to UNO Card game Bot \n"
+        String  welcome = "Welcome to UNO Card game Bot2 \n"
                 + "To play a game please type \"menu\n";
         String replyToken = event.getReplyToken();
         this.replyText(replyToken, welcome);
@@ -330,7 +330,7 @@ String userId = event.getSource().getUserId();
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
                         "Welcome to UNO game",
-                        "Select the following choices",
+                        "Select the  choices",
                         Arrays.asList(
                                 new URIAction("How to play UNO",
                                               "http://www.wikihow.com/Play-UNO"),
