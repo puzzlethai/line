@@ -86,8 +86,8 @@ import retrofit2.Response;
 public class KitchenSinkController {
     
     static boolean PRINT_VERBOSE = false;  
-     final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
-
+     final String channalKey ="EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=";
+//final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
 static HashMap<String,String> gameStatus = new HashMap<String,String>();
 static HashMap<String,Boolean> eventPressed = new HashMap<String,Boolean>();
 static HashMap<String,Boolean> colorPressed = new HashMap<String,Boolean>();
@@ -182,7 +182,7 @@ String userId = event.getSource().getUserId();
                 String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
-                        "Welcome to UNO game",
+                        "Welcome to UNO game2",
                         "Select the following choices",
                         Arrays.asList(
                                 new URIAction("How to play UNO",
