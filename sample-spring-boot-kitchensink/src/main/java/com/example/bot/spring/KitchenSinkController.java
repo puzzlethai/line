@@ -183,7 +183,7 @@ String userId = event.getSource().getUserId();
                 String imageUrl = createUri("/static/buttons/UNOback2.jpg");
                 ButtonsTemplate buttonsTemplate = new ButtonsTemplate(
                         imageUrl,
-                        "Welcome to UNO game2",
+                        "Welcome to UNO game3",
                         "Select the following choices",
                         Arrays.asList(
                                 new URIAction("How to play UNO",
