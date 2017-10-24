@@ -146,13 +146,16 @@ import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import lombok.NonNull;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import com.linecorp.bot.client.LineMessagingService;
-import com.linecorp.bot.client.LineMessagingServiceBuilder;
+// Ozone newest import com.linecorp.bot.client.LineMessagingService;
+// import com.linecorp.bot.client.LineMessagingServiceBuilder;
+
+
 
 @Slf4j
 @LineMessageHandler
 public class KitchenSinkController {
-    
+    @Autowired
+    private LineMessagingClient lineMessagingClient;
     static boolean PRINT_VERBOSE = false;  
      final String channalKey ="EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD7wHScPrMPTQdSAnB/zslXaGHg7+EsuzRvmIL7AoSqiWfkqkFUKfCO4LGlUyeHXuv97gDb9DwwnuMrpWFiqqJiGY0lrVjfgzwdB04t89/1O/w1cDnyilFU=";
 //final String channalKey ="xlHZZWi0tluGrr9/pPGtO6WK4h6Sbs8Uw9VdILnynXrv7QyRgCgBPHc6/LQma3LlDMOr5nsp9C88HUY0omCxnQoUTUlztfcWE93h2/ro05fZMWT72MzNqsBYXX80ZnehBPHXEtfXdiyYMjlK2RmTMgdB04t89/1O/w1cDnyilFU=";
@@ -318,11 +321,11 @@ String userId = event.getSource().getUserId();
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
                     this.replyText(replyToken, "Leaving group");
-                    lineMessagingService.leaveGroup(((GroupSource) source).getGroupId())
+                    lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId())
                                         .execute();
                 } else if (source instanceof RoomSource) {
                     this.replyText(replyToken, "Leaving room");
-                    lineMessagingService.leaveRoom(((RoomSource) source).getRoomId())
+                    lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId())
                                         .execute();
                 } else {
                     this.replyText(replyToken, "Bot can't leave from 1:1 chat");
