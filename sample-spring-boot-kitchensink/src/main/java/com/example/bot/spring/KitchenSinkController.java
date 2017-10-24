@@ -82,6 +82,8 @@ import lombok.extern.slf4j.Slf4j;
 import retrofit2.Response;
 
 */
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
