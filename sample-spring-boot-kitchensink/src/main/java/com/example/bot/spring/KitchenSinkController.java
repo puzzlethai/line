@@ -163,8 +163,8 @@ static HashMap<String,Boolean> joined = new HashMap<String,Boolean>();
 static HashMap<String,Boolean> playing = new HashMap<String,Boolean>();
 static HashMap<String,Integer> round = new HashMap<String,Integer>();
 
-    @Autowired
-    private LineMessagingService lineMessagingService;
+   /* @Autowired
+    private LineMessagingService lineMessagingService; Ozone newest  */
 
     @EventMapping
     public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws IOException {
@@ -430,20 +430,20 @@ String userId = event.getSource().getUserId();
             
 // this.pushText(userId, KitchenSinkController.gameStatus.get(userId));
         String userName ="";  
-                if (userId != null) {
+              /* Ozone newest  if (userId != null) {
                     Response<UserProfileResponse> response = lineMessagingService
                             .getProfile(userId)
                             .execute();
                     if (response.isSuccessful()) {
                         UserProfileResponse profiles = response.body();
                         userName = profiles.getDisplayName();
-                        
+
                     } else {
                         this.replyText(replyToken, response.errorBody().string());
                     }
                 } else {
                     this.replyText(replyToken, "Bot can't use profile API without user ID");
-                }
+                }*/
         
 if (eventData.equals("00PlayBOT")){
     if (!KitchenSinkController.playing.get(userId)){
@@ -656,9 +656,9 @@ if (eventData.equals("00PlayBOT")){
 
     private void reply(@NonNull String replyToken, @NonNull List<Message> messages) {
         try {
-            Response<BotApiResponse> apiResponse = lineMessagingService
+            /* Ozone newest Response<BotApiResponse> apiResponse = lineMessagingService
                     .replyMessage(new ReplyMessage(replyToken, messages))
-                    .execute();
+                    .execute();*/
            // log.info("Sent messages: {}", apiResponse);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
