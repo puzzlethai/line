@@ -199,7 +199,7 @@ static HashMap<String,Integer> round = new HashMap<String,Integer>();
         String replyToken = event.getReplyToken();
         this.replyText(replyToken, welcome);
     }
-    private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
+   /* private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
        TextMessage textMessage = new TextMessage(messages);
 PushMessage pushMessage = new PushMessage(
         userId,
@@ -213,9 +213,9 @@ Response<BotApiResponse> response =
                 .pushMessage(pushMessage)
                 .execute();
 System.out.println(response.code() + " " + response.message());
-    }
+    }*/
    
-    private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
+/*    private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
       // TextMessage textMessage = new TextMessage(messages);
       ImageMessage imageMessage = new ImageMessage(imageUrl, imageUrl);
 PushMessage pushMessage = new PushMessage(
@@ -230,7 +230,7 @@ Response<BotApiResponse> response =
                 .pushMessage(pushMessage)
                 .execute();
 System.out.println(response.code() + " " + response.message());
-    }
+    }*/
     
         private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws IOException {
@@ -460,7 +460,7 @@ if (eventData.equals("00PlayBOT")){
         }  // New
                 // joined = false;    // 267F คนพิการ  //263A หน้ายิ้ม  //2614 ร่ม  //2603 //26C4 หิมะ //\u26F9 นักบาส //2620  //26D1 Carefully
                // Eak Newest String imageUrl = createUri("/static/buttons/1040.jpg");    //2640 สีชมพู  /2642 สีฟ้า
-               this.pushText(userId, "Please select GROUP to play");
+               // Ozone Newest this.pushText(userId, "Please select GROUP to play");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
                                 new CarouselColumn(null, "GROUP1", "\uD83D\uDC2F : Conservative BOT\n\uD83D\uDC37 : Greedy BOT\n\uD83D\uDC38 : Crafty BOGT", Arrays.asList(
@@ -584,7 +584,7 @@ if (eventData.equals("00PlayBOT")){
             //KitchenSinkController.gameStatus = "notPlayYet";
         }
         catch (Exception e) {
-            this.pushText(userId,e.getMessage());
+            // Ozone newest this.pushText(userId,e.getMessage());
             if (KitchenSinkController.playing.containsKey(userId)) {
             KitchenSinkController.playing.replace(userId, false);
         } else {
@@ -626,9 +626,9 @@ if (eventData.equals("00PlayBOT")){
                        + "W4 = Wild Draw Four Cards.";
                                        this.replyText(replyToken, readme);
                         String imageUrl = createUri("/static/buttons/Uno_hint2.png");
-                    this.pushImage(userId, imageUrl);
+                    //Ozone newest this.pushImage(userId, imageUrl);
                 } else {
-                        this.pushText(userId, "Not Starts with Card or Color");
+                        //Ozone newest this.pushText(userId, "Not Starts with Card or Color");
                     }
                 
                 }
