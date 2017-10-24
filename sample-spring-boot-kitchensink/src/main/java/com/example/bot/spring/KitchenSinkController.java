@@ -312,7 +312,7 @@ String userId = event.getSource().getUserId();
                                         new MessageAction("Say message",
                                                           "Rice=米")
                                 ))
-/*                                ,
+                                ,
                                 new CarouselColumn(imageUrl, "Datetime Picker2", "Please select a date, time or datetime", Arrays.asList(
                                         new DatetimePickerAction("Datetime",
                                                 "action=sel",
@@ -332,7 +332,7 @@ String userId = event.getSource().getUserId();
                                                 "06:15",
                                                 "23:59",
                                                 "00:00")
-                                ))*/
+                                ))
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
                 this.reply(replyToken, templateMessage);
