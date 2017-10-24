@@ -59,12 +59,12 @@ subprojects {
     apply plugin: 'propdeps-maven'
     apply plugin: 'propdeps-idea'
     apply plugin: 'propdeps-eclipse'
-    apply plugin: 'findbugs'
+   // apply plugin: 'findbugs'  remove for test datetimepicker
     apply plugin: 'java'
-       findbugs{
+/*       findbugs{
    ignoreFailures=true
   findbugsTest.enabled=false
-}
+}*/
     if (new File("${project.rootDir}/.git").exists()) {
         logger.info("There's .git directory. Create git.properties.")
         apply plugin: 'com.gorylenko.gradle-git-properties'
