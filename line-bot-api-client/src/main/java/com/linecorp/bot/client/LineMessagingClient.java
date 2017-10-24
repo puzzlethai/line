@@ -21,6 +21,9 @@ import java.util.concurrent.CompletableFuture;
 import com.linecorp.bot.model.Multicast;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
+import com.linecorp.bot.model.event.source.GroupSource;
+import com.linecorp.bot.model.event.source.RoomSource;
+import com.linecorp.bot.model.profile.MembersIdsResponse;
 import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 
@@ -74,6 +77,46 @@ public interface LineMessagingClient {
     CompletableFuture<UserProfileResponse> getProfile(String userId);
 
     /**
+     * Get room member profile.
+     *
+     * @param groupId Identifier of the group. Can be get by {@link GroupSource#getGroupId()}.
+     * @param userId Identifier of the user.
+     *
+     * @see <a href="https://devdocs.line.me?java#get-group-room-member-profile">//devdocs.line.me#get-group-room-member-profile</a>
+     */
+    CompletableFuture<UserProfileResponse> getGroupMemberProfile(String groupId, String userId);
+
+    /**
+     * Get group member profile.
+     *
+     * @param roomId Identifier of the group. Can be get by {@link RoomSource#getRoomId()}.
+     * @param userId Identifier of the user.
+     *
+     * @see <a href="https://devdocs.line.me?java#get-group-room-member-profile">//devdocs.line.me#get-group-room-member-profile</a>
+     */
+    CompletableFuture<UserProfileResponse> getRoomMemberProfile(String roomId, String userId);
+
+    /**
+     * Get (a part of) group member list.
+     *
+     * @param start nullable continuationToken which can be get {@link MembersIdsResponse#getNext()}
+     *
+     * @see MembersIdsResponse#getNext()
+     */
+    CompletableFuture<MembersIdsResponse> getGroupMembersIds(
+            String groupId, String start);
+
+    /**
+     * Get (a part of) room member list.
+     *
+     * @param start nullable continuationToken which can be get {@link MembersIdsResponse#getNext()}
+     *
+     * @see MembersIdsResponse#getNext()
+     */
+    CompletableFuture<MembersIdsResponse> getRoomMembersIds(
+            String roomId, String start);
+
+    /**
      * Leave a group.
      *
      * @see <a href="https://devdocs.line.me?java#leave">//devdocs.line.me#leave</a>
@@ -86,4 +129,12 @@ public interface LineMessagingClient {
      * @see <a href="https://devdocs.line.me?java#leave">//devdocs.line.me#leave</a>
      */
     CompletableFuture<BotApiResponse> leaveRoom(String roomId);
+
+    static LineMessagingClientBuilder builder(String channelToken) {
+        return new LineMessagingClientBuilder(channelToken);
+    }
+
+    static LineMessagingClientBuilder builder(ChannelTokenSupplier channelTokenSupplier) {
+        return new LineMessagingClientBuilder(channelTokenSupplier);
+    }
 }
