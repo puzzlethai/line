@@ -50,7 +50,7 @@ public class Hand {
         cards = new ArrayList<Card>();
     }
 
-     private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
+     /* Ozone newest private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
        TextMessage textMessage = new TextMessage(messages);
 PushMessage pushMessage = new PushMessage(
         userId,
@@ -64,7 +64,7 @@ Response<BotApiResponse> response =
                 .pushMessage(pushMessage)
                 .execute();
 System.out.println(response.code() + " " + response.message());
-    }
+    }*/
     /**
      * Add (draw) a card to the hand.
      */

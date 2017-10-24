@@ -1,8 +1,8 @@
 package com.example.bot.spring;
 
 
-import com.linecorp.bot.client.LineMessagingService;
-import com.linecorp.bot.client.LineMessagingServiceBuilder;
+//import com.linecorp.bot.client.LineMessagingService;
+//import com.linecorp.bot.client.LineMessagingServiceBuilder;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.action.PostbackAction;
 import com.linecorp.bot.model.message.ImageMessage;
@@ -84,7 +84,7 @@ final String channalKey ="EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD
         int no_of_play = scoreboard.getNumPlayers();
         // h = new Hand[scoreboard.getNumPlayers()];
         h = new Hand[no_of_play];
-        this.pushText(userId, "Number of Player : "+no_of_play );
+        // Ozone newest this.pushText(userId, "Number of Player : "+no_of_play );
         mostRecentColorCalled =
             new UnoPlayer.Color[scoreboard.getNumPlayers()];
 //        this.pushText(userId, " playerClass0 :"+playerClassList.get(0));
@@ -107,7 +107,7 @@ final String channalKey ="EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD
             }
         }
         catch (Exception e) {
-            this.pushText(userId,"Can't deal initial hands!"+e.getMessage());
+            // Ozone newest this.pushText(userId,"Can't deal initial hands!"+e.getMessage());
            // Eak Newest System.exit(1);
            throw new Exception(e);
         }   
@@ -184,7 +184,7 @@ final String channalKey ="EUMai2WNIC2Qu7jgkGqcCJ/D1BGXlQQmmHKxMaNSnkLq5NKWYMEMaD
     //  Eak Newest private LineMessagingService lineMessagingService;
     
 
-    private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
+    /* Ozone newest private void pushText(@NonNull String userId, @NonNull String messages) throws IOException {
        TextMessage textMessage = new TextMessage(messages);
 PushMessage pushMessage = new PushMessage(
         userId,
@@ -198,7 +198,7 @@ Response<BotApiResponse> response =
                 .pushMessage(pushMessage)
                 .execute();
 System.out.println(response.code() + " " + response.message());
-    }
+    }*/
     /* Eak Newest
     private void pushImage(@NonNull String userId, @NonNull String imageUrl) throws IOException {
       // TextMessage textMessage = new TextMessage(messages);
@@ -217,7 +217,7 @@ Response<BotApiResponse> response =
 System.out.println(response.code() + " " + response.message());
     }
     */
-    private void pushButton(@NonNull String userId, TemplateMessage templateMessage) throws IOException {
+/* Ozone newest   private void pushButton(@NonNull String userId, TemplateMessage templateMessage) throws IOException {
        
 PushMessage pushMessage = new PushMessage(
         userId,
@@ -231,7 +231,7 @@ Response<BotApiResponse> response =
                 .pushMessage(pushMessage)
                 .execute();
 System.out.println(response.code() + " " + response.message());
-    } 
+    }*/
     
     /**
      * Play an entire Game of Uno from start to finish. Hands should have
@@ -289,7 +289,7 @@ System.out.println(response.code() + " " + response.message());
                                                    "nothingelse")
                         ));
                 TemplateMessage upCardtemplateMessage = new TemplateMessage("Initial upcard is " + upCard + ".", upCardbuttonsTemplate);
-                    pushButton(userId, upCardtemplateMessage);
+                   // Ozone newest pushButton(userId, upCardtemplateMessage);
         
         try {
             while (true) {
@@ -315,13 +315,13 @@ System.out.println(response.code() + " " + response.message());
                     }
                     catch (Exception e) {
                         //print("...deck exhausted, remixing...");
-                        this.pushText(userId,"Deck exhausted, remixing");
+                        // Ozone newest  this.pushText(userId,"Deck exhausted, remixing");
                         deck.remix();
                         drawnCard = deck.draw(); // what if cann't draw()
                     }
                     h[currPlayer].addCard(drawnCard);
                     //this.pushText(userId,playerName+" has to draw (" + drawnCard + ").");
-                     this.pushText(userId,pictureName+" draw card. \uDBC0\uDC7E");
+                    // Ozone newest this.pushText(userId,pictureName+" draw card. \uDBC0\uDC7E");
                     playedCard = h[currPlayer].play(this);
                 }
                 if (playedCard != null) {  
@@ -339,7 +339,7 @@ System.out.println(response.code() + " " + response.message());
                                                    "00nextPlay")
                         ));
                 TemplateMessage templateMessage = new TemplateMessage(pictureName+" plays "+ playedCard + ".", buttonsTemplate);
-                    pushButton(userId, templateMessage);
+                        // Ozone newest pushButton(userId, templateMessage);
                     
                     KitchenSinkController.colorPressed.replace(userId, false); // รอรับ input 
                     long startTime = System.currentTimeMillis(); //fetch starting time
@@ -366,7 +366,7 @@ System.out.println(response.code() + " " + response.message());
                     if (upCard.followedByCall()) {
                         calledColor = h[currPlayer].callColor(this);
                         mostRecentColorCalled[currPlayer] = calledColor;
-                        this.pushText(userId,pictureName+" calls \'" + calledColor+"\'" ); 
+                        // Ozone newest this.pushText(userId,pictureName+" calls \'" + calledColor+"\'" );
                         
                     }
                     else {
@@ -378,14 +378,14 @@ System.out.println(response.code() + " " + response.message());
                     for (int j=0; j<scoreboard.getNumPlayers(); j++) {
                         roundPoints += h[j].countCards();
                     }
-                    this.pushText(userId,"\n" + pictureName +
+                    // Ozone newest this.pushText(userId,"\n" + pictureName +
                         " wins! (" + roundPoints + " points.)\uDBC0\uDC7F");
                     scoreboard.addToScore(currPlayer,roundPoints);
                     //this.pushText(userId,"---------------\n" + scoreboard);
                     return;
                 }
                 if (h[currPlayer].size() == 1) {
-                    this.pushText(userId,pictureName+ " says \' UNO! \'\uDBC0\uDC8A");
+                    // Ozone newest this.pushText(userId,pictureName+ " says \' UNO! \'\uDBC0\uDC8A");
                 }
                 // this.pushText(userId,"\n");
                 if (playedCard != null) {
@@ -415,7 +415,7 @@ System.out.println(response.code() + " " + response.message());
             }
         }
         catch (EmptyDeckException e) {
-            this.pushText(userId,"Deck exhausted! This game is a draw.");
+            // Ozone newest this.pushText(userId,"Deck exhausted! This game is a draw.");
             //e.printStackTrace();
         }
         
@@ -424,7 +424,7 @@ System.out.println(response.code() + " " + response.message());
     void print(String s) {
         if (KitchenSinkController.PRINT_VERBOSE) {
             try {
-                this.pushText(userId,s);
+                // Ozone newest this.pushText(userId,s);
             } catch (IOException ex) {
                 //Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -434,7 +434,7 @@ System.out.println(response.code() + " " + response.message());
     void println(String s) {
         if (KitchenSinkController.PRINT_VERBOSE) {
             try {
-                this.pushText(userId,s);
+                // Ozone newest this.pushText(userId,s);
             } catch (IOException ex) {
                 //Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
