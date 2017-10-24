@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.linecorp.bot.model.action.DatetimePickerAction;
-import com.linecorp.bot.model.message.template.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -311,7 +311,8 @@ String userId = event.getSource().getUserId();
                                                            "hello こんにちは"),
                                         new MessageAction("Say message",
                                                           "Rice=米")
-                                )),
+                                ))
+/*                                ,
                                 new CarouselColumn(imageUrl, "Datetime Picker2", "Please select a date, time or datetime", Arrays.asList(
                                         new DatetimePickerAction("Datetime",
                                                 "action=sel",
@@ -331,7 +332,7 @@ String userId = event.getSource().getUserId();
                                                 "06:15",
                                                 "23:59",
                                                 "00:00")
-                                ))
+                                ))*/
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
                 this.reply(replyToken, templateMessage);
