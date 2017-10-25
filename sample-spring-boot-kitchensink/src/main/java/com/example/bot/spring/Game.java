@@ -378,8 +378,8 @@ System.out.println(response.code() + " " + response.message());
                     for (int j=0; j<scoreboard.getNumPlayers(); j++) {
                         roundPoints += h[j].countCards();
                     }
-                    // Ozone newest this.pushText(userId,"\n" + pictureName +
-                        " wins! (" + roundPoints + " points.)\uDBC0\uDC7F");
+                    /* Ozone newest this.pushText(userId,"\n" + pictureName +
+                        " wins! (" + roundPoints + " points.)\uDBC0\uDC7F"); */
                     scoreboard.addToScore(currPlayer,roundPoints);
                     //this.pushText(userId,"---------------\n" + scoreboard);
                     return;
