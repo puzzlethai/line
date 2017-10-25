@@ -422,23 +422,24 @@ System.out.println(response.code() + " " + response.message());
     }
 
     void print(String s) {
-        if (KitchenSinkController.PRINT_VERBOSE) {
+        /* Ozone newest if (KitchenSinkController.PRINT_VERBOSE) {
             try {
+
                 // Ozone newest this.pushText(userId,s);
             } catch (IOException ex) {
                 //Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }*/
     }
 
     void println(String s) {
-        if (KitchenSinkController.PRINT_VERBOSE) {
+        /*  Ozone newest if (KitchenSinkController.PRINT_VERBOSE) {
             try {
                 // Ozone newest this.pushText(userId,s);
             } catch (IOException ex) {
                 //Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }*/
     }
 
     /**
