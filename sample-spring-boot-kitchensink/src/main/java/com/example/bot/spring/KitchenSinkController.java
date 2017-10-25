@@ -658,14 +658,14 @@ if (eventData.equals("00PlayBOT")){
     }
 
     private void reply(@NonNull String replyToken, @NonNull List<Message> messages) {
-        try {
-            /* Ozone newest Response<BotApiResponse> apiResponse = lineMessagingService
+        /*  Ozone newest try {
+            *//* Ozone newest Response<BotApiResponse> apiResponse = lineMessagingService
                     .replyMessage(new ReplyMessage(replyToken, messages))
-                    .execute();*/
+                    .execute();*//*
            // log.info("Sent messages: {}", apiResponse);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
-        }
+        }*/
     }
 
     private void replyText(@NonNull String replyToken, @NonNull String message) {
