@@ -41,7 +41,7 @@ public class Hand {
         }
         catch (ClassNotFoundException e) {
             //System.out.println("Problem with " + unoPlayerClassName + ".");
-            this.pushText(userId, "error try "+e.getMessage());
+            // Ozone newest this.pushText(userId, "error try "+e.getMessage());
             e.printStackTrace(); 
             //Eak Newest System.exit(1);
             throw new IOException(e);
