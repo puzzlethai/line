@@ -317,7 +317,7 @@ String userId = event.getSource().getUserId();
                 break;
             }
             
-            case "bye": {
+/*  Ozone newest           case "bye": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
                     this.replyText(replyToken, "Leaving group");
@@ -331,7 +331,7 @@ String userId = event.getSource().getUserId();
                     this.replyText(replyToken, "Bot can't leave from 1:1 chat");
                 }
                 break;
-            }
+            }*/
             case "confirm": {
                 ConfirmTemplate confirmTemplate = new ConfirmTemplate(
                         "Do it?",
